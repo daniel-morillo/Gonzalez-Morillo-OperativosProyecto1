@@ -1,5 +1,7 @@
 
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,20 +14,88 @@ import java.util.concurrent.Semaphore;
  */
 public class Developer extends Thread {
     
-    private int type; //Tipo de trabajador
+    
+    private int Developersquantity;//Cantidad de trabajadores por tipo
+    private int type; //Tipo de trabajador 0: guionistas 1: escenarios 2: animadores 3: doblajes 4: plotwist
     private int salary;
     private float accSalary; //Salario acomulado
     private int dayDuration; 
-    private float workContent; //Cantidad de trabajo listo
+    private int daysWorking; //Cantidad de dias despues de la ultima entrega
+    private int daysToWork; //Cantidad de dias a trabajar para entregar
+    private int contentToSend; //Contenido a entregar el dia de la entrega
     private Semaphore mutex;
+    private Drive drive; //El drive a usar
 
-    public Developer(int type, int salary, float accSalary, int dayDuration, float workContent, Semaphore mutex) {
+    public Developer(int quantity , int type, int salary, int dayDuration, Semaphore mutex, int daysToWork, int contentToSend, Drive drive) {
         this.type = type;
         this.salary = salary;
-        this.accSalary = accSalary;
+        this.accSalary = 0;
         this.dayDuration = dayDuration;
-        this.workContent = workContent;
         this.mutex = mutex;
+        this.Developersquantity = quantity;
+        this.daysWorking = 0;
+        this.daysToWork = daysToWork;
+        this.contentToSend = contentToSend; 
+        this.drive = drive;
+    }
+    
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Work();
+                obtainSalary();
+                System.out.println("\nTrabajadores de tipo: "+ getType()+ " ganaron $" + getAccSalary()+"\n");
+                sleep(getDayDuration());
+            } catch (InterruptedException Err){
+                System.out.println(Err);
+            }
+        }
+    }
+    
+    
+    
+            
+    public void Work() {
+        setDaysWorking(getDaysWorking()+1);
+        if (getDaysWorking() >= getDaysToWork()) {
+            addPart();
+            setDaysWorking(0);
+        }
+    }
+    
+    public void addPart() {
+        setDaysWorking(getDaysWorking()+1);
+        if (getDaysWorking() >= getDaysToWork()) {
+            try {
+                getMutex().acquire();
+                getDrive().addPart(getType(), getContentToSend() * getDevelopersquantity());
+                getMutex().release();
+                System.out.print("Contenido del Drive: \nAnimaciones: "+getDrive().getAnimaciones()+"\n Doblajes: "+getDrive().getDoblajes()+
+                "\nEscenarios: "+getDrive().getEscenarios()+"\nGuiones: "+getDrive().getGuiones());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Developer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        obtainSalary();
+    }
+    
+    public void obtainSalary() {
+        setAccSalary(getAccSalary() + getSalary()*getDevelopersquantity());
+    }
+
+    /**
+     * @return the Developersquantity
+     */
+    public int getDevelopersquantity() {
+        return Developersquantity;
+    }
+
+    /**
+     * @param Developersquantity the Developersquantity to set
+     */
+    public void setDevelopersquantity(int Developersquantity) {
+        this.Developersquantity = Developersquantity;
     }
 
     /**
@@ -85,17 +155,45 @@ public class Developer extends Thread {
     }
 
     /**
-     * @return the workContent
+     * @return the daysWorking
      */
-    public float getWorkContent() {
-        return workContent;
+    public int getDaysWorking() {
+        return daysWorking;
     }
 
     /**
-     * @param workContent the workContent to set
+     * @param daysWorking the daysWorking to set
      */
-    public void setWorkContent(float workContent) {
-        this.workContent = workContent;
+    public void setDaysWorking(int daysWorking) {
+        this.daysWorking = daysWorking;
+    }
+
+    /**
+     * @return the daysToWork
+     */
+    public int getDaysToWork() {
+        return daysToWork;
+    }
+
+    /**
+     * @param daysToWork the daysToWork to set
+     */
+    public void setDaysToWork(int daysToWork) {
+        this.daysToWork = daysToWork;
+    }
+
+    /**
+     * @return the contentToSend
+     */
+    public int getContentToSend() {
+        return contentToSend;
+    }
+
+    /**
+     * @param contentToSend the contentToSend to set
+     */
+    public void setContentToSend(int contentToSend) {
+        this.contentToSend = contentToSend;
     }
 
     /**
@@ -111,6 +209,26 @@ public class Developer extends Thread {
     public void setMutex(Semaphore mutex) {
         this.mutex = mutex;
     }
+
+    /**
+     * @return the drive
+     */
+    public Drive getDrive() {
+        return drive;
+    }
+
+    /**
+     * @param drive the drive to set
+     */
+    public void setDrive(Drive drive) {
+        this.drive = drive;
+    }
+
+
+
+
+    
+
     
     
     

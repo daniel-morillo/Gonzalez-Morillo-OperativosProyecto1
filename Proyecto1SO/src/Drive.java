@@ -14,22 +14,56 @@ public class Drive {
     private int escenarios; //type 2
     private int doblajes; //type 3
     private int plotwist; //type 4
+    
+    private int maxguiones;
+    private int maxanimaciones;
+    private int maxescenarios;
+    private int maxdoblajes;
+    private int maxplotwist;
+            
 
-public Drive(){
+public Drive(int maxguiones, int maxanimaciones, int maxescenarios, int maxdoblajes, int maxplotwist){
     this.animaciones = 0;
     this.guiones = 0;
     this.escenarios = 0;
     this.plotwist = 0;
-    this.doblajes = 0;    
+    this.doblajes = 0;
+    this.maxanimaciones = maxanimaciones;
+    this.maxdoblajes = maxdoblajes;
+    this.maxescenarios = maxescenarios;
+    this.maxguiones = maxguiones;
+    this.maxplotwist = maxplotwist;
+         
 }    
 //Función para añadir una parte al drive 
-public void addPart (int employeType){
+public void addPart (int employeType, int contentToSend){
     switch (employeType) {
-        case 0 -> {setGuiones(getGuiones()+1);}
-        case 1 -> {setAnimaciones(getAnimaciones()+1);}
-        case 2 -> {setEscenarios(getEscenarios()+1);}
-        case 3 -> {setDoblajes(getDoblajes()+1);}
-        case 4 -> {setPlotwist(getPlotwist()+1);}
+        
+        case 0 -> { if (getGuiones()+contentToSend > getMaxguiones()) {
+            setGuiones(getMaxguiones());
+        } else {
+            setGuiones(getGuiones()+contentToSend);}}
+        
+        case 1 -> { if (getAnimaciones()+contentToSend > getMaxanimaciones()) {
+            setAnimaciones(getMaxanimaciones());
+        } else {
+            setAnimaciones(getAnimaciones()+contentToSend);}}
+        
+        case 2 -> { if (getEscenarios()+contentToSend > getMaxescenarios()) {
+            setEscenarios(getEscenarios());
+        } else {
+            setEscenarios(getEscenarios()+contentToSend);}}
+        
+        case 3 -> { if (getDoblajes()+contentToSend > getMaxdoblajes()) {
+            setDoblajes(getMaxdoblajes());
+        } else {
+            setDoblajes(getDoblajes()+contentToSend);}}
+        
+        case 4 -> { if (getPlotwist()+contentToSend > getMaxplotwist()) {
+            setPlotwist(getMaxplotwist());
+        } else {
+            setPlotwist(getPlotwist()+contentToSend);}}
+        
         default -> System.out.println("No hay empleado con ese codigo");
          
     }
@@ -103,6 +137,76 @@ public void addPart (int employeType){
      */
     public void setPlotwist(int plotwist) {
         this.plotwist = plotwist;
+    }
+
+    /**
+     * @return the maxguiones
+     */
+    public int getMaxguiones() {
+        return maxguiones;
+    }
+
+    /**
+     * @param maxguiones the maxguiones to set
+     */
+    public void setMaxguiones(int maxguiones) {
+        this.maxguiones = maxguiones;
+    }
+
+    /**
+     * @return the maxanimaciones
+     */
+    public int getMaxanimaciones() {
+        return maxanimaciones;
+    }
+
+    /**
+     * @param maxanimaciones the maxanimaciones to set
+     */
+    public void setMaxanimaciones(int maxanimaciones) {
+        this.maxanimaciones = maxanimaciones;
+    }
+
+    /**
+     * @return the maxescenarios
+     */
+    public int getMaxescenarios() {
+        return maxescenarios;
+    }
+
+    /**
+     * @param maxescenarios the maxescenarios to set
+     */
+    public void setMaxescenarios(int maxescenarios) {
+        this.maxescenarios = maxescenarios;
+    }
+
+    /**
+     * @return the maxdoblajes
+     */
+    public int getMaxdoblajes() {
+        return maxdoblajes;
+    }
+
+    /**
+     * @param maxdoblajes the maxdoblajes to set
+     */
+    public void setMaxdoblajes(int maxdoblajes) {
+        this.maxdoblajes = maxdoblajes;
+    }
+
+    /**
+     * @return the maxplotwist
+     */
+    public int getMaxplotwist() {
+        return maxplotwist;
+    }
+
+    /**
+     * @param maxplotwist the maxplotwist to set
+     */
+    public void setMaxplotwist(int maxplotwist) {
+        this.maxplotwist = maxplotwist;
     }
     
 }

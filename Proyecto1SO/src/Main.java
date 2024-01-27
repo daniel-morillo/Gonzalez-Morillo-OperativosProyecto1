@@ -20,18 +20,8 @@ public class Main {
         
         
         //Realmente aqui solo se arrancan las interfaces, sin embargo esto es para probar. 
-        Drive drive = new Drive(10,10,10,10,10);
-        Semaphore mutex = new Semaphore(1);
-        
-        Developer guionistas = new Developer(3,0,20,2000,mutex,2,1,drive);
-        Developer animadores = new Developer(1,2,40,2000,mutex,1,1,drive);
-        Developer dobladores = new Developer(2,3,10,2000,mutex,3,1,drive);
-        Developer escenarios = new Developer(2,1,35,2000,mutex,1,1,drive);
-        
-        guionistas.start();
-        animadores.start();
-        dobladores.start();
-        escenarios.start();
+        Company CN = new Company(2, 2, 2, 2, 2, 10, 20, 30, 20, 40, 3000, 1, 2, 3, 2, 1, 3, 2, 4, 5, 10);
+        CN.StartWorking();
         
     }
     

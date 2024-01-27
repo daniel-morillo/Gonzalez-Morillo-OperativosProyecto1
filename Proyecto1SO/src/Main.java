@@ -27,11 +27,15 @@ public class Main {
         Developer animadores = new Developer(1,2,40,2000,mutex,1,1,drive);
         Developer dobladores = new Developer(2,3,10,2000,mutex,3,1,drive);
         Developer escenarios = new Developer(2,1,35,2000,mutex,1,1,drive);
+        Developer plotTwist = new Developer(2,4,34,2000,mutex,3,1,drive);
+        assemblerCN ensamblador = new assemblerCN(1, 50, 2000, mutex, 2, drive);
         
+        ensamblador.start();
         guionistas.start();
         animadores.start();
         dobladores.start();
         escenarios.start();
+        plotTwist.start();
         
     }
     

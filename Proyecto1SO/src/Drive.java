@@ -20,6 +20,9 @@ public class Drive {
     private int maxescenarios;
     private int maxdoblajes;
     private int maxplotwist;
+    
+    public int finishedChapter;
+    public int finishedPlotChapter;
             
 
 public Drive(int maxguiones, int maxanimaciones, int maxescenarios, int maxdoblajes, int maxplotwist){
@@ -33,6 +36,8 @@ public Drive(int maxguiones, int maxanimaciones, int maxescenarios, int maxdobla
     this.maxescenarios = maxescenarios;
     this.maxguiones = maxguiones;
     this.maxplotwist = maxplotwist;
+    this.finishedChapter = 0;
+    this.finishedPlotChapter = 0;
          
 }    
 //Función para añadir una parte al drive 
@@ -67,6 +72,15 @@ public void addPart (int employeType, int contentToSend){
         default -> System.out.println("No hay empleado con ese codigo");
          
     }
+}
+
+public void addChapter (int newChapter, boolean isPlot){
+    if(isPlot){
+        this.setFinishedPlotChapter(finishedPlotChapter + newChapter);
+    }else{
+        this.setFinishedChapter(finishedChapter + newChapter);
+    }
+
 }
 
     /**
@@ -208,5 +222,23 @@ public void addPart (int employeType, int contentToSend){
     public void setMaxplotwist(int maxplotwist) {
         this.maxplotwist = maxplotwist;
     }
+
+    public int getFinishedChapter() {
+        return finishedChapter;
+    }
+
+    public void setFinishedChapter(int finishedChapter) {
+        this.finishedChapter = finishedChapter;
+    }
+
+    public int getFinishedPlotChapter() {
+        return finishedPlotChapter;
+    }
+
+    public void setFinishedPlotChapter(int finishedPlotChapter) {
+        this.finishedPlotChapter = finishedPlotChapter;
+    }
+    
+    
     
 }

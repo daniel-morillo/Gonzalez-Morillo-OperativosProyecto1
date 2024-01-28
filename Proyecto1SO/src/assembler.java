@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Gabriel Gonzalez
  */
-public class assemblerCN extends Thread{
+public class Assembler extends Thread{
     
     private int Assemblerquantity;//Cantidad de ensambladores
     private int salary;
@@ -21,12 +21,20 @@ public class assemblerCN extends Thread{
     private int dayDuration; 
     private int daysWorking; //Cantidad de dias despues de la ultima entrega
     private int daysToWork; //Cantidad de dias a trabajar para entregar
-    private int countPlot;
-    private boolean makePlot;
+    private int nextPlot; // Capitulos antes del calitulo con plot twist
+    private int countPlot; // Contador antes del cplitulo con plot twist
+    private boolean makePlot; //Crar capitulo con plot twist
     private Semaphore mutex;
     private Drive drive; //El drive a usar
     
-    public assemblerCN(int quantity , int salary, int dayDuration, Semaphore mutex, int daysToWork, Drive drive) {
+    private int numGuiones; //Numero minimo de guiones para un capitulo
+    private int numEscenarios; //Numero minimo de escenarios para un capitulo
+    private int numAnimaciones; //Numero minimo de animaciones para un capitulo
+    private int numDoblajes; //Numero minimo de doblajes para un capitulo
+    private int numPlotTwist; //Numero minimo de plot twist para un capitulo con plot twist
+    
+    public Assembler(int quantity , int salary, int dayDuration, Semaphore mutex, int daysToWork, Drive drive, 
+            int numGuiones, int numEscenarios, int numAnimaciones, int numDoblajes, int numPlotTwist, int nextPlot) {
         this.salary = salary;
         this.accSalary = 0;
         this.dayDuration = dayDuration;
@@ -37,6 +45,14 @@ public class assemblerCN extends Thread{
         this.countPlot = 0;
         this.makePlot = false;
         this.drive = drive;
+        
+        this.numGuiones = numGuiones; 
+        this.numEscenarios = numEscenarios; 
+        this.numAnimaciones = numAnimaciones; 
+        this.numDoblajes = numDoblajes; 
+        this.numPlotTwist = numPlotTwist;
+        
+        this.nextPlot = nextPlot;
     }
     
     @Override
@@ -55,9 +71,9 @@ public class assemblerCN extends Thread{
     
     
       public void checkDrive(){
-        if (getDrive().getGuiones() >=1 && getDrive().getEscenarios() >= 2 && 
-            getDrive().getAnimaciones() >= 6 && getDrive().getDoblajes() >= 5) {
-            if(this.countPlot >= 3 && getDrive().getPlotwist() >= 1){
+        if (getDrive().getGuiones() >= getNumGuiones() && getDrive().getEscenarios() >= getNumEscenarios() && 
+            getDrive().getAnimaciones() >= getNumAnimaciones() && getDrive().getDoblajes() >= getNumDoblajes()) {
+            if(this.countPlot >= this.nextPlot && getDrive().getPlotwist() >= getNumPlotTwist()){
                 this.setMakePlot(true);
                 Work();
             }else{
@@ -96,13 +112,13 @@ public class assemblerCN extends Thread{
     }
     
     public void delate() {
-        getDrive().setGuiones(getDrive().getGuiones() -1);
-        getDrive().setEscenarios(getDrive().getEscenarios() - 2);
-        getDrive().setAnimaciones(getDrive().getAnimaciones() - 6);
-        getDrive().setDoblajes(getDrive().getMaxdoblajes() - 5);
+        getDrive().setGuiones(getDrive().getGuiones() - getNumGuiones());
+        getDrive().setEscenarios(getDrive().getEscenarios() - getNumEscenarios());
+        getDrive().setAnimaciones(getDrive().getAnimaciones() - getNumAnimaciones());
+        getDrive().setDoblajes(getDrive().getDoblajes() - getNumDoblajes());
         setCountPlot(getCountPlot() + 1);
         if(this.makePlot){
-            getDrive().setPlotwist(getDrive().getPlotwist() -1);
+            getDrive().setPlotwist(getDrive().getPlotwist() - getNumPlotTwist());
             setCountPlot(0);
         }
      }
@@ -186,6 +202,47 @@ public class assemblerCN extends Thread{
     public void setMakePlot(boolean makePlot) {
         this.makePlot = makePlot;
     }
+
+    public int getNumGuiones() {
+        return numGuiones;
+    }
+
+    public void setNumGuiones(int numGuiones) {
+        this.numGuiones = numGuiones;
+    }
+
+    public int getNumEscenarios() {
+        return numEscenarios;
+    }
+
+    public void setNumEscenarios(int numEscenarios) {
+        this.numEscenarios = numEscenarios;
+    }
+
+    public int getNumAnimaciones() {
+        return numAnimaciones;
+    }
+
+    public void setNumAnimaciones(int numAnimaciones) {
+        this.numAnimaciones = numAnimaciones;
+    }
+
+    public int getNumDoblajes() {
+        return numDoblajes;
+    }
+
+    public void setNumDoblajes(int numDoblajes) {
+        this.numDoblajes = numDoblajes;
+    }
+
+    public int getNumPlotTwist() {
+        return numPlotTwist;
+    }
+
+    public void setNumPlotTwist(int numPlotTwist) {
+        this.numPlotTwist = numPlotTwist;
+    }
+    
     
     
 }

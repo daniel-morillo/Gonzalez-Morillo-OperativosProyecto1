@@ -19,9 +19,18 @@ public class Main {
         // TODO code application logic here
         
         
-        //Realmente aqui solo se arrancan las interfaces, sin embargo esto es para probar. 
-        Company CN = new Company(2, 2, 2, 2, 2, 10, 20, 30, 20, 40, 3000, 1, 2, 3, 2, 1, 3, 2, 4, 5, 10);
+         
+        Semaphore mutex = new Semaphore(1);
+        
+        //Realmente aqui solo se arrancan las interfaces, sin embargo esto es para probar.
+        Company CN = new Company(2, 2, 2, 2, 2, 10, 20, 30, 20, 40, 3000, 1, 2, 3, 2, 1, 3, 2, 4, 5, 10, 5);
+        Drive drive = CN.getDrive();
+        Assembler ensamblador = new Assembler(1, 50, 3000, mutex, 2, drive, 1, 2, 6, 5, 1, 3);
+        PM PMCN = new PM(3000, CN, mutex);
+        
         CN.StartWorking();
+        PMCN.start();
+        ensamblador.start();
         
     }
     

@@ -42,9 +42,10 @@ public class Company {
     private int escneariosToWork;
     private int PlotwistToWork;
     private Semaphore mutex;
+    private int commitDay;
     private Drive drive;
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int escneariosContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int escneariosContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int commitDay) {
         this.mutex = new Semaphore(1);
         this.drive = new Drive(25,55 ,20, 35, 10);
         this.numeroGuionistas = numeroGuionistas;
@@ -71,6 +72,7 @@ public class Company {
         this.Beneficios = 0;
         this.Ingresos = 0;
         this.Gastos = 0;
+        this.commitDay = commitDay;
     }
     
     
@@ -455,6 +457,17 @@ public class Company {
     public void setDrive(Drive drive) {
         this.drive = drive;
     }
+
+
+    public int getCommitDay() {
+        return commitDay;
+    }
+
+    public void setCommitDay(int commitDay) {
+        this.commitDay = commitDay;
+    }
+
+    
     
     
     

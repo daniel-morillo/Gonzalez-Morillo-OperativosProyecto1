@@ -53,6 +53,7 @@ public class Assembler extends Thread{
         this.numPlotTwist = numPlotTwist;
         
         this.nextPlot = nextPlot;
+        this.countPlot = 0;
     }
     
     @Override
@@ -73,12 +74,14 @@ public class Assembler extends Thread{
       public void checkDrive(){
         if (getDrive().getGuiones() >= getNumGuiones() && getDrive().getEscenarios() >= getNumEscenarios() && 
             getDrive().getAnimaciones() >= getNumAnimaciones() && getDrive().getDoblajes() >= getNumDoblajes()) {
-            if(this.countPlot >= this.nextPlot && getDrive().getPlotwist() >= getNumPlotTwist()){
+            if(getCountPlot() >= getNextPlot() && getDrive().getPlotwist() >= getNumPlotTwist()){
                 this.setMakePlot(true);
                 Work();
             }else{
-               Work(); 
+               Work();
             }
+        } else {
+            System.out.println("\nAl ensamblador le faltan piezas para completar el capitulo");
         }
     }
 
@@ -97,7 +100,7 @@ public class Assembler extends Thread{
                 getMutex().acquire();
                 getDrive().addChapter(1, this.makePlot);
                 delate();
-                this.setMakePlot(false);
+                setMakePlot(false);
                 getMutex().release();
                 System.out.print("\n Capitulos en Drive: \nCapitulos: "+getDrive().getFinishedChapter()+"\n Capitulos con plotwist: "+getDrive().getFinishedPlotChapter());
             } catch (InterruptedException ex) {
@@ -241,6 +244,20 @@ public class Assembler extends Thread{
 
     public void setNumPlotTwist(int numPlotTwist) {
         this.numPlotTwist = numPlotTwist;
+    }
+
+    /**
+     * @return the nextPlot
+     */
+    public int getNextPlot() {
+        return nextPlot;
+    }
+
+    /**
+     * @param nextPlot the nextPlot to set
+     */
+    public void setNextPlot(int nextPlot) {
+        this.nextPlot = nextPlot;
     }
     
     

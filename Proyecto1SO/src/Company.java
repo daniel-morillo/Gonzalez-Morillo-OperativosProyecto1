@@ -17,6 +17,7 @@ public class Company {
     private int numeroDobladores;
     private int numeroEscenarios;
     private int numeroPlotwisters;
+    private int numeroAssemblers;
     
     private float Gastos;
     private float Ingresos;
@@ -27,6 +28,7 @@ public class Company {
     private int dobladoresSalary;
     private int escenariosSalary;
     private int plotwistersSalary;
+    private int assemblersSalary;
     
     private int dayDuration;
     //Contenido que hace un trabajador para entregar el dia de la entrega
@@ -41,38 +43,57 @@ public class Company {
     private int dobladoresToWork;
     private int escneariosToWork;
     private int PlotwistToWork;
+    private int assemblerToWork;
+    //Cantidad necesaria de cada parte para ensamblar un capitulo
+    private int guionesEnsamblar;
+    private int escenariosEnsamblar;
+    private int doblajesEnsamblar;
+    private int animacionesEnsamblar;
+    private int plotwistEnsamblar;
+    //Cantidad de caps antes de uno con plotwist
+    private int capsToPlotwist;
     private Semaphore mutex;
+    private int fixCommitDay;
     private int commitDay;
     private Drive drive;
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int escneariosContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int commitDay) {
-        this.mutex = new Semaphore(1);
-        this.drive = new Drive(25,55 ,20, 35, 10);
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay) {
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
         this.numeroEscenarios = numeroEscenarios;
         this.numeroPlotwisters = numeroPlotwisters;
+        this.numeroAssemblers = numeroAssemblers;
         this.guionistasSalary = guionistasSalary;
         this.animadoresSalary = animadoresSalary;
         this.dobladoresSalary = dobladoresSalary;
         this.escenariosSalary = escenariosSalary;
         this.plotwistersSalary = plotwistersSalary;
+        this.assemblersSalary = assemblersSalary;
         this.dayDuration = dayDuration;
         this.guionistasContent = guionistasContent;
         this.animadoresContent = animadoresContent;
         this.dobladoresContent = dobladoresContent;
-        this.escneariosContent = escneariosContent;
         this.PlotwistContent = PlotwistContent;
         this.guionistasToWork = guionistasToWork;
         this.animadoresToWork = animadoresToWork;
         this.dobladoresToWork = dobladoresToWork;
         this.escneariosToWork = escneariosToWork;
         this.PlotwistToWork = PlotwistToWork;
-        this.Beneficios = 0;
-        this.Ingresos = 0;
-        this.Gastos = 0;
+        this.assemblerToWork = assemblerToWork;
+        this.guionesEnsamblar = guionesEnsamblar;
+        this.escenariosEnsamblar = escenariosEnsamblar;
+        this.doblajesEnsamblar = doblajesEnsamblar;
+        this.plotwistEnsamblar = plotwistEnsamblar;
+        this.animacionesEnsamblar = animacionesEnsamblar;
+        this.capsToPlotwist = capsToPlotwist;
+        this.mutex = new Semaphore(1);
+        this.fixCommitDay = commitDay;
         this.commitDay = commitDay;
+        this.drive = new Drive(25,55,20,35,10);
+        this.Beneficios = 0;
+        this.Gastos = 0;
+        this.Ingresos = 0;
     }
     
     
@@ -84,12 +105,14 @@ public class Company {
         Developer Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
         Developer Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),getDrive());
         Developer Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
+        Assembler Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getPlotwistEnsamblar());
         
         Guionistas.start();
         Animadores.start();
         Escenografos.start();
         Dobladores.start();
         Plotwisters.start();
+        Assembler.start();
     }
     
 
@@ -465,6 +488,146 @@ public class Company {
 
     public void setCommitDay(int commitDay) {
         this.commitDay = commitDay;
+    }
+
+    /**
+     * @return the fixCommitDay
+     */
+    public int getFixCommitDay() {
+        return fixCommitDay;
+    }
+
+    /**
+     * @param fixCommitDay the fixCommitDay to set
+     */
+    public void setFixCommitDay(int fixCommitDay) {
+        this.fixCommitDay = fixCommitDay;
+    }
+
+    /**
+     * @return the assemblersSalary
+     */
+    public int getAssemblersSalary() {
+        return assemblersSalary;
+    }
+
+    /**
+     * @param assemblersSalary the assemblersSalary to set
+     */
+    public void setAssemblersSalary(int assemblersSalary) {
+        this.assemblersSalary = assemblersSalary;
+    }
+
+    /**
+     * @return the assemblerToWork
+     */
+    public int getAssemblerToWork() {
+        return assemblerToWork;
+    }
+
+    /**
+     * @param assemblerToWork the assemblerToWork to set
+     */
+    public void setAssemblerToWork(int assemblerToWork) {
+        this.assemblerToWork = assemblerToWork;
+    }
+
+    /**
+     * @return the guionesEnsamblar
+     */
+    public int getGuionesEnsamblar() {
+        return guionesEnsamblar;
+    }
+
+    /**
+     * @param guionesEnsamblar the guionesEnsamblar to set
+     */
+    public void setGuionesEnsamblar(int guionesEnsamblar) {
+        this.guionesEnsamblar = guionesEnsamblar;
+    }
+
+    /**
+     * @return the escenariosEnsamblar
+     */
+    public int getEscenariosEnsamblar() {
+        return escenariosEnsamblar;
+    }
+
+    /**
+     * @param escenariosEnsamblar the escenariosEnsamblar to set
+     */
+    public void setEscenariosEnsamblar(int escenariosEnsamblar) {
+        this.escenariosEnsamblar = escenariosEnsamblar;
+    }
+
+    /**
+     * @return the doblajesEnsamblar
+     */
+    public int getDoblajesEnsamblar() {
+        return doblajesEnsamblar;
+    }
+
+    /**
+     * @param doblajesEnsamblar the doblajesEnsamblar to set
+     */
+    public void setDoblajesEnsamblar(int doblajesEnsamblar) {
+        this.doblajesEnsamblar = doblajesEnsamblar;
+    }
+
+    /**
+     * @return the animacionesEnsamblar
+     */
+    public int getAnimacionesEnsamblar() {
+        return animacionesEnsamblar;
+    }
+
+    /**
+     * @param animacionesEnsamblar the animacionesEnsamblar to set
+     */
+    public void setAnimacionesEnsamblar(int animacionesEnsamblar) {
+        this.animacionesEnsamblar = animacionesEnsamblar;
+    }
+
+    /**
+     * @return the plotwistEnsamblar
+     */
+    public int getPlotwistEnsamblar() {
+        return plotwistEnsamblar;
+    }
+
+    /**
+     * @param plotwistEnsamblar the plotwistEnsamblar to set
+     */
+    public void setPlotwistEnsamblar(int plotwistEnsamblar) {
+        this.plotwistEnsamblar = plotwistEnsamblar;
+    }
+
+    /**
+     * @return the capsToPlotwist
+     */
+    public int getCapsToPlotwist() {
+        return capsToPlotwist;
+    }
+
+    /**
+     * @param capsToPlotwist the capsToPlotwist to set
+     */
+    public void setCapsToPlotwist(int capsToPlotwist) {
+        this.capsToPlotwist = capsToPlotwist;
+    }
+
+    /**
+     * @return the numeroAssemblers
+     */
+    public int getNumeroAssemblers() {
+        return numeroAssemblers;
+    }
+
+    /**
+     * @param numeroAssemblers the numeroAssemblers to set
+     */
+    public void setNumeroAssemblers(int numeroAssemblers) {
+        this.numeroAssemblers = numeroAssemblers;
     }
 
     

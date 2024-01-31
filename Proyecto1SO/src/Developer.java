@@ -45,7 +45,7 @@ public class Developer extends Thread {
             try {
                 Work();
                 obtainSalary();
-                System.out.println("\nTrabajadores de tipo: "+ getType()+ " ganaron $" + getAccSalary()+"\n");
+                //System.out.println("\nTrabajadores de tipo: "+ getType()+ " ganaron $" + getAccSalary()+"\n");
                 sleep(getDayDuration());
             } catch (InterruptedException Err){
                 System.out.println(Err);
@@ -71,8 +71,8 @@ public class Developer extends Thread {
                 getMutex().acquire();
                 getDrive().addPart(getType(), getContentToSend() * getDevelopersquantity());
                 getMutex().release();
-                System.out.print("Contenido del Drive: \nAnimaciones: "+getDrive().getAnimaciones()+"\n Doblajes: "+getDrive().getDoblajes()+
-                "\nEscenarios: "+getDrive().getEscenarios()+"\nGuiones: "+getDrive().getGuiones());
+                //System.out.print("\nContenido del Drive: \nAnimaciones: "+getDrive().getAnimaciones()+"\n Doblajes: "+getDrive().getDoblajes()+
+                //"\nEscenarios: "+getDrive().getEscenarios()+"\nGuiones: "+getDrive().getGuiones()+"\nPlotwist: "+getDrive().getPlotwist());
             } catch (InterruptedException ex) {
                 Logger.getLogger(Developer.class.getName()).log(Level.SEVERE, null, ex);
             }

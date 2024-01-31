@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -76,9 +76,9 @@ public void addPart (int employeType, int contentToSend){
 
 public void addChapter (int newChapter, boolean isPlot){
     if(isPlot){
-        this.setFinishedPlotChapter(finishedPlotChapter + newChapter);
+        this.setFinishedPlotChapter(getFinishedPlotChapter() + newChapter);
     }else{
-        this.setFinishedChapter(finishedChapter + newChapter);
+        this.setFinishedChapter(getFinishedChapter() + newChapter);
     }
 
 }

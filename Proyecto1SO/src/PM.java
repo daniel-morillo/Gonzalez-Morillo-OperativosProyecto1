@@ -22,9 +22,12 @@ public class PM extends Thread{
     private boolean hourCheck; //Verificar que paso una hora
     private int countHour; //Contador de horas
     private Company company; //Empresa asociada
-    private Semaphore mutex;
+    private int salary;
+    private int accSalary;
+    private boolean sanctioned; //true: falta; false: no falta
+    private int sanctions; //numero de sanciones
     
-    public PM(int dayDuration, Company company, Semaphore mutex){
+    public PM(int dayDuration, Company company, int salary){
        this.dayDuration = dayDuration;
        this.hour = dayDuration/24;
        this.timeIdle = dayDuration/48;
@@ -33,7 +36,10 @@ public class PM extends Thread{
        this.changeDay = false;
        this.idle = false;
        this.hourCheck = false;
-       this.mutex = mutex;
+       this.salary = salary;
+       this.accSalary = 0;
+       this.sanctions = 0;
+       this.sanctioned = false;
         
     }
     
@@ -41,36 +47,25 @@ public class PM extends Thread{
     public void run(){
         while (true){
             try {
-                if(changeDay){
-                    changeDayFunc();
-                    sleep(getDayDuration());
-                }else if(countHour == 23){
-                    changeDay = true;
-                }else if (countHour <= 16){
-                    if(idle){
-                        Thread.sleep(timeIdle);
-                        idle = !idle;
-                        if(hourCheck){
-                            hourCheck = !hourCheck;
-                            countHour =+1;
-                        }else{
-                            hourCheck = !hourCheck;
-                        }
-                    }else{
-                        Thread.sleep(timeIdle);
-                        idle = !idle;
-                        if(hourCheck){
-                            hourCheck = !hourCheck;
-                            countHour =+1;
-                        }else{
-                            hourCheck = !hourCheck;
-                        }
-                    }
-                }else{
-                    Thread.sleep(hour);
-                    countHour =+1;
+                for (int contTime = 0;contTime < 16;contTime++){
+                    //System.out.println("\nPM trabajando");
+                    sleep(getTimeIdle());
+                    setIdle(true);
+                    //System.out.println("\nPM Flojeando");
+                    sleep(getTimeIdle());
+                    setIdle(false);
                 }
-                
+                setIdle(false);
+                System.out.println("\nPM trabajando (cambiando dia)");
+                if (company.getCommitDay()!= 0) {
+                    company.setCommitDay(company.getCommitDay()-1);
+                    System.out.print("\nDIAS PARA ENTREGAR: " + company.getCommitDay());
+                } else {
+                    System.out.println("\nYA ES EL DIA DE LA ENTREGA");
+                    company.setCommitDay(company.getFixCommitDay());
+                }
+                obtainSalary();
+                sleep(8*getHour());
             }catch (InterruptedException ex) {
                Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -78,22 +73,15 @@ public class PM extends Thread{
         
     }
     
-    public void changeDayFunc() {
-        changeDay = false;
-        idle = false;
-        try {
-            getMutex().acquire();
-            if (company.getCommitDay()!= 0){                      
-                company.setCommitDay(company.getCommitDay() -1);
-                        
-            }
-            System.out.print("\nDIAS PARA ENTREGAR" + company.getCommitDay());
-            getMutex().release();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    
-    }
+    public void obtainSalary() {
+        if (isSanctioned()){
+        setAccSalary(getAccSalary() + getSalary() - 100);
+            setSanctions(getSanctions()+1);
+    } else {
+            setAccSalary(getAccSalary() + getSalary());
+        }}
+    
+    
 
     public boolean isChangeDay() {
         return changeDay;
@@ -159,12 +147,61 @@ public class PM extends Thread{
         this.company = company;
     }
 
-    public Semaphore getMutex() {
-        return mutex;
+
+    /**
+     * @return the salary
+     */
+    public int getSalary() {
+        return salary;
     }
 
-    public void setMutex(Semaphore mutex) {
-        this.mutex = mutex;
+    /**
+     * @param salary the salary to set
+     */
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * @return the accSalary
+     */
+    public int getAccSalary() {
+        return accSalary;
+    }
+
+    /**
+     * @param accSalary the accSalary to set
+     */
+    public void setAccSalary(int accSalary) {
+        this.accSalary = accSalary;
+    }
+
+    /**
+     * @return the sanctioned
+     */
+    public boolean isSanctioned() {
+        return sanctioned;
+    }
+
+    /**
+     * @param sanctioned the sanctioned to set
+     */
+    public void setSanctioned(boolean sanctioned) {
+        this.sanctioned = sanctioned;
+    }
+
+    /**
+     * @return the sanctions
+     */
+    public int getSanctions() {
+        return sanctions;
+    }
+
+    /**
+     * @param sanctions the sanctions to set
+     */
+    public void setSanctions(int sanctions) {
+        this.sanctions = sanctions;
     }
     
     

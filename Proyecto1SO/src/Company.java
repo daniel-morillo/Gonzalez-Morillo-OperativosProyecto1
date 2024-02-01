@@ -105,7 +105,7 @@ public class Company {
         Developer Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
         Developer Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),getDrive());
         Developer Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
-        Assembler Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getPlotwistEnsamblar());
+        Assembler Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         
         Guionistas.start();
         Animadores.start();

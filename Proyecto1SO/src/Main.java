@@ -22,11 +22,10 @@ public class Main {
         
          
         //Realmente aqui solo se arrancan las interfaces, sin embargo esto es para probar.
-        Company CN = new Company(2,2,2,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10) ;
-        PM PMCN = new PM(3000, CN,20);
-        
+        Company CN = new Company(2,2,2,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20) ;
+        //InterfazPrincipal f = new InterfazPrincipal();
         CN.StartWorking();
-        PMCN.start();
+        //f.setVisible(true);
         
     }
     

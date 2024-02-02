@@ -26,12 +26,13 @@ public class PM extends Thread{
     private int accSalary;
     private boolean sanctioned; //true: falta; false: no falta
     private int sanctions; //numero de sanciones
+    private int commitDay;
+    private int fixCommitDay;
     
-    public PM(int dayDuration, Company company, int salary){
+    public PM(int dayDuration, int salary, int commitDay){
        this.dayDuration = dayDuration;
        this.hour = dayDuration/24;
        this.timeIdle = dayDuration/48;
-       this.company = company;
        this.countHour = 0;
        this.changeDay = false;
        this.idle = false;
@@ -40,6 +41,8 @@ public class PM extends Thread{
        this.accSalary = 0;
        this.sanctions = 0;
        this.sanctioned = false;
+       this.commitDay = commitDay;
+       this.fixCommitDay = commitDay;
         
     }
     
@@ -57,12 +60,12 @@ public class PM extends Thread{
                 }
                 setIdle(false);
                 System.out.println("\nPM trabajando (cambiando dia)");
-                if (company.getCommitDay()!= 0) {
-                    company.setCommitDay(company.getCommitDay()-1);
-                    System.out.print("\nDIAS PARA ENTREGAR: " + company.getCommitDay());
+                if (getCommitDay()!= 0) {
+                    setCommitDay(getCommitDay()-1);
+                    System.out.print("\nDIAS PARA ENTREGAR: " + getCommitDay());
                 } else {
                     System.out.println("\nYA ES EL DIA DE LA ENTREGA");
-                    company.setCommitDay(company.getFixCommitDay());
+                    setCommitDay(getFixCommitDay());
                 }
                 obtainSalary();
                 sleep(8*getHour());
@@ -202,6 +205,34 @@ public class PM extends Thread{
      */
     public void setSanctions(int sanctions) {
         this.sanctions = sanctions;
+    }
+
+    /**
+     * @return the commitDay
+     */
+    public int getCommitDay() {
+        return commitDay;
+    }
+
+    /**
+     * @param commitDay the commitDay to set
+     */
+    public void setCommitDay(int commitDay) {
+        this.commitDay = commitDay;
+    }
+
+    /**
+     * @return the fixCommitDay
+     */
+    public int getFixCommitDay() {
+        return fixCommitDay;
+    }
+
+    /**
+     * @param fixCommitDay the fixCommitDay to set
+     */
+    public void setFixCommitDay(int fixCommitDay) {
+        this.fixCommitDay = fixCommitDay;
     }
     
     

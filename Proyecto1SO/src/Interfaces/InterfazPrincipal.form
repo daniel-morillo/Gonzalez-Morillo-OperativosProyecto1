@@ -125,7 +125,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="CNDirectorStateField" min="-2" max="-2" attributes="0"/>
+                                      <Component id="CNDirectorStateLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -330,7 +330,7 @@
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNDirectorStateField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNDirectorStateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="CNDescuentoPMLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -598,7 +598,7 @@
                 <Property name="text" type="java.lang.String" value=" Label PM"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNDirectorStateField">
+            <Component class="javax.swing.JLabel" name="CNDirectorStateLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Label Director"/>
               </Properties>
@@ -630,7 +630,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="CNIngresosLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ingresos"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="CNGastosLabel">

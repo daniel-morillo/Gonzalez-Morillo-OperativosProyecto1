@@ -1,7 +1,10 @@
+package classes;
+
 
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,10 +29,12 @@ public class PM extends Thread{
     private int accSalary;
     private boolean sanctioned; //true: falta; false: no falta
     private int sanctions; //numero de sanciones
-    private int commitDay;
-    private int fixCommitDay;
+    private int commitDay;//dia de entrega de capitulo
+    private int fixCommitDay;//variable fija que recuperaremos al resetear el dia de entrega de capitulos
     
-    public PM(int dayDuration, int salary, int commitDay){
+    private JLabel[] PMlabels;
+    
+    public PM(int dayDuration, int salary, int commitDay, Company company){
        this.dayDuration = dayDuration;
        this.hour = dayDuration/24;
        this.timeIdle = dayDuration/48;
@@ -43,6 +48,7 @@ public class PM extends Thread{
        this.sanctioned = false;
        this.commitDay = commitDay;
        this.fixCommitDay = commitDay;
+       this.company = company;
         
     }
     
@@ -50,15 +56,20 @@ public class PM extends Thread{
     public void run(){
         while (true){
             try {
+                this.PMlabels[1].setText(String.valueOf(getCommitDay()));
+                setSanctioned(false);
                 for (int contTime = 0;contTime < 16;contTime++){
                     //System.out.println("\nPM trabajando");
                     sleep(getTimeIdle());
                     setIdle(true);
+                    ActState();
                     //System.out.println("\nPM Flojeando");
                     sleep(getTimeIdle());
                     setIdle(false);
+                    ActState();
                 }
                 setIdle(false);
+                ActState();
                 System.out.println("\nPM trabajando (cambiando dia)");
                 if (getCommitDay()!= 0) {
                     setCommitDay(getCommitDay()-1);
@@ -75,14 +86,28 @@ public class PM extends Thread{
     }
         
     }
+    //Actualiza el Estado en la interfaz
+    public void ActState() {
+        if (isIdle()){
+            this.PMlabels[3].setText("Viendo Anime");
+        } else {
+            this.PMlabels[3].setText("Trabajando");
+        }
+    }
     
     public void obtainSalary() {
         if (isSanctioned()){
         setAccSalary(getAccSalary() + getSalary() - 100);
+        getCompany().setGastos(getCompany().getGastos()+getSalary()*24-100);
             setSanctions(getSanctions()+1);
+        this.PMlabels[2].setText(String.valueOf(getSanctions()));
+        this.PMlabels[4].setText(String.valueOf(getSanctions()*100));
     } else {
-            setAccSalary(getAccSalary() + getSalary());
-        }}
+            setAccSalary(getAccSalary() + getSalary()*24);
+            getCompany().setGastos(getCompany().getGastos()+getSalary()*24);
+        }
+    this.PMlabels[0].setText(String.valueOf(getCompany().getGastos()));
+    }
     
     
 
@@ -233,6 +258,22 @@ public class PM extends Thread{
      */
     public void setFixCommitDay(int fixCommitDay) {
         this.fixCommitDay = fixCommitDay;
+    }
+
+
+
+    /**
+     * @return the PMlabels
+     */
+    public JLabel[] getPMlabels() {
+        return PMlabels;
+    }
+
+    /**
+     * @param PMlabels the PMlabels to set
+     */
+    public void setPMlabels(JLabel[] PMlabels) {
+        this.PMlabels = PMlabels;
     }
     
     

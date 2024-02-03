@@ -1,7 +1,11 @@
+package classes;
 
+
+import classes.Drive;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,8 +29,10 @@ public class Developer extends Thread {
     private int contentToSend; //Contenido a entregar el dia de la entrega
     private Semaphore mutex;
     private Drive drive; //El drive a usar
+    private JLabel[] ContablesLabel;
+    private Company company;
 
-    public Developer(int quantity , int type, int salary, int dayDuration, Semaphore mutex, int daysToWork, int contentToSend, Drive drive) {
+    public Developer(int quantity , int type, int salary, int dayDuration, Semaphore mutex, int daysToWork, int contentToSend, Company company) {
         this.type = type;
         this.salary = salary;
         this.accSalary = 0;
@@ -35,8 +41,9 @@ public class Developer extends Thread {
         this.Developersquantity = quantity;
         this.daysWorking = 0;
         this.daysToWork = daysToWork;
-        this.contentToSend = contentToSend; 
-        this.drive = drive;
+        this.contentToSend = contentToSend;
+        this.company = company;
+        this.drive = company.getDrive();
     }
     
     @Override
@@ -81,7 +88,9 @@ public class Developer extends Thread {
     }
     
     public void obtainSalary() {
-        setAccSalary(getAccSalary() + getSalary()*getDevelopersquantity());
+        setAccSalary(getAccSalary() + getSalary()*getDevelopersquantity()*24);
+        getCompany().setGastos(getCompany().getGastos()+getSalary()*getDevelopersquantity()*24);
+        this.ContablesLabel[1].setText(String.valueOf(getCompany().getGastos() + getSalary()*24*getDevelopersquantity()));
     }
 
     /**
@@ -222,6 +231,34 @@ public class Developer extends Thread {
      */
     public void setDrive(Drive drive) {
         this.drive = drive;
+    }
+
+    /**
+     * @return the ContablesLabel
+     */
+    public JLabel[] getContablesLabel() {
+        return ContablesLabel;
+    }
+
+    /**
+     * @param ContablesLabel the ContablesLabel to set
+     */
+    public void setContablesLabel(JLabel[] ContablesLabel) {
+        this.ContablesLabel = ContablesLabel;
+    }
+
+    /**
+     * @return the company
+     */
+    public Company getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 

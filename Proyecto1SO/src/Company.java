@@ -10,7 +10,7 @@ import java.util.concurrent.Semaphore;
  *
  * @author Daniel Morillo
  */
-public class Company {
+public final class Company {
     
     private int numeroGuionistas;
     private int numeroAnimadores;
@@ -22,6 +22,9 @@ public class Company {
     private float Gastos;
     private float Ingresos;
     private float Beneficios;
+    
+    private float chapterProfit;
+    private float plotProfit;
     
     private int guionistasSalary;
     private int animadoresSalary;
@@ -56,8 +59,21 @@ public class Company {
     private int fixCommitDay;
     private int commitDay;
     private Drive drive;
+    
+    private int PMsalary;
+    private int directorSalary;
+    
+    private final Developer Guionistas;
+    private final Developer Animadores;
+    private final Developer Escenografos;
+    private final Developer Dobladores;
+    private final Developer Plotwisters;
+    private final Assembler Assembler;
+    private final PM PM;
+    private final Director director;
+           
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary) {
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
@@ -70,6 +86,7 @@ public class Company {
         this.escenariosSalary = escenariosSalary;
         this.plotwistersSalary = plotwistersSalary;
         this.assemblersSalary = assemblersSalary;
+        this.directorSalary = directorSalary;
         this.dayDuration = dayDuration;
         this.guionistasContent = guionistasContent;
         this.animadoresContent = animadoresContent;
@@ -94,25 +111,30 @@ public class Company {
         this.Beneficios = 0;
         this.Gastos = 0;
         this.Ingresos = 0;
+        this.chapterProfit = chapterProfit;
+        this.plotProfit = plotProfit;
+        this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),getDrive());
+        this.Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(),getAnimadoresContent(),getAnimadoresToWork(),getDrive());
+        this.Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
+        this.Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),getDrive());
+        this.Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
+        this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
+        this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay());
+        this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
+        
     }
     
     
     
     public void StartWorking() {
-        
-        Developer Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),getDrive());
-        Developer Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(),getAnimadoresContent(),getAnimadoresToWork(),getDrive());
-        Developer Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
-        Developer Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),getDrive());
-        Developer Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
-        Assembler Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getPlotwistEnsamblar());
-        
-        Guionistas.start();
-        Animadores.start();
-        Escenografos.start();
-        Dobladores.start();
-        Plotwisters.start();
-        Assembler.start();
+        getGuionistas().start();
+        getAnimadores().start();
+        getEscenografos().start();
+        getDobladores().start();
+        getPlotwisters().start();
+        getAssembler().start();
+        getPM().start();
+        getDirector().start();
     }
     
 
@@ -628,6 +650,97 @@ public class Company {
      */
     public void setNumeroAssemblers(int numeroAssemblers) {
         this.numeroAssemblers = numeroAssemblers;
+    }
+
+    /**
+     * @return the Guionistas
+     */
+    public Developer getGuionistas() {
+        return Guionistas;
+    }
+
+    /**
+     * @return the Animadores
+     */
+    public Developer getAnimadores() {
+        return Animadores;
+    }
+
+    /**
+     * @return the Escenografos
+     */
+    public Developer getEscenografos() {
+        return Escenografos;
+    }
+
+    /**
+     * @return the Dobladores
+     */
+    public Developer getDobladores() {
+        return Dobladores;
+    }
+
+    /**
+     * @return the Plotwisters
+     */
+    public Developer getPlotwisters() {
+        return Plotwisters;
+    }
+
+    /**
+     * @return the Assembler
+     */
+    public Assembler getAssembler() {
+        return Assembler;
+    }
+
+    /**
+     * @return the PMsalary
+     */
+    public int getPMsalary() {
+        return PMsalary;
+    }
+
+    /**
+     * @param PMsalary the PMsalary to set
+     */
+    public void setPMsalary(int PMsalary) {
+        this.PMsalary = PMsalary;
+    }
+
+    /**
+     * @return the PM
+     */
+    public PM getPM() {
+        return PM;
+    }
+
+    public float getChapterProfit() {
+        return chapterProfit;
+    }
+
+    public void setChapterProfit(float chapterProfit) {
+        this.chapterProfit = chapterProfit;
+    }
+
+    public float getPlotProfit() {
+        return plotProfit;
+    }
+
+    public void setPlotProfit(float plotProfit) {
+        this.plotProfit = plotProfit;
+    }
+
+    public int getDirectorSalary() {
+        return directorSalary;
+    }
+
+    public void setDirectorSalary(int directorSalary) {
+        this.directorSalary = directorSalary;
+    }
+
+    public Director getDirector() {
+        return director;
     }
 
     

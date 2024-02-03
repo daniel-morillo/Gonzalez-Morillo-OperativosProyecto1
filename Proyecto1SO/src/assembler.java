@@ -16,14 +16,14 @@ import java.util.logging.Logger;
 public class Assembler extends Thread{
     
     private int Assemblerquantity;//Cantidad de ensambladores
-    private int salary;
+    private int salary; 
     private float accSalary; //Salario acomulado
     private int dayDuration; 
     private int daysWorking; //Cantidad de dias despues de la ultima entrega
     private int daysToWork; //Cantidad de dias a trabajar para entregar
-    private int nextPlot; // Capitulos antes del calitulo con plot twist
-    private int countPlot; // Contador antes del cplitulo con plot twist
-    private boolean makePlot; //Crar capitulo con plot twist
+    private int nextPlot; // Capitulos antes del capitulo con plot twist
+    private int countPlot; // Contador antes del capitulo con plot twist
+    private boolean makePlot; //Crear capitulo con plot twist
     private Semaphore mutex;
     private Drive drive; //El drive a usar
     

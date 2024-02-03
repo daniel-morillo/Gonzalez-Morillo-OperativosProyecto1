@@ -4,17 +4,36 @@
  */
 package Interfaces;
 
+import classes.Company;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Daniel Morillo
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
+    
+    Company CN = new Company(2,2,2,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20, 300, 650, 60) ;
 
-    /**
-     * Creates new form InterfazPrincipal
-     */
     public InterfazPrincipal() {
         initComponents();
+        
+        JLabel[] CNContableLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel};
+        JLabel[] CNDirectorLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDirectorStateLabel,CNDescuentoPMLabel};
+        JLabel[] CNPMLabels = {CNGastosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDescuentoPMLabel};
+        
+        this.CN.getDirector().setLabels(CNContableLabels);
+        this.CN.getAnimadores().setContablesLabel(CNContableLabels);
+        this.CN.getGuionistas().setContablesLabel(CNContableLabels);
+        this.CN.getEscenografos().setContablesLabel(CNContableLabels);
+        this.CN.getDobladores().setContablesLabel(CNContableLabels);
+        this.CN.getPlotwisters().setContablesLabel(CNContableLabels);
+        this.CN.getAssembler().setContablesLabel(CNContableLabels);
+        
+        this.CN.getPM().setPMlabels(CNPMLabels);
+        this.CN.getDirector().setLabels(CNDirectorLabels);
+        
+        CN.StartWorking();
     }
 
     /**
@@ -79,7 +98,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         CNPMStateLabel = new javax.swing.JLabel();
-        CNDirectorStateField = new javax.swing.JLabel();
+        CNDirectorStateLabel = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         CNFaltasPMlabel = new javax.swing.JLabel();
@@ -199,7 +218,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNPMStateLabel.setText(" Label PM");
 
-        CNDirectorStateField.setText("Label Director");
+        CNDirectorStateLabel.setText("Label Director");
 
         jLabel23.setText("FaltasPM: ");
 
@@ -211,7 +230,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNDiasEntregaLabel.setText("Dias");
 
-        CNIngresosLabel.setText("Ingresos");
+        CNIngresosLabel.setText("0");
 
         CNGastosLabel.setText("Gastos");
 
@@ -248,7 +267,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addGap(31, 31, 31)
-                                .addComponent(CNDirectorStateField)
+                                .addComponent(CNDirectorStateLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,7 +428,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                 .addGap(36, 36, 36)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel22)
-                                    .addComponent(CNDirectorStateField)
+                                    .addComponent(CNDirectorStateLabel)
                                     .addComponent(jLabel24)
                                     .addComponent(CNDescuentoPMLabel)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -517,7 +536,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField CNCapsPLTDispo;
     private javax.swing.JLabel CNDescuentoPMLabel;
     private javax.swing.JLabel CNDiasEntregaLabel;
-    private javax.swing.JLabel CNDirectorStateField;
+    private javax.swing.JLabel CNDirectorStateLabel;
     private javax.swing.JTextField CNDoblDispoField;
     private javax.swing.JTextField CNEscnDispoField;
     private javax.swing.JLabel CNFaltasPMlabel;

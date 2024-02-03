@@ -1,8 +1,11 @@
+package classes;
+
 
 import static java.lang.Thread.sleep;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,6 +21,7 @@ public class Director extends Thread{
     private int salary;
     private int accSalary;
     private int dayDuration;
+    private int idle; //0: entregando capitulos, 1: trabajando 2: viendo al PM
     private int watchTime; //Tiempo que vigila al PM
     private int timeLeft; //Tiempo que falta despues de la vigilancia para completar la hora
     private int hour;
@@ -25,6 +29,8 @@ public class Director extends Thread{
     private Company company;
     private PM pm;
     private Drive drive;
+    
+    private JLabel[] labels;
     
     
     public Director(int dayDuration, int salary, Company company, PM pm, Semaphore mutex, Drive drive){
@@ -38,21 +44,27 @@ public class Director extends Thread{
        this.pm = pm;
        this.mutex = mutex;
        this.drive = drive;
+       this.idle = 1;
     }
     
     @Override
     public void run(){
         while (true){
             try {
+                setIdle(1);
                 int randHour = (int)Math.floor(Math.random()*24+1);
                 checkDay();
+                actState();
                 for (int contTime = 0;contTime < 24;contTime++){
                     sleep(hour);
                     obtainSalary();
                     if(contTime == randHour){
+                        setIdle(2);
+                        actState();
                         sleep(watchTime);
                         if(getPm().isIdle()){
                             System.out.println("\n PM AMONESTADO");
+                            getPm().setSanctioned(true);
                             getPm().setSanctions(getPm().getSanctions() + 1);
                         }
                         sleep(timeLeft);
@@ -64,27 +76,56 @@ public class Director extends Thread{
     }
     }
     
+    public void actState() {
+        switch(this.getIdle()){
+            
+            case 0: 
+                this.labels[6].setText("Entregando Capitulos");
+                break;
+            case 1:
+                this.labels[6].setText("Trabajando");
+                break;
+            case 2:
+                this.labels[6].setText("Vigilando");
+                break;
+            default:
+                break;
+        }
+    }
+    
     public void checkDay() throws InterruptedException{
-        if (pm.getCommitDay() == 0){
+        this.labels[3].setText(String.valueOf(getPm().getCommitDay()));
+        if (getPm().getCommitDay() == 0){
             sendChapters();   
         }
     }
     
     public void sendChapters() throws InterruptedException{
         System.out.println("\nENVIANDO CAPITULOS LISTOS");
+        setIdle(0);
+        actState();
         sleep(dayDuration);
         mutex.acquire();
         getCompany().setIngresos(getCompany().getIngresos() + getDrive().getFinishedChapter()*getCompany().getChapterProfit() + getDrive().getFinishedPlotChapter()*getCompany().getPlotProfit());
+        getCompany().setBeneficios(getCompany().getIngresos() - getCompany().getGastos());
         getDrive().setFinishedChapter(0);
         getDrive().setFinishedPlotChapter(0);
+        mutex.release();
+        this.labels[0].setText(String.valueOf(getCompany().getIngresos()));
+        this.labels[2].setText(String.valueOf(getCompany().getBeneficios()));
         System.out.println("\nINGRESOS " + getCompany().getIngresos() + "K");
-        mutex.release();      
         
     }
     
     public void obtainSalary() {
-        setAccSalary(getAccSalary() + getSalary());
+        setAccSalary(getAccSalary() + getSalary()*24);
+        this.getCompany().setGastos(getCompany().getGastos() + getSalary()*24);
+        this.getCompany().setBeneficios(getCompany().getIngresos() - getCompany().getGastos());
+        this.labels[1].setText(String.valueOf(getCompany().getGastos()));
+        this.labels[2].setText(String.valueOf(getCompany().getBeneficios()));
     }
+    
+    
     
 
     public int getSalary() {
@@ -166,6 +207,38 @@ public class Director extends Thread{
 
     public void setTimeLeft(int timeLeft) {
         this.timeLeft = timeLeft;
+    }
+
+    /**
+     * @return the labels
+     */
+    public JLabel[] getLabels() {
+        return labels;
+    }
+
+    /**
+     * @param labels the labels to set
+     */
+
+    /**
+     * @param labels the labels to set
+     */
+    public void setLabels(JLabel[] labels) {
+        this.labels = labels;
+    }
+
+    /**
+     * @return the idle
+     */
+    public int getIdle() {
+        return idle;
+    }
+
+    /**
+     * @param idle the idle to set
+     */
+    public void setIdle(int idle) {
+        this.idle = idle;
     }
 
    

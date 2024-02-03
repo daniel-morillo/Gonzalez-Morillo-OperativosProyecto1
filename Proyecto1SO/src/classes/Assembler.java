@@ -1,8 +1,12 @@
+package classes;
+
+
 
 
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,6 +30,7 @@ public class Assembler extends Thread{
     private boolean makePlot; //Crear capitulo con plot twist
     private Semaphore mutex;
     private Drive drive; //El drive a usar
+    private Company company;
     
     private int numGuiones; //Numero minimo de guiones para un capitulo
     private int numEscenarios; //Numero minimo de escenarios para un capitulo
@@ -33,7 +38,9 @@ public class Assembler extends Thread{
     private int numDoblajes; //Numero minimo de doblajes para un capitulo
     private int numPlotTwist; //Numero minimo de plot twist para un capitulo con plot twist
     
-    public Assembler(int quantity , int salary, int dayDuration, Semaphore mutex, int daysToWork, Drive drive, 
+    private JLabel[] ContablesLabel;
+    
+    public Assembler(int quantity , int salary, int dayDuration, Semaphore mutex, int daysToWork, Company company, 
             int numGuiones, int numEscenarios, int numAnimaciones, int numDoblajes, int numPlotTwist, int nextPlot) {
         this.salary = salary;
         this.accSalary = 0;
@@ -44,7 +51,9 @@ public class Assembler extends Thread{
         this.daysToWork = daysToWork;
         this.countPlot = 0;
         this.makePlot = false;
-        this.drive = drive;
+        this.company =  company;
+        this.drive = company.getDrive();
+        
         
         this.numGuiones = numGuiones; 
         this.numEscenarios = numEscenarios; 
@@ -111,7 +120,9 @@ public class Assembler extends Thread{
     }
     
     public void obtainSalary() {
-        setAccSalary(getAccSalary() + getSalary()*getAssemblerquantity());
+        setAccSalary(getAccSalary() + getSalary()*getAssemblerquantity()*24);
+        getCompany().setGastos(getCompany().getGastos()+getSalary()*getAssemblerquantity()*24);
+        this.ContablesLabel[1].setText(String.valueOf(getCompany().getGastos()+getSalary()*getAssemblerquantity()*24));
     }
     
     public void delate() {
@@ -259,6 +270,38 @@ public class Assembler extends Thread{
     public void setNextPlot(int nextPlot) {
         this.nextPlot = nextPlot;
     }
+
+    /**
+     * @return the ContablesLabel
+     */
+    public JLabel[] getContablesLabel() {
+        return ContablesLabel;
+    }
+
+    /**
+     * @param ContablesLabel the ContablesLabel to set
+     */
+    public void setContablesLabel(JLabel[] ContablesLabel) {
+        this.ContablesLabel = ContablesLabel;
+    }
+
+    /**
+     * @return the company
+     */
+    public Company getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    /**
+     * @param ContablesLabel the ContablesLabel to set
+     */
     
     
     

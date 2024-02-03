@@ -1,5 +1,7 @@
+package classes;
 
 import java.util.concurrent.Semaphore;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -71,6 +73,8 @@ public final class Company {
     private final Assembler Assembler;
     private final PM PM;
     private final Director director;
+    //Labels para cambiar los campos de la interfaz manipulables desde la compañia
+    private JLabel[] labels;
            
 
     public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary) {
@@ -113,13 +117,13 @@ public final class Company {
         this.Ingresos = 0;
         this.chapterProfit = chapterProfit;
         this.plotProfit = plotProfit;
-        this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),getDrive());
-        this.Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(),getAnimadoresContent(),getAnimadoresToWork(),getDrive());
-        this.Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
-        this.Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),getDrive());
-        this.Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
-        this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
-        this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay());
+        this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),this);
+        this.Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(),getAnimadoresContent(),getAnimadoresToWork(),this);
+        this.Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),this);
+        this.Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresContent(),getDobladoresToWork(),this);
+        this.Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),this);
+        this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
+        this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(),this);
         this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
         
     }
@@ -741,6 +745,20 @@ public final class Company {
 
     public Director getDirector() {
         return director;
+    }
+
+    /**
+     * @return the labels
+     */
+    public JLabel[] getLabels() {
+        return labels;
+    }
+
+    /**
+     * @param labels the labels to set
+     */
+    public void setLabels(JLabel[] labels) {
+        this.labels = labels;
     }
 
     

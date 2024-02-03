@@ -1,3 +1,8 @@
+package classes;
+
+
+import javax.swing.JLabel;
+
  /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -21,8 +26,12 @@ public class Drive {
     private int maxdoblajes;
     private int maxplotwist;
     
-    public int finishedChapter;
-    public int finishedPlotChapter;
+    private int finishedChapter;
+    private int finishedPlotChapter;
+    
+    private JLabel[] labelsDrive;
+    
+    
             
 
 public Drive(int maxguiones, int maxanimaciones, int maxescenarios, int maxdoblajes, int maxplotwist){
@@ -237,6 +246,20 @@ public void addChapter (int newChapter, boolean isPlot){
 
     public void setFinishedPlotChapter(int finishedPlotChapter) {
         this.finishedPlotChapter = finishedPlotChapter;
+    }
+
+    /**
+     * @return the labelsDrive
+     */
+    public JLabel[] getLabelsDrive() {
+        return labelsDrive;
+    }
+
+    /**
+     * @param labelsDrive the labelsDrive to set
+     */
+    public void setLabelsDrive(JLabel[] labelsDrive) {
+        this.labelsDrive = labelsDrive;
     }
     
     

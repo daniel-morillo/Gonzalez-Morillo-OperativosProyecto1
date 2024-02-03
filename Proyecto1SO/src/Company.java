@@ -23,6 +23,9 @@ public final class Company {
     private float Ingresos;
     private float Beneficios;
     
+    private float chapterProfit;
+    private float plotProfit;
+    
     private int guionistasSalary;
     private int animadoresSalary;
     private int dobladoresSalary;
@@ -58,6 +61,7 @@ public final class Company {
     private Drive drive;
     
     private int PMsalary;
+    private int directorSalary;
     
     private final Developer Guionistas;
     private final Developer Animadores;
@@ -66,9 +70,10 @@ public final class Company {
     private final Developer Plotwisters;
     private final Assembler Assembler;
     private final PM PM;
+    private final Director director;
            
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary) {
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
@@ -81,6 +86,7 @@ public final class Company {
         this.escenariosSalary = escenariosSalary;
         this.plotwistersSalary = plotwistersSalary;
         this.assemblersSalary = assemblersSalary;
+        this.directorSalary = directorSalary;
         this.dayDuration = dayDuration;
         this.guionistasContent = guionistasContent;
         this.animadoresContent = animadoresContent;
@@ -105,6 +111,8 @@ public final class Company {
         this.Beneficios = 0;
         this.Gastos = 0;
         this.Ingresos = 0;
+        this.chapterProfit = chapterProfit;
+        this.plotProfit = plotProfit;
         this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),getDrive());
         this.Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(),getAnimadoresContent(),getAnimadoresToWork(),getDrive());
         this.Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(),getEscneariosContent(),getEscneariosToWork(),getDrive());
@@ -112,6 +120,7 @@ public final class Company {
         this.Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(),getPlotwistContent(),getPlotwistToWork(),getDrive());
         this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), getDrive(), getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay());
+        this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
         
     }
     
@@ -125,6 +134,7 @@ public final class Company {
         getPlotwisters().start();
         getAssembler().start();
         getPM().start();
+        getDirector().start();
     }
     
 
@@ -703,6 +713,34 @@ public final class Company {
      */
     public PM getPM() {
         return PM;
+    }
+
+    public float getChapterProfit() {
+        return chapterProfit;
+    }
+
+    public void setChapterProfit(float chapterProfit) {
+        this.chapterProfit = chapterProfit;
+    }
+
+    public float getPlotProfit() {
+        return plotProfit;
+    }
+
+    public void setPlotProfit(float plotProfit) {
+        this.plotProfit = plotProfit;
+    }
+
+    public int getDirectorSalary() {
+        return directorSalary;
+    }
+
+    public void setDirectorSalary(int directorSalary) {
+        this.directorSalary = directorSalary;
+    }
+
+    public Director getDirector() {
+        return director;
     }
 
     

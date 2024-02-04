@@ -135,6 +135,7 @@ public class Assembler extends Thread{
             getDrive().setPlotwist(getDrive().getPlotwist() - getNumPlotTwist());
             setCountPlot(0);
         }
+        getDrive().actParts();
      }
             
     public int getAssemblerquantity() {

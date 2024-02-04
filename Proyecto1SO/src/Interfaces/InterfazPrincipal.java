@@ -6,6 +6,7 @@ package Interfaces;
 
 import classes.Company;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,7 +14,7 @@ import javax.swing.JLabel;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    Company CN = new Company(2,2,2,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20, 300, 650, 60) ;
+    Company CN = new Company(2,2,1,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20, 300, 650, 60,21) ;
 
     public InterfazPrincipal() {
         initComponents();
@@ -21,6 +22,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         JLabel[] CNContableLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel};
         JLabel[] CNDirectorLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDirectorStateLabel,CNDescuentoPMLabel};
         JLabel[] CNPMLabels = {CNGastosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDescuentoPMLabel};
+        JLabel[] CNDriveLabels = {CNGuionesDispoLabel,CNAnimDispoLabels,CNEscnDispoLabel,CNDoblDispoLabel,CNPlotDispoLabel,CNCapDispoLabel,CNCapPlotDispo};
         
         this.CN.getDirector().setLabels(CNContableLabels);
         this.CN.getAnimadores().setContablesLabel(CNContableLabels);
@@ -33,6 +35,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.CN.getPM().setPMlabels(CNPMLabels);
         this.CN.getDirector().setLabels(CNDirectorLabels);
         
+        this.CN.getDrive().setLabelsDrive(CNDriveLabels);
+        
+        CN.getDrive().loadLimits();
         CN.StartWorking();
     }
 
@@ -55,12 +60,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        CNTotalTrabField = new javax.swing.JTextField();
-        CNNumGuionField = new javax.swing.JTextField();
-        CNNumAnimField = new javax.swing.JTextField();
-        CNNumDoblField = new javax.swing.JTextField();
-        CNNumEscnField = new javax.swing.JTextField();
-        CNNumPlotField = new javax.swing.JTextField();
         CNPlusGuionButton = new javax.swing.JButton();
         CNPlusAnimButton = new javax.swing.JButton();
         CNPlusDoblButton = new javax.swing.JButton();
@@ -72,7 +71,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         CNMinusEscnButton = new javax.swing.JButton();
         CNMinusPltButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        CNNumEnsmField = new javax.swing.JTextField();
         CNPlusEnsmButton = new javax.swing.JButton();
         CNMinusEnsmButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -84,13 +82,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        CNGuionDispoField = new javax.swing.JTextField();
-        CNAnimDispoField = new javax.swing.JTextField();
-        CNDoblDispoField = new javax.swing.JTextField();
-        CNEscnDispoField = new javax.swing.JTextField();
-        CNPltDispoField = new javax.swing.JTextField();
-        CNCapsDispoField = new javax.swing.JTextField();
-        CNCapsPLTDispo = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -107,6 +98,20 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         CNIngresosLabel = new javax.swing.JLabel();
         CNGastosLabel = new javax.swing.JLabel();
         CNBeneficiosLabel = new javax.swing.JLabel();
+        CNGuionesDispoLabel = new javax.swing.JLabel();
+        CNAnimDispoLabels = new javax.swing.JLabel();
+        CNDoblDispoLabel = new javax.swing.JLabel();
+        CNEscnDispoLabel = new javax.swing.JLabel();
+        CNPlotDispoLabel = new javax.swing.JLabel();
+        CNCapDispoLabel = new javax.swing.JLabel();
+        CNCapPlotDispo = new javax.swing.JLabel();
+        CNNumGuionistasLabel = new javax.swing.JLabel();
+        CNNumAnimadoresLabel = new javax.swing.JLabel();
+        CNNumDobladoresLabel = new javax.swing.JLabel();
+        CNNumEscenografosLabel = new javax.swing.JLabel();
+        CNNumPlotwistersLabel = new javax.swing.JLabel();
+        CNNumEnsambladoresLabel = new javax.swing.JLabel();
+        CNNumWorkersLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,30 +154,90 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel6.setText("Plotwisters: ");
 
         CNPlusGuionButton.setText("+");
+        CNPlusGuionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusGuionButtonActionPerformed(evt);
+            }
+        });
 
         CNPlusAnimButton.setText("+");
+        CNPlusAnimButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusAnimButtonActionPerformed(evt);
+            }
+        });
 
         CNPlusDoblButton.setText("+");
+        CNPlusDoblButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusDoblButtonActionPerformed(evt);
+            }
+        });
 
         CNPlusEcsnButton.setText("+");
+        CNPlusEcsnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusEcsnButtonActionPerformed(evt);
+            }
+        });
 
         CNPlusPltButton.setText("+");
+        CNPlusPltButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusPltButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusGuionButton.setText("-");
+        CNMinusGuionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusGuionButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusAnimButton.setText("-");
+        CNMinusAnimButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusAnimButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusDoblButton.setText("-");
+        CNMinusDoblButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusDoblButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusEscnButton.setText("-");
+        CNMinusEscnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusEscnButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusPltButton.setText("-");
+        CNMinusPltButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusPltButtonActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Ensambladores: ");
 
         CNPlusEnsmButton.setText("+");
+        CNPlusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNPlusEnsmButtonActionPerformed(evt);
+            }
+        });
 
         CNMinusEnsmButton.setText("-");
+        CNMinusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNMinusEnsmButtonActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("CARTOON NETWORK");
 
@@ -182,27 +247,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jLabel11.setText("Animaciones:");
 
-        jLabel12.setText("Dobladores:");
+        jLabel12.setText("Doblajes:");
 
-        jLabel13.setText("Escenografos: ");
+        jLabel13.setText("Escenas");
 
         jLabel14.setText("Plotwist: ");
 
         jLabel15.setText("Capitulos Disponibles:");
 
         jLabel16.setText("Caps con Plotwist Disponibles:");
-
-        CNGuionDispoField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CNGuionDispoFieldActionPerformed(evt);
-            }
-        });
-
-        CNPltDispoField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CNPltDispoFieldActionPerformed(evt);
-            }
-        });
 
         jLabel17.setText("DIAS PARA LA ENTREGA:");
 
@@ -236,20 +289,41 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNBeneficiosLabel.setText("Beneficios");
 
+        CNGuionesDispoLabel.setText("0");
+
+        CNAnimDispoLabels.setText("0");
+
+        CNDoblDispoLabel.setText("0");
+
+        CNEscnDispoLabel.setText("0");
+
+        CNPlotDispoLabel.setText("0");
+
+        CNCapDispoLabel.setText("0");
+
+        CNCapPlotDispo.setText("0");
+
+        CNNumGuionistasLabel.setText("1");
+
+        CNNumAnimadoresLabel.setText("1");
+
+        CNNumDobladoresLabel.setText("1");
+
+        CNNumEscenografosLabel.setText("1");
+
+        CNNumPlotwistersLabel.setText("1");
+
+        CNNumEnsambladoresLabel.setText("1");
+
+        CNNumWorkersLabel.setText("6");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(CNNumEnsmField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CNPlusEnsmButton))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(308, 308, 308)
-                        .addComponent(jLabel8)))
+                .addGap(503, 503, 503)
+                .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -272,84 +346,95 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CNDescuentoPMLabel))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(CNNumWorkersLabel))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel3))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CNMinusEnsmButton)
-                            .addComponent(CNMinusAnimButton)
-                            .addComponent(CNMinusGuionButton)
-                            .addComponent(CNMinusPltButton)
-                            .addComponent(CNMinusDoblButton)
-                            .addComponent(CNMinusEscnButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CNTotalTrabField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CNNumAnimField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CNNumGuionField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CNNumPlotField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CNNumDoblField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CNNumEscnField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CNMinusEnsmButton)
+                                    .addComponent(CNMinusAnimButton)
+                                    .addComponent(CNMinusGuionButton)
+                                    .addComponent(CNMinusPltButton)
+                                    .addComponent(CNMinusDoblButton)
+                                    .addComponent(CNMinusEscnButton))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(CNNumGuionistasLabel))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CNNumDobladoresLabel)
+                                            .addComponent(CNNumAnimadoresLabel)
+                                            .addComponent(CNNumEscenografosLabel)
+                                            .addComponent(CNNumPlotwistersLabel)
+                                            .addComponent(CNNumEnsambladoresLabel))))))
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(CNPlusGuionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(CNPlusAnimButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(CNPlusDoblButton))
-                                    .addComponent(CNPlusPltButton))
-                                .addGap(74, 74, 74)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel14))
-                                        .addGap(23, 23, 23)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(CNPlusGuionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(CNPlusAnimButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(CNPlusDoblButton))
+                                            .addComponent(CNPlusPltButton))
+                                        .addGap(74, 74, 74)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CNPltDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CNEscnDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CNDoblDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CNAnimDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CNGuionDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel15)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(CNCapsDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel16)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(CNCapsPLTDispo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(CNPlusEcsnButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 335, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CNDiasEntregaLabel)
-                            .addComponent(CNIngresosLabel)
-                            .addComponent(CNGastosLabel)
-                            .addComponent(CNBeneficiosLabel))))
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel10)
+                                                    .addComponent(jLabel11)
+                                                    .addComponent(jLabel12)
+                                                    .addComponent(jLabel13)
+                                                    .addComponent(jLabel14))
+                                                .addGap(27, 27, 27)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(CNGuionesDispoLabel)
+                                                    .addComponent(CNAnimDispoLabels)
+                                                    .addComponent(CNDoblDispoLabel)
+                                                    .addComponent(CNEscnDispoLabel)
+                                                    .addComponent(CNPlotDispoLabel)))
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                                    .addComponent(jLabel15)
+                                                    .addGap(34, 34, 34)
+                                                    .addComponent(CNCapDispoLabel))
+                                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                                    .addComponent(jLabel16)
+                                                    .addGap(26, 26, 26)
+                                                    .addComponent(CNCapPlotDispo)
+                                                    .addGap(14, 14, 14)))))
+                                    .addComponent(CNPlusEcsnButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CNDiasEntregaLabel)
+                                    .addComponent(CNIngresosLabel)
+                                    .addComponent(CNGastosLabel)
+                                    .addComponent(CNBeneficiosLabel)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(CNPlusEnsmButton)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(113, 113, 113))
         );
         jPanel2Layout.setVerticalGroup(
@@ -359,40 +444,40 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(CNTotalTrabField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                            .addComponent(CNNumWorkersLabel))
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(CNNumGuionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CNPlusGuionButton)
-                            .addComponent(CNMinusGuionButton))
+                            .addComponent(CNMinusGuionButton)
+                            .addComponent(CNNumGuionistasLabel))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(CNNumAnimField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CNPlusAnimButton)
-                            .addComponent(CNMinusAnimButton))
+                            .addComponent(CNMinusAnimButton)
+                            .addComponent(CNNumAnimadoresLabel))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(CNNumDoblField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CNPlusDoblButton)
-                            .addComponent(CNMinusDoblButton))
+                            .addComponent(CNMinusDoblButton)
+                            .addComponent(CNNumDobladoresLabel))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(CNNumEscnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CNPlusEcsnButton)
-                            .addComponent(CNMinusEscnButton))
+                            .addComponent(CNMinusEscnButton)
+                            .addComponent(CNNumEscenografosLabel))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(CNNumPlotField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CNPlusPltButton)
-                            .addComponent(CNMinusPltButton))
+                            .addComponent(CNMinusPltButton)
+                            .addComponent(CNNumPlotwistersLabel))
                         .addGap(24, 24, 24))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -433,40 +518,40 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                     .addComponent(CNDescuentoPMLabel)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addGap(37, 37, 37)
+                                .addGap(40, 40, 40)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
-                                    .addComponent(CNGuionDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CNGuionesDispoLabel))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(CNAnimDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CNAnimDispoLabels))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(CNDoblDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CNDoblDispoLabel))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
-                                    .addComponent(CNEscnDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CNEscnDispoLabel))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
-                                    .addComponent(CNPltDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
+                                    .addComponent(CNPlotDispoLabel))
+                                .addGap(32, 32, 32)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel15)
-                                    .addComponent(CNCapsDispoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
+                                    .addComponent(CNCapDispoLabel))
+                                .addGap(27, 27, 27)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CNCapsPLTDispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(CNCapPlotDispo))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(CNNumEnsmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CNPlusEnsmButton)
-                    .addComponent(CNMinusEnsmButton))
+                    .addComponent(CNMinusEnsmButton)
+                    .addComponent(CNNumEnsambladoresLabel))
                 .addGap(14, 14, 14))
         );
 
@@ -486,13 +571,135 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CNPltDispoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPltDispoFieldActionPerformed
+    private void CNPlusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CNPltDispoFieldActionPerformed
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        }
+        else {
+        this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
+        }
+    }//GEN-LAST:event_CNPlusGuionButtonActionPerformed
 
-    private void CNGuionDispoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNGuionDispoFieldActionPerformed
+    private void CNPlusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusAnimButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CNGuionDispoFieldActionPerformed
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        }
+        else {
+        this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));}
+    }//GEN-LAST:event_CNPlusAnimButtonActionPerformed
+
+    private void CNPlusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDoblButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+        this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));}
+    }//GEN-LAST:event_CNPlusDoblButtonActionPerformed
+
+    private void CNPlusEcsnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEcsnButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+        this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));}
+    }//GEN-LAST:event_CNPlusEcsnButtonActionPerformed
+
+    private void CNPlusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPltButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+        this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));}
+    }//GEN-LAST:event_CNPlusPltButtonActionPerformed
+
+    private void CNPlusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsmButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+        this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()+1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));}
+    }//GEN-LAST:event_CNPlusEnsmButtonActionPerformed
+
+    private void CNMinusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getGuionistas().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
+        }
+        
+    }//GEN-LAST:event_CNMinusGuionButtonActionPerformed
+
+    private void CNMinusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getAnimadores().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));
+        }
+    }//GEN-LAST:event_CNMinusAnimButtonActionPerformed
+
+    private void CNMinusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDoblButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getDobladores().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));
+        }
+    }//GEN-LAST:event_CNMinusDoblButtonActionPerformed
+
+    private void CNMinusEscnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscnButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getEscenografos().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));
+        }
+    }//GEN-LAST:event_CNMinusEscnButtonActionPerformed
+
+    private void CNMinusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPltButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getPlotwisters().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));
+        }
+    }//GEN-LAST:event_CNMinusPltButtonActionPerformed
+
+    private void CNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsmButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getAssembler().getAssemblerquantity()== 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+        this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()-1);
+        this.CN.actTotalTrabajadores();
+        this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));
+        }
+    }//GEN-LAST:event_CNMinusEnsmButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,18 +737,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CNAnimDispoField;
+    private javax.swing.JLabel CNAnimDispoLabels;
     private javax.swing.JLabel CNBeneficiosLabel;
-    private javax.swing.JTextField CNCapsDispoField;
-    private javax.swing.JTextField CNCapsPLTDispo;
+    private javax.swing.JLabel CNCapDispoLabel;
+    private javax.swing.JLabel CNCapPlotDispo;
     private javax.swing.JLabel CNDescuentoPMLabel;
     private javax.swing.JLabel CNDiasEntregaLabel;
     private javax.swing.JLabel CNDirectorStateLabel;
-    private javax.swing.JTextField CNDoblDispoField;
-    private javax.swing.JTextField CNEscnDispoField;
+    private javax.swing.JLabel CNDoblDispoLabel;
+    private javax.swing.JLabel CNEscnDispoLabel;
     private javax.swing.JLabel CNFaltasPMlabel;
     private javax.swing.JLabel CNGastosLabel;
-    private javax.swing.JTextField CNGuionDispoField;
+    private javax.swing.JLabel CNGuionesDispoLabel;
     private javax.swing.JLabel CNIngresosLabel;
     private javax.swing.JButton CNMinusAnimButton;
     private javax.swing.JButton CNMinusDoblButton;
@@ -549,21 +756,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton CNMinusEscnButton;
     private javax.swing.JButton CNMinusGuionButton;
     private javax.swing.JButton CNMinusPltButton;
-    private javax.swing.JTextField CNNumAnimField;
-    private javax.swing.JTextField CNNumDoblField;
-    private javax.swing.JTextField CNNumEnsmField;
-    private javax.swing.JTextField CNNumEscnField;
-    private javax.swing.JTextField CNNumGuionField;
-    private javax.swing.JTextField CNNumPlotField;
+    private javax.swing.JLabel CNNumAnimadoresLabel;
+    private javax.swing.JLabel CNNumDobladoresLabel;
+    private javax.swing.JLabel CNNumEnsambladoresLabel;
+    private javax.swing.JLabel CNNumEscenografosLabel;
+    private javax.swing.JLabel CNNumGuionistasLabel;
+    private javax.swing.JLabel CNNumPlotwistersLabel;
+    private javax.swing.JLabel CNNumWorkersLabel;
     private javax.swing.JLabel CNPMStateLabel;
-    private javax.swing.JTextField CNPltDispoField;
+    private javax.swing.JLabel CNPlotDispoLabel;
     private javax.swing.JButton CNPlusAnimButton;
     private javax.swing.JButton CNPlusDoblButton;
     private javax.swing.JButton CNPlusEcsnButton;
     private javax.swing.JButton CNPlusEnsmButton;
     private javax.swing.JButton CNPlusGuionButton;
     private javax.swing.JButton CNPlusPltButton;
-    private javax.swing.JTextField CNTotalTrabField;
     private javax.swing.JTabbedPane TabbedPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

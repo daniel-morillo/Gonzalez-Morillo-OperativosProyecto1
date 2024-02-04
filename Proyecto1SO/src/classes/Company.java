@@ -80,7 +80,8 @@ public final class Company {
     private JLabel[] labels;
            
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent,int escenarioContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
+        this.PMsalary = PMsalary;
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
@@ -97,6 +98,7 @@ public final class Company {
         this.dayDuration = dayDuration;
         this.guionistasContent = guionistasContent;
         this.animadoresContent = animadoresContent;
+        this.escneariosContent = escenarioContent;
         this.dobladoresContent = dobladoresContent;
         this.PlotwistContent = PlotwistContent;
         this.guionistasToWork = guionistasToWork;

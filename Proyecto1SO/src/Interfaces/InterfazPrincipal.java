@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    Company CN = new Company(2,2,1,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20, 300, 650, 60,21) ;
-    Company DN = new Company(2,2,1,2,2,2,10,20,30,40,50,60,3000, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 5, 5,5, 2, 4, 5,  10,20, 300, 650, 60,21) ;
+    Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300, 650, 60,18) ;
+    Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250, 600, 60,15) ;
 
     public InterfazPrincipal() {
         initComponents();

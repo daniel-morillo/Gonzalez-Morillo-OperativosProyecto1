@@ -94,18 +94,8 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="195" pref="195" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="CNNumEnsmField" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="CNPlusEnsmButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace min="-2" pref="503" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -133,14 +123,15 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="CNNumWorkersLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -149,86 +140,102 @@
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="CNMinusEnsmButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNMinusAnimButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNMinusGuionButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNMinusPltButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNMinusDoblButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNMinusEscnButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                              <Component id="CNNumGuionistasLabel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="CNNumDobladoresLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CNNumAnimadoresLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CNNumEscenografosLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CNNumPlotwistersLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CNNumEnsambladoresLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CNMinusEnsmButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNMinusAnimButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNMinusGuionButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNMinusPltButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNMinusDoblButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNMinusEscnButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="CNTotalTrabField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="CNNumAnimField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="CNNumGuionField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="CNNumPlotField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="CNNumDoblField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="CNNumEscnField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="CNPlusGuionButton" max="32767" attributes="0"/>
-                                              <Component id="CNPlusAnimButton" max="32767" attributes="0"/>
-                                              <Component id="CNPlusDoblButton" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="CNPlusPltButton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel9" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="CNPlusGuionButton" max="32767" attributes="0"/>
+                                                      <Component id="CNPlusAnimButton" max="32767" attributes="0"/>
+                                                      <Component id="CNPlusDoblButton" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="CNPlusPltButton" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="CNPltDispoField" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Component id="CNEscnDispoField" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Component id="CNDoblDispoField" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Component id="CNAnimDispoField" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Component id="CNGuionDispoField" min="-2" pref="71" max="-2" attributes="0"/>
+                                                  <Component id="jLabel9" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Component id="CNGuionesDispoLabel" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="CNAnimDispoLabels" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="CNDoblDispoLabel" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="CNEscnDispoLabel" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="CNPlotDispoLabel" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                                          <Component id="CNCapDispoLabel" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                                          <Component id="CNCapPlotDispo" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
                                           </Group>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="CNCapsDispoField" min="-2" pref="71" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="CNCapsPLTDispo" min="-2" pref="71" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="CNPlusEcsnButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="407" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel18" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel19" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="CNDiasEntregaLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNIngresosLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNGastosLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNBeneficiosLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="CNPlusEcsnButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="335" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel18" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel19" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CNDiasEntregaLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNIngresosLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNGastosLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNBeneficiosLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="CNPlusEnsmButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -243,45 +250,45 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="35" max="32767" attributes="0"/>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNTotalTrabField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumWorkersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumGuionField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusGuionButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusGuionButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumGuionistasLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumAnimField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusAnimButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusAnimButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumAnimadoresLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumDoblField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusDoblButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusDoblButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumDobladoresLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumEscnField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusEcsnButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusEscnButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumEscenografosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumPlotField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusPltButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusPltButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumPlotwistersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
@@ -337,40 +344,40 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNGuionDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNGuionesDispoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNAnimDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNAnimDispoLabels" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNDoblDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNDoblDispoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNEscnDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNEscnDispoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNPltDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNPlotDispoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CNCapsDispoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNCapDispoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel16" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                                          <Component id="CNCapsPLTDispo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CNCapPlotDispo" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -379,9 +386,9 @@
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CNNumEnsmField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CNPlusEnsmButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CNMinusEnsmButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CNNumEnsambladoresLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
@@ -419,84 +426,106 @@
                 <Property name="text" type="java.lang.String" value="Plotwisters: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="CNTotalTrabField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNNumGuionField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNNumAnimField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNNumDoblField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNNumEscnField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNNumPlotField">
-            </Component>
             <Component class="javax.swing.JButton" name="CNPlusGuionButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusGuionButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNPlusAnimButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusAnimButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNPlusDoblButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusDoblButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNPlusEcsnButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusEcsnButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNPlusPltButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusPltButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusGuionButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusGuionButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusAnimButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusAnimButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusDoblButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusDoblButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusEscnButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusEscnButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusPltButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusPltButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ensambladores: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="CNNumEnsmField">
-            </Component>
             <Component class="javax.swing.JButton" name="CNPlusEnsmButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPlusEnsmButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="CNMinusEnsmButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNMinusEnsmButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -520,12 +549,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dobladores:"/>
+                <Property name="text" type="java.lang.String" value="Doblajes:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Escenografos: "/>
+                <Property name="text" type="java.lang.String" value="Escenas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -542,26 +571,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Caps con Plotwist Disponibles:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNGuionDispoField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNGuionDispoFieldActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNAnimDispoField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNDoblDispoField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNEscnDispoField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNPltDispoField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPltDispoFieldActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNCapsDispoField">
-            </Component>
-            <Component class="javax.swing.JTextField" name="CNCapsPLTDispo">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -641,6 +650,76 @@
             <Component class="javax.swing.JLabel" name="CNBeneficiosLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Beneficios"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNGuionesDispoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNAnimDispoLabels">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNDoblDispoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNEscnDispoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNPlotDispoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNCapDispoLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNCapPlotDispo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumGuionistasLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumAnimadoresLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumDobladoresLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumEscenografosLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumPlotwistersLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumEnsambladoresLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CNNumWorkersLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="6"/>
               </Properties>
             </Component>
           </SubComponents>

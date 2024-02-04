@@ -48,7 +48,15 @@ public Drive(int maxguiones, int maxanimaciones, int maxescenarios, int maxdobla
     this.finishedChapter = 0;
     this.finishedPlotChapter = 0;
          
-}    
+}
+
+public void loadLimits(){
+    this.labelsDrive[0].setText("0 / "+String.valueOf(getMaxguiones()));
+    this.labelsDrive[1].setText("0 / "+String.valueOf(getMaxanimaciones()));
+    this.labelsDrive[2].setText("0 / "+String.valueOf(getMaxescenarios()));
+    this.labelsDrive[3].setText("0 / "+String.valueOf(getMaxdoblajes()));
+    this.labelsDrive[4].setText("0 / "+String.valueOf(getMaxplotwist()));
+}
 //Función para añadir una parte al drive 
 public void addPart (int employeType, int contentToSend){
     switch (employeType) {
@@ -56,12 +64,13 @@ public void addPart (int employeType, int contentToSend){
         case 0 -> { if (getGuiones()+contentToSend > getMaxguiones()) {
             setGuiones(getMaxguiones());
         } else {
-            setGuiones(getGuiones()+contentToSend);}}
-        
+            setGuiones(getGuiones()+contentToSend);}
+        }
         case 1 -> { if (getAnimaciones()+contentToSend > getMaxanimaciones()) {
             setAnimaciones(getMaxanimaciones());
         } else {
             setAnimaciones(getAnimaciones()+contentToSend);}}
+
         
         case 2 -> { if (getEscenarios()+contentToSend > getMaxescenarios()) {
             setEscenarios(getEscenarios());
@@ -79,8 +88,8 @@ public void addPart (int employeType, int contentToSend){
             setPlotwist(getPlotwist()+contentToSend);}}
         
         default -> System.out.println("No hay empleado con ese codigo");
-         
-    }
+        
+    } actParts();
 }
 
 public void addChapter (int newChapter, boolean isPlot){
@@ -89,7 +98,19 @@ public void addChapter (int newChapter, boolean isPlot){
     }else{
         this.setFinishedChapter(getFinishedChapter() + newChapter);
     }
+    actParts();
+    
 
+}
+//Actualiza la interfaz
+public void actParts() {
+    this.labelsDrive[0].setText(String.valueOf(getGuiones())+"/ "+String.valueOf(getMaxguiones()));
+    this.labelsDrive[1].setText(String.valueOf(getAnimaciones())+"/ "+String.valueOf(getMaxanimaciones()));
+    this.labelsDrive[2].setText(String.valueOf(getEscenarios())+"/ "+String.valueOf(getMaxescenarios()));
+    this.labelsDrive[3].setText(String.valueOf(getDoblajes())+"/ "+String.valueOf(getMaxdoblajes()));
+    this.labelsDrive[4].setText(String.valueOf(getPlotwist())+"/ "+String.valueOf(getMaxplotwist()));
+    this.labelsDrive[5].setText(String.valueOf(getFinishedChapter()));
+    this.labelsDrive[6].setText(String.valueOf(getFinishedPlotChapter()));
 }
 
     /**

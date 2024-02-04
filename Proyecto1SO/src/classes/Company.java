@@ -73,11 +73,13 @@ public final class Company {
     private final Assembler Assembler;
     private final PM PM;
     private final Director director;
+    private int trabajadoresTotalesMax;
+    private int trabajadoresTotales;
     //Labels para cambiar los campos de la interfaz manipulables desde la compañia
     private JLabel[] labels;
            
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
@@ -115,6 +117,7 @@ public final class Company {
         this.Beneficios = 0;
         this.Gastos = 0;
         this.Ingresos = 0;
+        this.trabajadoresTotalesMax = trabajadoresTotalesMax;
         this.chapterProfit = chapterProfit;
         this.plotProfit = plotProfit;
         this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasContent(),getGuionistasToWork(),this);
@@ -125,7 +128,7 @@ public final class Company {
         this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(),this);
         this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
-        
+        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
     }
     
     
@@ -139,6 +142,10 @@ public final class Company {
         getAssembler().start();
         getPM().start();
         getDirector().start();
+    }
+    //Actualiza los trabajadores totales
+    public void actTotalTrabajadores(){
+        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
     }
     
 
@@ -759,6 +766,34 @@ public final class Company {
      */
     public void setLabels(JLabel[] labels) {
         this.labels = labels;
+    }
+
+    /**
+     * @return the trabajadoresTotalesMax
+     */
+    public int getTrabajadoresTotalesMax() {
+        return trabajadoresTotalesMax;
+    }
+
+    /**
+     * @param trabajadoresTotalesMax the trabajadoresTotalesMax to set
+     */
+    public void setTrabajadoresTotalesMax(int trabajadoresTotalesMax) {
+        this.trabajadoresTotalesMax = trabajadoresTotalesMax;
+    }
+
+    /**
+     * @return the trabajadoresTotales
+     */
+    public int getTrabajadoresTotales() {
+        return trabajadoresTotales;
+    }
+
+    /**
+     * @param trabajadoresTotales the trabajadoresTotales to set
+     */
+    public void setTrabajadoresTotales(int trabajadoresTotales) {
+        this.trabajadoresTotales = trabajadoresTotales;
     }
 
     

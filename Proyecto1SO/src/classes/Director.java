@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author user
+ * @author Gabriel Gonzalez
  */
 public class Director extends Thread{
     
@@ -37,7 +37,7 @@ public class Director extends Thread{
        this.dayDuration = dayDuration;
        this.hour = dayDuration/24;
        this.watchTime = dayDuration/41;
-       this.timeLeft = this.dayDuration - this.watchTime;
+       this.timeLeft = this.hour - this.watchTime;
        this.salary = salary;
        this.accSalary = 0;
        this.company = company;
@@ -104,13 +104,13 @@ public class Director extends Thread{
         System.out.println("\nENVIANDO CAPITULOS LISTOS");
         setIdle(0);
         actState();
-        sleep(dayDuration);
         mutex.acquire();
         getCompany().setIngresos(getCompany().getIngresos() + getDrive().getFinishedChapter()*getCompany().getChapterProfit() + getDrive().getFinishedPlotChapter()*getCompany().getPlotProfit());
         getCompany().setBeneficios(getCompany().getIngresos() - getCompany().getGastos());
         getDrive().setFinishedChapter(0);
         getDrive().setFinishedPlotChapter(0);
         mutex.release();
+        sleep(dayDuration);
         this.labels[0].setText(String.valueOf(getCompany().getIngresos()));
         this.labels[2].setText(String.valueOf(getCompany().getBeneficios()));
         System.out.println("\nINGRESOS " + getCompany().getIngresos() + "K");

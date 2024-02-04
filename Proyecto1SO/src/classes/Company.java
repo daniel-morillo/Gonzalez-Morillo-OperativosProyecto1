@@ -75,6 +75,7 @@ public final class Company {
     private final Director director;
     private int trabajadoresTotalesMax;
     private int trabajadoresTotales;
+    private int guardarTrabajadoresTotales;
     //Labels para cambiar los campos de la interfaz manipulables desde la compañia
     private JLabel[] labels;
            
@@ -128,7 +129,8 @@ public final class Company {
         this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(),this);
         this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
-        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
+        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();
+        this.guardarTrabajadoresTotales = this.trabajadoresTotales;
     }
     
     
@@ -794,6 +796,14 @@ public final class Company {
      */
     public void setTrabajadoresTotales(int trabajadoresTotales) {
         this.trabajadoresTotales = trabajadoresTotales;
+    }
+
+    public int getGuardarTrabajadoresTotales() {
+        return guardarTrabajadoresTotales;
+    }
+
+    public void setGuardarTrabajadoresTotales(int guardarTrabajadoresTotales) {
+        this.guardarTrabajadoresTotales = guardarTrabajadoresTotales;
     }
 
     

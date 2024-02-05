@@ -24,6 +24,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     
     public InterfazPrincipal() {
         this.lector.ReadTxt(CN, DN);
+        CN.actGuardarTotalTrabajadores();
+        DN.actGuardarTotalTrabajadores();
         
         initComponents();
         
@@ -1951,7 +1953,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (DNNumGuionistas == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas -1));
         }
     }//GEN-LAST:event_DNMinusGuionReadButton3ActionPerformed
@@ -1959,10 +1961,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusGuionReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusGuionReadButton2ActionPerformed
         // TODO add your handling code here:
         Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas +1));
         }
     }//GEN-LAST:event_DNPlusGuionReadButton2ActionPerformed
@@ -1973,7 +1975,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (DNNumAnimadores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores -1));
         }
     }//GEN-LAST:event_DNMinusAnimadoresReadButton3ActionPerformed
@@ -1981,10 +1983,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusAnimadoresReadButton3ActionPerformed
         // TODO add your handling code here:
         Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores +1));
         }
     }//GEN-LAST:event_DNPlusAnimadoresReadButton3ActionPerformed
@@ -1995,7 +1997,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
          if (DNNumDobladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores -1));
         }
         
@@ -2004,10 +2006,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDobladoresReadButton4ActionPerformed
         // TODO add your handling code here:
         Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores +1));
         }
     }//GEN-LAST:event_DNPlusDobladoresReadButton4ActionPerformed
@@ -2018,7 +2020,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
          if (DNNumEscenografos == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos -1));
         }
         
@@ -2027,10 +2029,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEscenografosReadButton5ActionPerformed
         // TODO add your handling code here:
         Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos +1));
         }
     }//GEN-LAST:event_DNPlusEscenografosReadButton5ActionPerformed
@@ -2041,7 +2043,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
          if (DNNumPlotwisters == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters -1));
         }
     }//GEN-LAST:event_DNMinusPlotwistersReadButton6ActionPerformed
@@ -2049,10 +2051,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPlotwistersReadButton6ActionPerformed
         // TODO add your handling code here:
         Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters +1));
         }
     }//GEN-LAST:event_DNPlusPlotwistersReadButton6ActionPerformed
@@ -2063,7 +2065,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (DNNumEnsambladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
         this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores -1));
         }
     }//GEN-LAST:event_DNMinusEnsambladoresReadButton7ActionPerformed
@@ -2071,10 +2073,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void DNPlusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsambladoresReadButton7ActionPerformed
         // TODO add your handling code here:
         Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
         this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores +1));
         }
     }//GEN-LAST:event_DNPlusEnsambladoresReadButton7ActionPerformed

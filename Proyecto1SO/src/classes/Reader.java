@@ -103,6 +103,7 @@ public class Reader {
             Company1.getAnimadores().setDayDuration(getSegundosEnSimulacion());
             Company1.getEscenografos().setDayDuration(getSegundosEnSimulacion());
             Company1.getPlotwisters().setDayDuration(getSegundosEnSimulacion());
+            Company1.getAssembler().setDayDuration(getSegundosEnSimulacion());
             Company1.getPM().setDayDuration(getSegundosEnSimulacion());
             Company1.getDirector().setDayDuration(getSegundosEnSimulacion());
             Company1.getGuionistas().setDevelopersquantity(getNumGuionistas1());
@@ -110,6 +111,7 @@ public class Reader {
             Company1.getEscenografos().setDevelopersquantity(getNumEscenografos1());
             Company1.getDobladores().setDevelopersquantity(getNumDobladores1());
             Company1.getPlotwisters().setDevelopersquantity(getNumPlotwist1());
+            Company1.getAssembler().setAssemblerquantity(getNumEnsambladores1());
             Company1.setCommitDay(getDiasAntesDelDeadline1());
             Company1.getPM().setCommitDay(getDiasAntesDelDeadline1());
             
@@ -120,6 +122,7 @@ public class Reader {
             Company2.getAnimadores().setDayDuration(getSegundosEnSimulacion());
             Company2.getEscenografos().setDayDuration(getSegundosEnSimulacion());
             Company2.getPlotwisters().setDayDuration(getSegundosEnSimulacion());
+            Company2.getAssembler().setDayDuration(getSegundosEnSimulacion());
             Company2.getPM().setDayDuration(getSegundosEnSimulacion());
             Company2.getDirector().setDayDuration(getSegundosEnSimulacion());
             Company2.getGuionistas().setDevelopersquantity(getNumGuionistas2());
@@ -127,6 +130,7 @@ public class Reader {
             Company2.getEscenografos().setDevelopersquantity(getNumEscenografos2());
             Company2.getDobladores().setDevelopersquantity(getNumDobladores2());
             Company2.getPlotwisters().setDevelopersquantity(getNumPlotwist2());
+            Company2.getAssembler().setAssemblerquantity(getNumEnsambladores2());
             Company2.setCommitDay(getDiasAntesDelDeadline2());
             Company2.getPM().setCommitDay(getDiasAntesDelDeadline2());
             //Aún Faltan ensambladores y Dias para entregar capitulo

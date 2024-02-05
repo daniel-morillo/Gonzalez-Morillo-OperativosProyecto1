@@ -156,6 +156,10 @@ public final class Company {
         this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
     }
     
+    public void actGuardarTotalTrabajadores(){
+        this.guardarTrabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();
+    }
+    
     public void loadWorkersValues(){
         
         this.labels[0].setText(String.valueOf(getTrabajadoresTotales()));

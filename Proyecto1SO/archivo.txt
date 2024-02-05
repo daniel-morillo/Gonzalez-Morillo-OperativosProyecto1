@@ -1,15 +1,15 @@
-Segundos en la simulación:9000
-Días antes del Deadline1:14
-Guionistas1:6
+Segundos en la simulación:3000
+Días antes del Deadline1:12
+Guionistas1:4
 Animadores1:2
-Dobladores1:1
-Escenografos1:2
-Plotwist1:2
-Ensambladores11:2
-Días antes del Deadline2:20
-Guionistas2:4
+Dobladores1:2
+Escenografos1:3
+Plotwist1:3
+Ensambladores1:3
+Días antes del Deadline2:10
+Guionistas2:3
 Animadores2:2
-Dobladores2:1
-Escenografos2:2
-Plotwist2:2
-Ensambladores12:2
+Dobladores2:2
+Escenografos2:3
+Plotwist2:3
+Ensambladores2:2

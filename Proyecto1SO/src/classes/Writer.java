@@ -66,7 +66,7 @@ public class Writer {
             pw.print("Dobladores1:" + numDobladores1 + "\n");
             pw.print("Escenografos1:" + numEscenografos1 + "\n");
             pw.print("Plotwist1:" + numPlotwist1 + "\n");
-            pw.print("Ensambladores11:" + numEnsambladores1 + "\n");
+            pw.print("Ensambladores1:" + numEnsambladores1 + "\n");
             
             pw.print("Días antes del Deadline2:" + diasAntesDelDeadline2 + "\n");
             pw.print("Guionistas2:" + numGuionistas2 + "\n");
@@ -74,7 +74,7 @@ public class Writer {
             pw.print("Dobladores2:" + numDobladores2 + "\n");
             pw.print("Escenografos2:" + numEscenografos2 + "\n");
             pw.print("Plotwist2:" + numPlotwist2 + "\n");
-            pw.print("Ensambladores12:" + numEnsambladores2 + "\n");
+            pw.print("Ensambladores2:" + numEnsambladores2 + "\n");
             
             pw.close();
             

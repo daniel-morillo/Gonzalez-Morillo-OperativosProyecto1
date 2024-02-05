@@ -32,7 +32,7 @@ public class Reader {
     private int numEnsambladores2;
 
     public void ReadTxt(Company Company1, Company Company2) {
-        String Path = "Prueba.txt";
+        String Path = "archivo.txt";
         try {
             FileReader lector = new FileReader(Path);
             BufferedReader bufferedReader = new BufferedReader(lector);
@@ -98,20 +98,37 @@ public class Reader {
 
             bufferedReader.close();
             Company1.setDayDuration(getSegundosEnSimulacion());
-            Company1.setNumeroAnimadores(getNumAnimadores1());
-            Company1.setNumeroDobladores(getNumDobladores1());
-            Company1.setNumeroEscenarios(getNumEscenografos1());
-            Company1.setNumeroGuionistas(getNumGuionistas1());
-            Company1.setNumeroPlotwisters(getNumPlotwist1());
-            Company1.setNumeroAssemblers(getNumEnsambladores1());
+            Company1.getGuionistas().setDayDuration(getSegundosEnSimulacion());
+            Company1.getDobladores().setDayDuration(getSegundosEnSimulacion());
+            Company1.getAnimadores().setDayDuration(getSegundosEnSimulacion());
+            Company1.getEscenografos().setDayDuration(getSegundosEnSimulacion());
+            Company1.getPlotwisters().setDayDuration(getSegundosEnSimulacion());
+            Company1.getPM().setDayDuration(getSegundosEnSimulacion());
+            Company1.getDirector().setDayDuration(getSegundosEnSimulacion());
+            Company1.getGuionistas().setDevelopersquantity(getNumGuionistas1());
+            Company1.getAnimadores().setDevelopersquantity(getNumAnimadores1());
+            Company1.getEscenografos().setDevelopersquantity(getNumEscenografos1());
+            Company1.getDobladores().setDevelopersquantity(getNumDobladores1());
+            Company1.getPlotwisters().setDevelopersquantity(getNumPlotwist1());
+            Company1.setCommitDay(getDiasAntesDelDeadline1());
+            Company1.getPM().setCommitDay(getDiasAntesDelDeadline1());
+            
             
             Company2.setDayDuration(getSegundosEnSimulacion());
-            Company2.setNumeroAnimadores(getNumAnimadores2());
-            Company2.setNumeroDobladores(getNumDobladores2());
-            Company2.setNumeroEscenarios(getNumEscenografos2());
-            Company2.setNumeroGuionistas(getNumGuionistas2());
-            Company2.setNumeroPlotwisters(getNumPlotwist2());
-            Company2.setNumeroAssemblers(getNumEnsambladores2());
+            Company2.getGuionistas().setDayDuration(getSegundosEnSimulacion());
+            Company2.getDobladores().setDayDuration(getSegundosEnSimulacion());
+            Company2.getAnimadores().setDayDuration(getSegundosEnSimulacion());
+            Company2.getEscenografos().setDayDuration(getSegundosEnSimulacion());
+            Company2.getPlotwisters().setDayDuration(getSegundosEnSimulacion());
+            Company2.getPM().setDayDuration(getSegundosEnSimulacion());
+            Company2.getDirector().setDayDuration(getSegundosEnSimulacion());
+            Company2.getGuionistas().setDevelopersquantity(getNumGuionistas2());
+            Company2.getAnimadores().setDevelopersquantity(getNumAnimadores2());
+            Company2.getEscenografos().setDevelopersquantity(getNumEscenografos2());
+            Company2.getDobladores().setDevelopersquantity(getNumDobladores2());
+            Company2.getPlotwisters().setDevelopersquantity(getNumPlotwist2());
+            Company2.setCommitDay(getDiasAntesDelDeadline2());
+            Company2.getPM().setCommitDay(getDiasAntesDelDeadline2());
             //Aún Faltan ensambladores y Dias para entregar capitulo
         } catch (Exception err) {
             System.out.println(err);

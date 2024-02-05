@@ -127,7 +127,7 @@ public final class Company {
         this.Animadores = new Developer(getNumeroAnimadores(), 1, getAnimadoresSalary(), getDayDuration(), getMutex(), getAnimadoresToWork(), getAnimadoresContent(), this);
         this.Escenografos = new Developer(getNumeroEscenarios(), 2, getEscenariosSalary(), getDayDuration(), getMutex(), getEscneariosToWork(), getEscneariosContent(), this);
         this.Dobladores = new Developer(getNumeroDobladores(), 3, getDobladoresSalary(), getDayDuration(), getMutex(), getDobladoresToWork(), getDobladoresContent(), this);
-        this.Plotwisters = new Developer(getNumeroPlotwisters(), 4, getPlotwistersSalary(), getDayDuration(), getMutex(), getPlotwistToWork(), getPlotwistContent(), this);
+        this.Plotwisters = new Developer(getNumeroPlotwisters(), 4, getPlotwistersSalary(), getDayDuration(), getMutex(), getPlotwistToWork(),getPlotwistContent(), this);
         this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(), getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(), this);
         this.director = new Director(getDayDuration(), getDirectorSalary(), this, getPM(), getMutex(), getDrive());

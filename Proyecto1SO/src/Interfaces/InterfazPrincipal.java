@@ -5,6 +5,7 @@
 package Interfaces;
 
 import classes.Company;
+import classes.Reader;
 import classes.Writer;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,16 +16,23 @@ import javax.swing.JOptionPane;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300, 650, 60,18) ;
-    Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250, 600, 60,15) ;
-
+    
+    
+    Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300000, 650000, 60,18) ;
+    Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250000, 600000, 60,15) ;
+    Reader lector = new Reader();
+    
     public InterfazPrincipal() {
+        this.lector.ReadTxt(CN, DN);
+        
         initComponents();
+        
         
         JLabel[] CNContableLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel};
         JLabel[] CNDirectorLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDirectorStateLabel,CNDescuentoPMLabel};
         JLabel[] CNPMLabels = {CNGastosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDescuentoPMLabel};
         JLabel[] CNDriveLabels = {CNGuionesDispoLabel,CNAnimDispoLabels,CNEscnDispoLabel,CNDoblDispoLabel,CNPlotDispoLabel,CNCapDispoLabel,CNCapPlotDispo};
+        JLabel[] CNCompanyLabels={CNNumWorkersLabel,CNNumAnimadoresLabel,CNNumGuionistasLabel,CNNumEscenografosLabel,CNNumDobladoresLabel,CNNumPlotwistersLabel,CNNumEnsambladoresLabel,CNDeadLineReadLabel,CNNumGuionistasReadLabel,CNNumAnimadoresReadLabel,CNNumDobladoresReadLabel,CNNumEscenografosReadLabel,CNNumPlotwistersReadLabel,CNNumEnsambladoresReadLabel};
         
         this.CN.getDirector().setLabels(CNContableLabels);
         this.CN.getAnimadores().setContablesLabel(CNContableLabels);
@@ -33,6 +41,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.CN.getDobladores().setContablesLabel(CNContableLabels);
         this.CN.getPlotwisters().setContablesLabel(CNContableLabels);
         this.CN.getAssembler().setContablesLabel(CNContableLabels);
+        this.CN.setLabels(CNCompanyLabels);
         
         this.CN.getPM().setPMlabels(CNPMLabels);
         this.CN.getDirector().setLabels(CNDirectorLabels); 
@@ -42,6 +51,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         JLabel[] DNDirectorLabels = {DNIngresosLabel,DNGastosLabel,DNBeneficiosLabel,DNDiasEntregaLabel,DNFaltasPMlabel,DNPMStateLabel,DNDirectorStateLabel,DNDescuentoPMLabel};
         JLabel[] DNPMLabels = {DNGastosLabel,DNDiasEntregaLabel,DNFaltasPMlabel,DNPMStateLabel,DNDescuentoPMLabel};
         JLabel[] DNDriveLabels = {DNGuionesDispoLabel,DNAnimDispoLabels,DNEscnDispoLabel,DNDoblDispoLabel,DNPlotDispoLabel,DNCapDispoLabel,DNCapPlotDispo};
+        JLabel[] DNCompanyLabels={DNNumWorkersLabel,DNNumAnimadoresLabel,DNNumGuionistasLabel,DNNumEscenografosLabel,DNNumDobladoresLabel,DNNumPlotwistersLabel,DNNumEnsambladoresLabel,DNDeadLineReadLabel,DNNumGuionistasReadLabel,DNNumAnimadoresReadLabel,DNNumDobladoresReadLabel,DNNumEscenografosReadLabel,DNNumPlotwistersReadLabel,DNNumEnsambladoresReadLabel};
+        
         
         this.DN.getDirector().setLabels(DNContableLabels);
         this.DN.getAnimadores().setContablesLabel(DNContableLabels);
@@ -55,37 +66,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.DN.getDirector().setLabels(DNDirectorLabels); 
         this.DN.getDrive().setLabelsDrive(DNDriveLabels);
         
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
-        CNNumGuionistasLabel.setText(String.valueOf(this.CN.getNumeroGuionistas()));
-        CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getNumeroAnimadores()));
-        CNNumDobladoresLabel.setText(String.valueOf(this.CN.getNumeroDobladores()));
-        CNNumEscenografosLabel.setText(String.valueOf(this.CN.getNumeroEscenarios()));
-        CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getNumeroPlotwisters()));
-        CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getNumeroAssemblers()));
+        this.DN.setLabels(DNCompanyLabels);
         
-        CNDeadLineReadLabel2.setText(String.valueOf(this.CN.getCommitDay()));
-        CNNumGuionistasReadLabel1.setText(String.valueOf(this.CN.getNumeroGuionistas()));
-        CNNumAnimadoresReadLabel1.setText(String.valueOf(this.CN.getNumeroAnimadores()));
-        CNNumDobladoresReadLabel2.setText(String.valueOf(this.CN.getNumeroDobladores()));
-        CNNumEscenografosReadLabel1.setText(String.valueOf(this.CN.getNumeroEscenarios()));
-        CNNumPlotwistersReadLabel1.setText(String.valueOf(this.CN.getNumeroPlotwisters()));
-        CNNumEnsambladoresReadLabel1.setText(String.valueOf(this.CN.getNumeroAssemblers()));
         
-        DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
-        DNNumGuionistasLabel.setText(String.valueOf(this.DN.getNumeroGuionistas()));
-        DNNumAnimadoresLabel.setText(String.valueOf(this.DN.getNumeroAnimadores()));
-        DNNumDobladoresLabel.setText(String.valueOf(this.DN.getNumeroDobladores()));
-        DNNumEscenografosLabel.setText(String.valueOf(this.DN.getNumeroEscenarios()));
-        DNNumPlotwistersLabel.setText(String.valueOf(this.DN.getNumeroPlotwisters()));
-        DNNumEnsambladoresLabel.setText(String.valueOf(this.DN.getNumeroAssemblers()));       
+        CNDeadLineReadLabel.setText(String.valueOf(this.CN.getCommitDay()));
+        CNNumGuionistasReadLabel.setText(String.valueOf(this.CN.getNumeroGuionistas()));
+        CNNumAnimadoresReadLabel.setText(String.valueOf(this.CN.getNumeroAnimadores()));
+        CNNumDobladoresReadLabel.setText(String.valueOf(this.CN.getNumeroDobladores()));
+        CNNumEscenografosReadLabel.setText(String.valueOf(this.CN.getNumeroEscenarios()));
+        CNNumPlotwistersReadLabel.setText(String.valueOf(this.CN.getNumeroPlotwisters()));
+        CNNumEnsambladoresReadLabel.setText(String.valueOf(this.CN.getNumeroAssemblers()));
+             
         
-        DNDeadLineReadLabel3.setText(String.valueOf(this.DN.getCommitDay()));
-        DNNumGuionistasReadLabel2.setText(String.valueOf(this.DN.getNumeroGuionistas()));
-        DNNumAnimadoresReadLabel2.setText(String.valueOf(this.DN.getNumeroAnimadores()));
-        DNNumDobladoresReadLabel1.setText(String.valueOf(this.DN.getNumeroDobladores()));
-        DNNumEscenografosReadLabel2.setText(String.valueOf(this.DN.getNumeroEscenarios()));
-        DNNumPlotwistersReadLabel2.setText(String.valueOf(this.DN.getNumeroPlotwisters()));
-        DNNumEnsambladoresReadLabel2.setText(String.valueOf(this.DN.getNumeroAssemblers()));
+        DNDeadLineReadLabel.setText(String.valueOf(this.DN.getCommitDay()));
+        DNNumGuionistasReadLabel.setText(String.valueOf(this.DN.getNumeroGuionistas()));
+        DNNumAnimadoresReadLabel.setText(String.valueOf(this.DN.getNumeroAnimadores()));
+        DNNumDobladoresReadLabel.setText(String.valueOf(this.DN.getNumeroDobladores()));
+        DNNumEscenografosReadLabel.setText(String.valueOf(this.DN.getNumeroEscenarios()));
+        DNNumPlotwistersReadLabel.setText(String.valueOf(this.DN.getNumeroPlotwisters()));
+        DNNumEnsambladoresReadLabel.setText(String.valueOf(this.DN.getNumeroAssemblers()));
         
         
         
@@ -107,21 +106,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         TabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        CNNumGuionistasReadLabel1 = new javax.swing.JLabel();
-        DNNumGuionistasReadLabel2 = new javax.swing.JLabel();
-        CNNumAnimadoresReadLabel1 = new javax.swing.JLabel();
-        DNNumAnimadoresReadLabel2 = new javax.swing.JLabel();
-        DNNumDobladoresReadLabel1 = new javax.swing.JLabel();
-        CNNumDobladoresReadLabel2 = new javax.swing.JLabel();
-        CNNumEscenografosReadLabel1 = new javax.swing.JLabel();
-        DNNumEscenografosReadLabel2 = new javax.swing.JLabel();
-        CNNumPlotwistersReadLabel1 = new javax.swing.JLabel();
-        DNNumPlotwistersReadLabel2 = new javax.swing.JLabel();
-        CNNumEnsambladoresReadLabel1 = new javax.swing.JLabel();
-        DNNumEnsambladoresReadLabel2 = new javax.swing.JLabel();
+        CNNumGuionistasReadLabel = new javax.swing.JLabel();
+        DNNumGuionistasReadLabel = new javax.swing.JLabel();
+        CNNumAnimadoresReadLabel = new javax.swing.JLabel();
+        DNNumAnimadoresReadLabel = new javax.swing.JLabel();
+        DNNumDobladoresReadLabel = new javax.swing.JLabel();
+        CNNumDobladoresReadLabel = new javax.swing.JLabel();
+        CNNumEscenografosReadLabel = new javax.swing.JLabel();
+        DNNumEscenografosReadLabel = new javax.swing.JLabel();
+        CNNumPlotwistersReadLabel = new javax.swing.JLabel();
+        DNNumPlotwistersReadLabel = new javax.swing.JLabel();
+        CNNumEnsambladoresReadLabel = new javax.swing.JLabel();
+        DNNumEnsambladoresReadLabel = new javax.swing.JLabel();
         WritterButton = new javax.swing.JButton();
-        CNDeadLineReadLabel2 = new javax.swing.JLabel();
-        DNDeadLineReadLabel3 = new javax.swing.JLabel();
+        CNDeadLineReadLabel = new javax.swing.JLabel();
+        DNDeadLineReadLabel = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         CNMinusDeadLineReadButton1 = new javax.swing.JButton();
@@ -282,41 +281,41 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CNNumGuionistasReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumGuionistasReadLabel1.setText("1");
+        CNNumGuionistasReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumGuionistasReadLabel.setText("1");
 
-        DNNumGuionistasReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumGuionistasReadLabel2.setText("1");
+        DNNumGuionistasReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumGuionistasReadLabel.setText("1");
 
-        CNNumAnimadoresReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumAnimadoresReadLabel1.setText("1");
+        CNNumAnimadoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumAnimadoresReadLabel.setText("1");
 
-        DNNumAnimadoresReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumAnimadoresReadLabel2.setText("1");
+        DNNumAnimadoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumAnimadoresReadLabel.setText("1");
 
-        DNNumDobladoresReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumDobladoresReadLabel1.setText("1");
+        DNNumDobladoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumDobladoresReadLabel.setText("1");
 
-        CNNumDobladoresReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumDobladoresReadLabel2.setText("1");
+        CNNumDobladoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumDobladoresReadLabel.setText("1");
 
-        CNNumEscenografosReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumEscenografosReadLabel1.setText("1");
+        CNNumEscenografosReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumEscenografosReadLabel.setText("1");
 
-        DNNumEscenografosReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumEscenografosReadLabel2.setText("1");
+        DNNumEscenografosReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumEscenografosReadLabel.setText("1");
 
-        CNNumPlotwistersReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumPlotwistersReadLabel1.setText("1");
+        CNNumPlotwistersReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumPlotwistersReadLabel.setText("1");
 
-        DNNumPlotwistersReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumPlotwistersReadLabel2.setText("1");
+        DNNumPlotwistersReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumPlotwistersReadLabel.setText("1");
 
-        CNNumEnsambladoresReadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNNumEnsambladoresReadLabel1.setText("1");
+        CNNumEnsambladoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNNumEnsambladoresReadLabel.setText("1");
 
-        DNNumEnsambladoresReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumEnsambladoresReadLabel2.setText("1");
+        DNNumEnsambladoresReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumEnsambladoresReadLabel.setText("1");
 
         WritterButton.setText("Cargar");
         WritterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -325,11 +324,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
 
-        CNDeadLineReadLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CNDeadLineReadLabel2.setText("1");
+        CNDeadLineReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CNDeadLineReadLabel.setText("1");
 
-        DNDeadLineReadLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNDeadLineReadLabel3.setText("1");
+        DNDeadLineReadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNDeadLineReadLabel.setText("1");
 
         jLabel25.setText("Duracion del dia:");
 
@@ -572,13 +571,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(180, 180, 180)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(CNDeadLineReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumGuionistasReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumAnimadoresReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumDobladoresReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumEscenografosReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumPlotwistersReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CNNumEnsambladoresReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(CNDeadLineReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumGuionistasReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumAnimadoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumDobladoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumEscenografosReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumPlotwistersReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CNNumEnsambladoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(30, 30, 30)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(CNPlusGuionReadButton1)
@@ -635,31 +634,31 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumEnsambladoresReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumEnsambladoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusEnsambladoresReadButton7))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumPlotwistersReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumPlotwistersReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusPlotwistersReadButton6))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumEscenografosReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumEscenografosReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusEscenografosReadButton5))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumDobladoresReadLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumDobladoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusDobladoresReadButton4))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumAnimadoresReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumAnimadoresReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusAnimadoresReadButton3))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNDeadLineReadLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNDeadLineReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusDeadLineReadButton2))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(DNNumGuionistasReadLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(DNNumGuionistasReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusGuionReadButton2)))))))
                 .addContainerGap(967, Short.MAX_VALUE))
@@ -682,17 +681,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNMinusDeadLineReadButton1)
                             .addComponent(CNPlusDeadLineReadButton1)
-                            .addComponent(CNDeadLineReadLabel2)
-                            .addComponent(DNDeadLineReadLabel3)
+                            .addComponent(CNDeadLineReadLabel)
+                            .addComponent(DNDeadLineReadLabel)
                             .addComponent(DNMinusDeadLineReadButton2)
                             .addComponent(DNPlusDeadLineReadButton2)
                             .addComponent(jLabel28))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNMinusGuionReadButton1)
-                            .addComponent(CNNumGuionistasReadLabel1)
+                            .addComponent(CNNumGuionistasReadLabel)
                             .addComponent(CNPlusGuionReadButton1)
-                            .addComponent(DNNumGuionistasReadLabel2)
+                            .addComponent(DNNumGuionistasReadLabel)
                             .addComponent(DNMinusGuionReadButton3)
                             .addComponent(DNPlusGuionReadButton2)
                             .addComponent(jLabel29))
@@ -700,8 +699,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusAnimadoresReadButton2)
                             .addComponent(CNMinusAnimadoresReadButton2)
-                            .addComponent(CNNumAnimadoresReadLabel1)
-                            .addComponent(DNNumAnimadoresReadLabel2)
+                            .addComponent(CNNumAnimadoresReadLabel)
+                            .addComponent(DNNumAnimadoresReadLabel)
                             .addComponent(DNMinusAnimadoresReadButton3)
                             .addComponent(DNPlusAnimadoresReadButton3)
                             .addComponent(jLabel31))
@@ -709,8 +708,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusDobladoresReadButton3)
                             .addComponent(CNMinusDobladoresReadButton3)
-                            .addComponent(CNNumDobladoresReadLabel2)
-                            .addComponent(DNNumDobladoresReadLabel1)
+                            .addComponent(CNNumDobladoresReadLabel)
+                            .addComponent(DNNumDobladoresReadLabel)
                             .addComponent(DNMinusDobladoresReadButton4)
                             .addComponent(DNPlusDobladoresReadButton4)
                             .addComponent(jLabel30))
@@ -718,8 +717,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusEscenografosReadButton4)
                             .addComponent(CNMinusEscenografosReadButton4)
-                            .addComponent(CNNumEscenografosReadLabel1)
-                            .addComponent(DNNumEscenografosReadLabel2)
+                            .addComponent(CNNumEscenografosReadLabel)
+                            .addComponent(DNNumEscenografosReadLabel)
                             .addComponent(DNMinusEscenografosReadButton5)
                             .addComponent(DNPlusEscenografosReadButton5)
                             .addComponent(jLabel32))
@@ -727,8 +726,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusPlotwistersReadButton5)
                             .addComponent(CNMinusPlotwistersReadButton5)
-                            .addComponent(CNNumPlotwistersReadLabel1)
-                            .addComponent(DNNumPlotwistersReadLabel2)
+                            .addComponent(CNNumPlotwistersReadLabel)
+                            .addComponent(DNNumPlotwistersReadLabel)
                             .addComponent(DNMinusPlotwistersReadButton6)
                             .addComponent(DNPlusPlotwistersReadButton6)
                             .addComponent(jLabel33))
@@ -736,8 +735,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusEnsambladoresReadButton6)
                             .addComponent(CNMinusEnsambladoresReadButton6)
-                            .addComponent(CNNumEnsambladoresReadLabel1)
-                            .addComponent(DNNumEnsambladoresReadLabel2)
+                            .addComponent(CNNumEnsambladoresReadLabel)
+                            .addComponent(DNNumEnsambladoresReadLabel)
                             .addComponent(DNMinusEnsambladoresReadButton7)
                             .addComponent(DNPlusEnsambladoresReadButton7)
                             .addComponent(jLabel34))
@@ -1071,20 +1070,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addComponent(jLabel36)
                         .addGap(52, 52, 52)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel37)
                             .addComponent(jLabel51)
                             .addComponent(DNDiasEntregaLabel)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DNNumWorkersLabel))))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DNNumWorkersLabel)))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
@@ -1754,21 +1751,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         try {
             Integer DurationDay = Integer.parseInt(durationDayLabel.getText());
             
-            Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel2.getText());
-            Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel1.getText());
-            Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel1.getText());
-            Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel2.getText());
-            Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel1.getText());
-            Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel1.getText());
-            Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel1.getText());
+            Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
+            Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
+            Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
+            Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
+            Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
+            Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
+            Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
             
-            Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel3.getText());
-            Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel2.getText());
-            Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel2.getText());
-            Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel1.getText());
-            Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel2.getText());
-            Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel2.getText());
-            Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel2.getText());
+            Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
+            Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
+            Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
+            Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
+            Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
+            Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
+            Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
             
             if(DurationDay > 0){
                 Writer writer = new Writer(DurationDay, CNDeadLine , CNNumGuionistas, CNNumAnimadores, CNNumDobladores, CNNumEscenografos, CNNumPlotwisters, CNNumEnsambladores, DNDeadLine ,DNNumGuionistas, DNNumAnimadores, DNNumDobladores, DNNumEscenografos, DNNumPlotwisters, DNNumEnsambladores);
@@ -1785,300 +1782,300 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void CNMinusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDeadLineReadButton1ActionPerformed
         // TODO add your handling code here:
-        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel2.getText());
+        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
         if (CNDeadLine == 1){
             JOptionPane.showMessageDialog(this, "El dia de entrega no puede ser menor a 1");
         } else {
 
-        this.CNDeadLineReadLabel2.setText(String.valueOf(CNDeadLine - 1));
+        this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine - 1));
         }
         
     }//GEN-LAST:event_CNMinusDeadLineReadButton1ActionPerformed
 
     private void CNPlusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDeadLineReadButton1ActionPerformed
         // TODO add your handling code here:
-        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel2.getText());
-        this.CNDeadLineReadLabel2.setText(String.valueOf(CNDeadLine + 1));
+        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
+        this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine + 1));
     }//GEN-LAST:event_CNPlusDeadLineReadButton1ActionPerformed
 
     private void CNPlusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionReadButton1ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel1.getText());
+        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         }
         else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumGuionistasReadLabel1.setText(String.valueOf(CNNumGuionistas +1));
+        this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas +1));
         }
     }//GEN-LAST:event_CNPlusGuionReadButton1ActionPerformed
 
     private void CNMinusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionReadButton1ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel1.getText());
+        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
         if (CNNumGuionistas == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumGuionistasReadLabel1.setText(String.valueOf(CNNumGuionistas -1));
+        this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas -1));
         }
     }//GEN-LAST:event_CNMinusGuionReadButton1ActionPerformed
 
     private void CNMinusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimadoresReadButton2ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel1.getText());
+        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
         if (CNNumAnimadores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumAnimadoresReadLabel1.setText(String.valueOf(CNNumAnimadores -1));
+        this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores -1));
         }
     }//GEN-LAST:event_CNMinusAnimadoresReadButton2ActionPerformed
 
     private void CNPlusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusAnimadoresReadButton2ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel1.getText());
+        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         }
         else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumAnimadoresReadLabel1.setText(String.valueOf(CNNumAnimadores +1));
+        this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores +1));
         }
     }//GEN-LAST:event_CNPlusAnimadoresReadButton2ActionPerformed
 
     private void CNMinusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDobladoresReadButton3ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel2.getText());
+        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
         if (CNNumDobladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumDobladoresReadLabel2.setText(String.valueOf(CNNumDobladores -1));
+        this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores -1));
         }
     }//GEN-LAST:event_CNMinusDobladoresReadButton3ActionPerformed
 
     private void CNPlusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDobladoresReadButton3ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel2.getText());
+        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumDobladoresReadLabel2.setText(String.valueOf(CNNumDobladores +1));}
+        this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores +1));}
     }//GEN-LAST:event_CNPlusDobladoresReadButton3ActionPerformed
 
     private void CNMinusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscenografosReadButton4ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel1.getText());
+        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
         if (CNNumEscenografos == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-            this.CNNumEscenografosReadLabel1.setText(String.valueOf(CNNumEscenografos -1));
+            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos -1));
         }
     }//GEN-LAST:event_CNMinusEscenografosReadButton4ActionPerformed
 
     private void CNPlusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEscenografosReadButton4ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel1.getText());
+        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumEscenografosReadLabel1.setText(String.valueOf(CNNumEscenografos +1));}
+            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos +1));}
     }//GEN-LAST:event_CNPlusEscenografosReadButton4ActionPerformed
 
     private void CNMinusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPlotwistersReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel1.getText());
+        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
         if (CNNumPlotwisters == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-            this.CNNumPlotwistersReadLabel1.setText(String.valueOf(CNNumPlotwisters -1));
+            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters -1));
         }
     }//GEN-LAST:event_CNMinusPlotwistersReadButton5ActionPerformed
 
     private void CNPlusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPlotwistersReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel1.getText());
+        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumPlotwistersReadLabel1.setText(String.valueOf(CNNumPlotwisters +1));}
+            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters +1));}
     }//GEN-LAST:event_CNPlusPlotwistersReadButton5ActionPerformed
 
     private void CNMinusEnsambladoresReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsambladoresReadButton6ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel1.getText());
+        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
         if (CNNumEnsambladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-            this.CNNumEnsambladoresReadLabel1.setText(String.valueOf(CNNumEnsambladores -1));
+            this.CNNumEnsambladoresReadLabel.setText(String.valueOf(CNNumEnsambladores -1));
         }
     }//GEN-LAST:event_CNMinusEnsambladoresReadButton6ActionPerformed
 
     private void CNPlusEnsambladoresReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsambladoresReadButton6ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel1.getText());
+        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumEnsambladoresReadLabel1.setText(String.valueOf(CNNumEnsambladores +1));}
+            this.CNNumEnsambladoresReadLabel.setText(String.valueOf(CNNumEnsambladores +1));}
     }//GEN-LAST:event_CNPlusEnsambladoresReadButton6ActionPerformed
 
     private void DNMinusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDeadLineReadButton2ActionPerformed
         // TODO add your handling code here:
-        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel3.getText());
+        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
         if (DNDeadLine == 1){
             JOptionPane.showMessageDialog(this, "El dia de entrega no puede ser menor a 1");
         } else {
 
-        this.DNDeadLineReadLabel3.setText(String.valueOf(DNDeadLine - 1));
+        this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine - 1));
         }
     }//GEN-LAST:event_DNMinusDeadLineReadButton2ActionPerformed
 
     private void DNPlusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDeadLineReadButton2ActionPerformed
         // TODO add your handling code here:
-        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel3.getText());
-        this.DNDeadLineReadLabel3.setText(String.valueOf(DNDeadLine + 1));
+        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
+        this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine + 1));
     }//GEN-LAST:event_DNPlusDeadLineReadButton2ActionPerformed
 
     private void DNMinusGuionReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusGuionReadButton3ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel2.getText());
+        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
         if (DNNumGuionistas == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumGuionistasReadLabel2.setText(String.valueOf(DNNumGuionistas -1));
+        this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas -1));
         }
     }//GEN-LAST:event_DNMinusGuionReadButton3ActionPerformed
 
     private void DNPlusGuionReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusGuionReadButton2ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel2.getText());
+        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumGuionistasReadLabel2.setText(String.valueOf(DNNumGuionistas +1));
+        this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas +1));
         }
     }//GEN-LAST:event_DNPlusGuionReadButton2ActionPerformed
 
     private void DNMinusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusAnimadoresReadButton3ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel2.getText());
+        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
         if (DNNumAnimadores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumAnimadoresReadLabel2.setText(String.valueOf(DNNumAnimadores -1));
+        this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores -1));
         }
     }//GEN-LAST:event_DNMinusAnimadoresReadButton3ActionPerformed
 
     private void DNPlusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusAnimadoresReadButton3ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel2.getText());
+        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumAnimadoresReadLabel2.setText(String.valueOf(DNNumAnimadores +1));
+        this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores +1));
         }
     }//GEN-LAST:event_DNPlusAnimadoresReadButton3ActionPerformed
 
     private void DNMinusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDobladoresReadButton4ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel1.getText());
+        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
          if (DNNumDobladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumDobladoresReadLabel1.setText(String.valueOf(DNNumDobladores -1));
+        this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores -1));
         }
         
     }//GEN-LAST:event_DNMinusDobladoresReadButton4ActionPerformed
 
     private void DNPlusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDobladoresReadButton4ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel1.getText());
+        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumDobladoresReadLabel1.setText(String.valueOf(DNNumDobladores +1));
+        this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores +1));
         }
     }//GEN-LAST:event_DNPlusDobladoresReadButton4ActionPerformed
 
     private void DNMinusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEscenografosReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel2.getText());
+        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
          if (DNNumEscenografos == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumEscenografosReadLabel2.setText(String.valueOf(DNNumEscenografos -1));
+        this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos -1));
         }
         
     }//GEN-LAST:event_DNMinusEscenografosReadButton5ActionPerformed
 
     private void DNPlusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEscenografosReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel2.getText());
+        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumEscenografosReadLabel2.setText(String.valueOf(DNNumEscenografos +1));
+        this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos +1));
         }
     }//GEN-LAST:event_DNPlusEscenografosReadButton5ActionPerformed
 
     private void DNMinusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusPlotwistersReadButton6ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel2.getText());
+        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
          if (DNNumPlotwisters == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumPlotwistersReadLabel2.setText(String.valueOf(DNNumPlotwisters -1));
+        this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters -1));
         }
     }//GEN-LAST:event_DNMinusPlotwistersReadButton6ActionPerformed
 
     private void DNPlusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPlotwistersReadButton6ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel2.getText());
+        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumPlotwistersReadLabel2.setText(String.valueOf(DNNumPlotwisters +1));
+        this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters +1));
         }
     }//GEN-LAST:event_DNPlusPlotwistersReadButton6ActionPerformed
 
     private void DNMinusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEnsambladoresReadButton7ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel2.getText());
+        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
         if (DNNumEnsambladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumEnsambladoresReadLabel2.setText(String.valueOf(DNNumEnsambladores -1));
+        this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores -1));
         }
     }//GEN-LAST:event_DNMinusEnsambladoresReadButton7ActionPerformed
 
     private void DNPlusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsambladoresReadButton7ActionPerformed
         // TODO add your handling code here:
-        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel2.getText());
+        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
         this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumEnsambladoresReadLabel2.setText(String.valueOf(DNNumEnsambladores +1));
+        this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores +1));
         }
     }//GEN-LAST:event_DNPlusEnsambladoresReadButton7ActionPerformed
 
@@ -2269,7 +2266,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel CNBeneficiosLabel;
     private javax.swing.JLabel CNCapDispoLabel;
     private javax.swing.JLabel CNCapPlotDispo;
-    private javax.swing.JLabel CNDeadLineReadLabel2;
+    private javax.swing.JLabel CNDeadLineReadLabel;
     private javax.swing.JLabel CNDescuentoPMLabel;
     private javax.swing.JLabel CNDiasEntregaLabel;
     private javax.swing.JLabel CNDirectorStateLabel;
@@ -2293,17 +2290,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton CNMinusPlotwistersReadButton5;
     private javax.swing.JButton CNMinusPltButton;
     private javax.swing.JLabel CNNumAnimadoresLabel;
-    private javax.swing.JLabel CNNumAnimadoresReadLabel1;
+    private javax.swing.JLabel CNNumAnimadoresReadLabel;
     private javax.swing.JLabel CNNumDobladoresLabel;
-    private javax.swing.JLabel CNNumDobladoresReadLabel2;
+    private javax.swing.JLabel CNNumDobladoresReadLabel;
     private javax.swing.JLabel CNNumEnsambladoresLabel;
-    private javax.swing.JLabel CNNumEnsambladoresReadLabel1;
+    private javax.swing.JLabel CNNumEnsambladoresReadLabel;
     private javax.swing.JLabel CNNumEscenografosLabel;
-    private javax.swing.JLabel CNNumEscenografosReadLabel1;
+    private javax.swing.JLabel CNNumEscenografosReadLabel;
     private javax.swing.JLabel CNNumGuionistasLabel;
-    private javax.swing.JLabel CNNumGuionistasReadLabel1;
+    private javax.swing.JLabel CNNumGuionistasReadLabel;
     private javax.swing.JLabel CNNumPlotwistersLabel;
-    private javax.swing.JLabel CNNumPlotwistersReadLabel1;
+    private javax.swing.JLabel CNNumPlotwistersReadLabel;
     private javax.swing.JLabel CNNumWorkersLabel;
     private javax.swing.JLabel CNPMStateLabel;
     private javax.swing.JLabel CNPlotDispoLabel;
@@ -2324,7 +2321,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel DNBeneficiosLabel;
     private javax.swing.JLabel DNCapDispoLabel;
     private javax.swing.JLabel DNCapPlotDispo;
-    private javax.swing.JLabel DNDeadLineReadLabel3;
+    private javax.swing.JLabel DNDeadLineReadLabel;
     private javax.swing.JLabel DNDescuentoPMLabel;
     private javax.swing.JLabel DNDiasEntregaLabel;
     private javax.swing.JLabel DNDirectorStateLabel;
@@ -2348,17 +2345,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton DNMinusPlotwistersReadButton6;
     private javax.swing.JButton DNMinusPltButton;
     private javax.swing.JLabel DNNumAnimadoresLabel;
-    private javax.swing.JLabel DNNumAnimadoresReadLabel2;
+    private javax.swing.JLabel DNNumAnimadoresReadLabel;
     private javax.swing.JLabel DNNumDobladoresLabel;
-    private javax.swing.JLabel DNNumDobladoresReadLabel1;
+    private javax.swing.JLabel DNNumDobladoresReadLabel;
     private javax.swing.JLabel DNNumEnsambladoresLabel;
-    private javax.swing.JLabel DNNumEnsambladoresReadLabel2;
+    private javax.swing.JLabel DNNumEnsambladoresReadLabel;
     private javax.swing.JLabel DNNumEscenografosLabel;
-    private javax.swing.JLabel DNNumEscenografosReadLabel2;
+    private javax.swing.JLabel DNNumEscenografosReadLabel;
     private javax.swing.JLabel DNNumGuionistasLabel;
-    private javax.swing.JLabel DNNumGuionistasReadLabel2;
+    private javax.swing.JLabel DNNumGuionistasReadLabel;
     private javax.swing.JLabel DNNumPlotwistersLabel;
-    private javax.swing.JLabel DNNumPlotwistersReadLabel2;
+    private javax.swing.JLabel DNNumPlotwistersReadLabel;
     private javax.swing.JLabel DNNumWorkersLabel;
     private javax.swing.JLabel DNPMStateLabel;
     private javax.swing.JLabel DNPlotDispoLabel;

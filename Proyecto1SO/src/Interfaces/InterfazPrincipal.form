@@ -55,13 +55,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="CNDeadLineReadLabel2" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumGuionistasReadLabel1" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumAnimadoresReadLabel1" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumDobladoresReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumEscenografosReadLabel1" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumPlotwistersReadLabel1" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="CNNumEnsambladoresReadLabel1" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNDeadLineReadLabel" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumGuionistasReadLabel" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumAnimadoresReadLabel" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumDobladoresReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumEscenografosReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumPlotwistersReadLabel" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="CNNumEnsambladoresReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -131,37 +131,37 @@
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="DNNumEnsambladoresReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumEnsambladoresReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusEnsambladoresReadButton7" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="DNNumPlotwistersReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumPlotwistersReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusPlotwistersReadButton6" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="DNNumEscenografosReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumEscenografosReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusEscenografosReadButton5" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="DNNumDobladoresReadLabel1" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumDobladoresReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusDobladoresReadButton4" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="DNNumAnimadoresReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumAnimadoresReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusAnimadoresReadButton3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="DNDeadLineReadLabel3" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNDeadLineReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusDeadLineReadButton2" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="DNNumGuionistasReadLabel2" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Component id="DNNumGuionistasReadLabel" min="-2" pref="15" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="DNPlusGuionReadButton2" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -195,8 +195,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNMinusDeadLineReadButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusDeadLineReadButton1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNDeadLineReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNDeadLineReadLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNDeadLineReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNDeadLineReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusDeadLineReadButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusDeadLineReadButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -204,9 +204,9 @@
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNMinusGuionReadButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumGuionistasReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumGuionistasReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNPlusGuionReadButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumGuionistasReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumGuionistasReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusGuionReadButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusGuionReadButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -215,8 +215,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNPlusAnimadoresReadButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusAnimadoresReadButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumAnimadoresReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumAnimadoresReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumAnimadoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumAnimadoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusAnimadoresReadButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusAnimadoresReadButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -225,8 +225,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNPlusDobladoresReadButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusDobladoresReadButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumDobladoresReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumDobladoresReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumDobladoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumDobladoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusDobladoresReadButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusDobladoresReadButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -235,8 +235,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNPlusEscenografosReadButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusEscenografosReadButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumEscenografosReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumEscenografosReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumEscenografosReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumEscenografosReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusEscenografosReadButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusEscenografosReadButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -245,8 +245,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNPlusPlotwistersReadButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusPlotwistersReadButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumPlotwistersReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumPlotwistersReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumPlotwistersReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumPlotwistersReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusPlotwistersReadButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusPlotwistersReadButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -255,8 +255,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CNPlusEnsambladoresReadButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="CNMinusEnsambladoresReadButton6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CNNumEnsambladoresReadLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DNNumEnsambladoresReadLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CNNumEnsambladoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DNNumEnsambladoresReadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNMinusEnsambladoresReadButton7" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="DNPlusEnsambladoresReadButton7" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -271,73 +271,73 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="CNNumGuionistasReadLabel1">
+            <Component class="javax.swing.JLabel" name="CNNumGuionistasReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumGuionistasReadLabel2">
+            <Component class="javax.swing.JLabel" name="DNNumGuionistasReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNNumAnimadoresReadLabel1">
+            <Component class="javax.swing.JLabel" name="CNNumAnimadoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumAnimadoresReadLabel2">
+            <Component class="javax.swing.JLabel" name="DNNumAnimadoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumDobladoresReadLabel1">
+            <Component class="javax.swing.JLabel" name="DNNumDobladoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNNumDobladoresReadLabel2">
+            <Component class="javax.swing.JLabel" name="CNNumDobladoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNNumEscenografosReadLabel1">
+            <Component class="javax.swing.JLabel" name="CNNumEscenografosReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumEscenografosReadLabel2">
+            <Component class="javax.swing.JLabel" name="DNNumEscenografosReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNNumPlotwistersReadLabel1">
+            <Component class="javax.swing.JLabel" name="CNNumPlotwistersReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumPlotwistersReadLabel2">
+            <Component class="javax.swing.JLabel" name="DNNumPlotwistersReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNNumEnsambladoresReadLabel1">
+            <Component class="javax.swing.JLabel" name="CNNumEnsambladoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNNumEnsambladoresReadLabel2">
+            <Component class="javax.swing.JLabel" name="DNNumEnsambladoresReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
@@ -351,13 +351,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WritterButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="CNDeadLineReadLabel2">
+            <Component class="javax.swing.JLabel" name="CNDeadLineReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="DNDeadLineReadLabel3">
+            <Component class="javax.swing.JLabel" name="DNDeadLineReadLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="1"/>
@@ -834,9 +834,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -845,12 +845,9 @@
                                   <Component id="DNDiasEntregaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel35" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="DNNumWorkersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel35" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="DNNumWorkersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>

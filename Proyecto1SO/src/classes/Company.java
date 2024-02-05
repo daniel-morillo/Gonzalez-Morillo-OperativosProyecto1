@@ -123,21 +123,24 @@ public final class Company {
         this.trabajadoresTotalesMax = trabajadoresTotalesMax;
         this.chapterProfit = chapterProfit;
         this.plotProfit = plotProfit;
-        this.Guionistas = new Developer(getNumeroGuionistas(),0,getGuionistasSalary(),getDayDuration(), getMutex(),getGuionistasToWork(), getGuionistasContent(),this);
-        this.Animadores = new Developer(getNumeroAnimadores(),1,getAnimadoresSalary(),getDayDuration(), getMutex(), getAnimadoresToWork(),getAnimadoresContent(),this);
-        this.Escenografos = new Developer(getNumeroEscenarios(),2,getEscenariosSalary(),getDayDuration(), getMutex(), getEscneariosToWork(), getEscneariosContent(),this);
-        this.Dobladores = new Developer(getNumeroDobladores(),3,getDobladoresSalary(),getDayDuration(), getMutex(),getDobladoresToWork(), getDobladoresContent(),this);
-        this.Plotwisters = new Developer(getNumeroPlotwisters(),4,getPlotwistersSalary(),getDayDuration(),getMutex(), getPlotwistToWork(), getPlotwistContent(),this);
-        this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
-        this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(),this);
-        this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
-        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();
+        this.Guionistas = new Developer(getNumeroGuionistas(), 0, getGuionistasSalary(), getDayDuration(), getMutex(), getGuionistasToWork(), getGuionistasContent(), this);
+        this.Animadores = new Developer(getNumeroAnimadores(), 1, getAnimadoresSalary(), getDayDuration(), getMutex(), getAnimadoresToWork(), getAnimadoresContent(), this);
+        this.Escenografos = new Developer(getNumeroEscenarios(), 2, getEscenariosSalary(), getDayDuration(), getMutex(), getEscneariosToWork(), getEscneariosContent(), this);
+        this.Dobladores = new Developer(getNumeroDobladores(), 3, getDobladoresSalary(), getDayDuration(), getMutex(), getDobladoresToWork(), getDobladoresContent(), this);
+        this.Plotwisters = new Developer(getNumeroPlotwisters(), 4, getPlotwistersSalary(), getDayDuration(), getMutex(), getPlotwistToWork(), getPlotwistContent(), this);
+        this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(), getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
+        this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(), this);
+        this.director = new Director(getDayDuration(), getDirectorSalary(), this, getPM(), getMutex(), getDrive());
+        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity() + Dobladores.getDevelopersquantity() + Plotwisters.getDevelopersquantity() + Assembler.getAssemblerquantity();
         this.guardarTrabajadoresTotales = this.trabajadoresTotales;
+
     }
     
     
     
     public void StartWorking() {
+        actTotalTrabajadores();
+        loadWorkersValues();
         getGuionistas().start();
         getAnimadores().start();
         getEscenografos().start();
@@ -146,12 +149,30 @@ public final class Company {
         getAssembler().start();
         getPM().start();
         getDirector().start();
+        System.out.println("Cantidad de guionistas: "+String.valueOf(getGuionistas().getDevelopersquantity()));
     }
     //Actualiza los trabajadores totales
     public void actTotalTrabajadores(){
         this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
     }
     
+    public void loadWorkersValues(){
+        
+        this.labels[0].setText(String.valueOf(getTrabajadoresTotales()));
+        this.labels[1].setText(String.valueOf(getAnimadores().getDevelopersquantity()));
+        this.labels[2].setText(String.valueOf(getGuionistas().getDevelopersquantity()));
+        this.labels[3].setText(String.valueOf(getEscenografos().getDevelopersquantity()));
+        this.labels[4].setText(String.valueOf(getDobladores().getDevelopersquantity()));
+        this.labels[5].setText(String.valueOf(getPlotwisters().getDevelopersquantity()));
+        this.labels[6].setText(String.valueOf(getAssembler().getAssemblerquantity()));
+        this.labels[7].setText(String.valueOf(getPM().getCommitDay()));
+        this.labels[8].setText(String.valueOf(getGuionistas().getDevelopersquantity()));
+        this.labels[9].setText(String.valueOf(getAnimadores().getDevelopersquantity()));
+        this.labels[10].setText(String.valueOf(getDobladores().getDevelopersquantity()));
+        this.labels[11].setText(String.valueOf(getEscenografos().getDevelopersquantity()));
+        this.labels[12].setText(String.valueOf(getPlotwisters().getDevelopersquantity()));
+        this.labels[13].setText(String.valueOf(getAssembler().getAssemblerquantity()));
+    }
 
 
     /**

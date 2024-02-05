@@ -75,11 +75,13 @@ public final class Company {
     private final Director director;
     private int trabajadoresTotalesMax;
     private int trabajadoresTotales;
+    private int guardarTrabajadoresTotales;
     //Labels para cambiar los campos de la interfaz manipulables desde la compañia
     private JLabel[] labels;
            
 
-    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
+    public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent,int escenarioContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
+        this.PMsalary = PMsalary;
         this.numeroGuionistas = numeroGuionistas;
         this.numeroAnimadores = numeroAnimadores;
         this.numeroDobladores = numeroDobladores;
@@ -96,6 +98,7 @@ public final class Company {
         this.dayDuration = dayDuration;
         this.guionistasContent = guionistasContent;
         this.animadoresContent = animadoresContent;
+        this.escneariosContent = escenarioContent;
         this.dobladoresContent = dobladoresContent;
         this.PlotwistContent = PlotwistContent;
         this.guionistasToWork = guionistasToWork;
@@ -128,7 +131,8 @@ public final class Company {
         this.Assembler = new Assembler(getNumeroAssemblers(), getAssemblersSalary(), getDayDuration(), getMutex(), getAssemblerToWork(), this, getGuionesEnsamblar(), getEscenariosEnsamblar(), getAnimacionesEnsamblar(),getDoblajesEnsamblar(), getPlotwistEnsamblar(), getCapsToPlotwist());
         this.PM = new PM(getDayDuration(), getPMsalary(), getCommitDay(),this);
         this.director = new  Director(getDayDuration(),getDirectorSalary() , this, getPM(), getMutex(), getDrive());
-        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();    
+        this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();
+        this.guardarTrabajadoresTotales = this.trabajadoresTotales;
     }
     
     
@@ -794,6 +798,14 @@ public final class Company {
      */
     public void setTrabajadoresTotales(int trabajadoresTotales) {
         this.trabajadoresTotales = trabajadoresTotales;
+    }
+
+    public int getGuardarTrabajadoresTotales() {
+        return guardarTrabajadoresTotales;
+    }
+
+    public void setGuardarTrabajadoresTotales(int guardarTrabajadoresTotales) {
+        this.guardarTrabajadoresTotales = guardarTrabajadoresTotales;
     }
 
     

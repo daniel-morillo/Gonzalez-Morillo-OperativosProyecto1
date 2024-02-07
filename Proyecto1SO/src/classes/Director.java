@@ -67,6 +67,7 @@ public class Director extends Thread{
                             getPm().setSanctioned(true);
                             getPm().setSanctions(getPm().getSanctions() + 1);
                         }
+                        setIdle(1);
                         sleep(timeLeft);
                     }
                 }

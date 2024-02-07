@@ -78,6 +78,8 @@ public final class Company {
     private int guardarTrabajadoresTotales;
     //Labels para cambiar los campos de la interfaz manipulables desde la compañia
     private JLabel[] labels;
+    
+    private int daysInSimulation;
            
 
     public Company(int numeroGuionistas, int numeroAnimadores, int numeroDobladores, int numeroEscenarios, int numeroPlotwisters, int numeroAssemblers, int guionistasSalary, int animadoresSalary, int dobladoresSalary, int escenariosSalary, int plotwistersSalary, int assemblersSalary, int dayDuration, int guionistasContent, int animadoresContent,int escenarioContent, int dobladoresContent, int PlotwistContent, int guionistasToWork, int animadoresToWork, int dobladoresToWork, int escneariosToWork, int PlotwistToWork, int assemblerToWork, int guionesEnsamblar, int escenariosEnsamblar, int doblajesEnsamblar, int plotwistEnsamblar,int animacionesEnsamblar, int capsToPlotwist,  int commitDay, int PMsalary, float chapterProfit, float plotProfit, int directorSalary, int trabajadoresTotalesMax) {
@@ -133,6 +135,7 @@ public final class Company {
         this.director = new Director(getDayDuration(), getDirectorSalary(), this, getPM(), getMutex(), getDrive());
         this.trabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity() + Dobladores.getDevelopersquantity() + Plotwisters.getDevelopersquantity() + Assembler.getAssemblerquantity();
         this.guardarTrabajadoresTotales = this.trabajadoresTotales;
+        this.daysInSimulation = 0;
 
     }
     
@@ -831,6 +834,20 @@ public final class Company {
 
     public void setGuardarTrabajadoresTotales(int guardarTrabajadoresTotales) {
         this.guardarTrabajadoresTotales = guardarTrabajadoresTotales;
+    }
+
+    /**
+     * @return the daysInSimulation
+     */
+    public int getDaysInSimulation() {
+        return daysInSimulation;
+    }
+
+    /**
+     * @param daysInSimulation the daysInSimulation to set
+     */
+    public void setDaysInSimulation(int daysInSimulation) {
+        this.daysInSimulation = daysInSimulation;
     }
 
     

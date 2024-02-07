@@ -790,11 +790,11 @@
                                           <Component id="jLabel54" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="DNBeneficiosLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="DNGastosLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="DNIngresosLabel" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="DNDiasEntregaLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="DNIngresosLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="DNGastosLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="DNBeneficiosLabel" alignment="0" pref="89" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1826,7 +1826,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="679" y="340" width="90" height="-1"/>
+                  <AbsoluteConstraints x="680" y="290" width="90" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -1842,7 +1842,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="679" y="290" width="120" height="-1"/>
+                  <AbsoluteConstraints x="680" y="340" width="120" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -1993,7 +1993,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="897" y="240" width="30" height="-1"/>
+                  <AbsoluteConstraints x="897" y="240" width="110" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -2006,7 +2006,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="896" y="340" width="60" height="-1"/>
+                  <AbsoluteConstraints x="890" y="290" width="160" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -2019,7 +2019,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="903" y="290" width="70" height="-1"/>
+                  <AbsoluteConstraints x="890" y="340" width="170" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -2217,6 +2217,39 @@
                   <AbsoluteConstraints x="0" y="0" width="1600" height="560"/>
                 </Constraint>
               </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Grafico">
+                <Property name="tabTitle" type="java.lang.String" value="Grafico"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel59" min="-2" pref="1212" max="-2" attributes="0"/>
+                      <EmptySpace pref="582" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel59" min="-2" pref="500" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="60" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel59">
             </Component>
           </SubComponents>
         </Container>

@@ -33,7 +33,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         
         setImageLabel(CNImageLabel, "src/resources/RegularShow.png");
-        setImageLabel(DNImage, "src/resources/fondo.jpg");
+        setImageLabel(DNImage, "src/resources/fondo.jpeg");
         setImageLabel(pImage, "src/resources/Animacion-digital.png");
         
         JLabel[] CNContableLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel};

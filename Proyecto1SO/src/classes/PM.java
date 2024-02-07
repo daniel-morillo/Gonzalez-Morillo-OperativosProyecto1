@@ -71,6 +71,7 @@ public class PM extends Thread{
                 setIdle(false);
                 ActState();
                 System.out.println("\nPM trabajando (cambiando dia)");
+                company.setDaysInSimulation(company.getDaysInSimulation()+1);
                 if (getCommitDay()!= 0) {
                     setCommitDay(getCommitDay()-1);
                     System.out.print("\nDIAS PARA ENTREGAR: " + getCommitDay());

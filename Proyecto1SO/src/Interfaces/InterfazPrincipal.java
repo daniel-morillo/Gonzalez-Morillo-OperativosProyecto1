@@ -7,10 +7,22 @@ package Interfaces;
 import classes.Company;
 import classes.Reader;
 import classes.Writer;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -18,7 +30,9 @@ import javax.swing.JOptionPane;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    
+    XYSeries CNseries;
+    XYSeries DNseries;
+    double time = 0;
     
     Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300000, 650000, 60,18) ;
     Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250000, 600000, 60,15) ;
@@ -101,8 +115,55 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         DN.getDrive().loadLimits();
         CN.StartWorking();
         DN.StartWorking();
+        
+        CrearGrafico();
+        int delay = CN.getDayDuration();
+        new Timer(delay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                time += 1; // Aumentar el tiempo en cada actualización
+                ActualizarGrafico();
+            }
+        }).start();
     }
+    
+    public void CrearGrafico() {
+    this.CNseries = new XYSeries("Cartoon Network");
+    this.DNseries = new XYSeries("Disney Chanel");
+    
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
 
+        JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo", "Utilidad", dataset, PlotOrientation.VERTICAL,true,true, false 
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(this.GraphLabel.getWidth(),this.GraphLabel.getHeight()));
+        getContentPane().add(chartPanel, BorderLayout.CENTER);
+        this.GraphLabel.removeAll(); 
+        this.GraphLabel.setLayout(new BorderLayout());
+        this.GraphLabel.add(chartPanel, BorderLayout.CENTER);
+        this.GraphLabel.validate();
+        this.GraphLabel.repaint(); 
+    }
+    
+    public void ActualizarGrafico() {
+    CNseries.add(time,this.CN.getBeneficios());
+    DNseries.add(time,this.DN.getBeneficios());
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
+
+    JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo (Días)", "Beneficios ($)", dataset, PlotOrientation.VERTICAL,true,true, false );
+
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new Dimension(this.GraphLabel.getWidth(),this.GraphLabel.getHeight()));
+    getContentPane().add(chartPanel, BorderLayout.CENTER);
+    this.GraphLabel.removeAll(); 
+    this.GraphLabel.setLayout(new BorderLayout());
+    this.GraphLabel.add(chartPanel, BorderLayout.CENTER);
+    this.GraphLabel.validate();
+    this.GraphLabel.repaint(); 
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,6 +352,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         CNNumEnsambladoresLabel = new javax.swing.JLabel();
         CNNumWorkersLabel = new javax.swing.JLabel();
         CNImageLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        GraphLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1281,15 +1344,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNIngresosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNIngresosLabel.setText("0");
-        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 30, -1));
+        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 110, -1));
 
         CNGastosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNGastosLabel.setText("Gastos");
-        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 340, 60, -1));
+        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 340, 120, -1));
 
         CNBeneficiosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNBeneficiosLabel.setText("Beneficios");
-        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(903, 290, 70, -1));
+        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(903, 290, 130, -1));
 
         CNGuionesDispoLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         CNGuionesDispoLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1351,6 +1414,23 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel2.add(CNImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1600, 560));
 
         TabbedPane.addTab("CartoonNetwork", jPanel2);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(GraphLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 623, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(GraphLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+        );
+
+        TabbedPane.addTab("Grafico", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2138,6 +2218,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton DNPlusGuionReadButton2;
     private javax.swing.JButton DNPlusPlotwistersReadButton6;
     private javax.swing.JButton DNPlusPltButton;
+    private javax.swing.JLabel GraphLabel;
     private javax.swing.JTabbedPane TabbedPane;
     private javax.swing.JButton WritterButton;
     private javax.swing.JTextField durationDayLabel;
@@ -2202,6 +2283,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel pImage;
     // End of variables declaration//GEN-END:variables

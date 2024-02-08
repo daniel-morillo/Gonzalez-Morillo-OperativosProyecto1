@@ -10,7 +10,7 @@ import java.io.FileReader;
  */
 
 /**
- *
+ * Clase para leer el txt y actualizar los valores de las empresas (cantidad de empleados, dias de entrega y tiempo de duracion)
  * @author Daniel Morillo
  */
 public class Reader {
@@ -31,6 +31,12 @@ public class Reader {
     private int numPlotwist2;
     private int numEnsambladores2;
 
+
+    /**
+     * Se lee el txt y se actualizan las empresas con los valores leidos
+     * @param Company1 
+     * @param Company2
+     */
     public void ReadTxt(Company Company1, Company Company2) {
         String Path = "archivo.txt";
         try {

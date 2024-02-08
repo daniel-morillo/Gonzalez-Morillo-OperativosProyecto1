@@ -7,10 +7,22 @@ package Interfaces;
 import classes.Company;
 import classes.Reader;
 import classes.Writer;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -18,7 +30,9 @@ import javax.swing.JOptionPane;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    
+    XYSeries CNseries;
+    XYSeries DNseries;
+    double time = 0;
     
     Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300000, 650000, 60,18) ;
     Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250000, 600000, 60,15) ;
@@ -33,7 +47,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         
         setImageLabel(CNImageLabel, "src/resources/RegularShow.png");
-        
+        setImageLabel(DNImage, "src/resources/fondo.jpeg");
+        setImageLabel(pImage, "src/resources/Animacion-digital.png");
         
         JLabel[] CNContableLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel};
         JLabel[] CNDirectorLabels = {CNIngresosLabel,CNGastosLabel,CNBeneficiosLabel,CNDiasEntregaLabel,CNFaltasPMlabel,CNPMStateLabel,CNDirectorStateLabel,CNDescuentoPMLabel};
@@ -100,8 +115,55 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         DN.getDrive().loadLimits();
         CN.StartWorking();
         DN.StartWorking();
+        
+        CrearGrafico();
+        int delay = CN.getDayDuration();
+        new Timer(delay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                time += 1; // Aumentar el tiempo en cada actualización
+                ActualizarGrafico();
+            }
+        }).start();
     }
+    
+    public void CrearGrafico() {
+    this.CNseries = new XYSeries("Cartoon Network");
+    this.DNseries = new XYSeries("Disney Chanel");
+    
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
 
+        JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo", "Utilidad", dataset, PlotOrientation.VERTICAL,true,true, false 
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(this.GraphLabel.getWidth(),this.GraphLabel.getHeight()));
+        getContentPane().add(chartPanel, BorderLayout.CENTER);
+        this.GraphLabel.removeAll(); 
+        this.GraphLabel.setLayout(new BorderLayout());
+        this.GraphLabel.add(chartPanel, BorderLayout.CENTER);
+        this.GraphLabel.validate();
+        this.GraphLabel.repaint(); 
+    }
+    
+    public void ActualizarGrafico() {
+    CNseries.add(time,this.CN.getBeneficios());
+    DNseries.add(time,this.DN.getBeneficios());
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
+
+    JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo (Días)", "Beneficios ($)", dataset, PlotOrientation.VERTICAL,true,true, false );
+
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new Dimension(this.GraphLabel.getWidth(),this.GraphLabel.getHeight()));
+    getContentPane().add(chartPanel, BorderLayout.CENTER);
+    this.GraphLabel.removeAll(); 
+    this.GraphLabel.setLayout(new BorderLayout());
+    this.GraphLabel.add(chartPanel, BorderLayout.CENTER);
+    this.GraphLabel.validate();
+    this.GraphLabel.repaint(); 
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,45 +229,48 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         durationDayLabel = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        pImage = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        DNImagePanel = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
+        DNDoblDispoLabel = new javax.swing.JLabel();
+        DNNumGuionistasLabel = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        DNNumPlotwistersLabel = new javax.swing.JLabel();
+        DNNumEnsambladoresLabel = new javax.swing.JLabel();
+        DNPlotDispoLabel = new javax.swing.JLabel();
+        DNAnimDispoLabels = new javax.swing.JLabel();
+        DNMinusEnsmButton = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         DNNumWorkersLabel = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        DNNumGuionistasLabel = new javax.swing.JLabel();
-        DNMinusGuionButton = new javax.swing.JButton();
-        DNPlusGuionButton = new javax.swing.JButton();
-        jLabel39 = new javax.swing.JLabel();
-        DNNumAnimadoresLabel = new javax.swing.JLabel();
-        DNMinusAnimButton = new javax.swing.JButton();
-        DNPlusAnimButton = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
-        DNNumDobladoresLabel = new javax.swing.JLabel();
-        DNMinusDoblButton = new javax.swing.JButton();
-        DNPlusDoblButton = new javax.swing.JButton();
-        jLabel41 = new javax.swing.JLabel();
-        DNNumEscenografosLabel = new javax.swing.JLabel();
-        DNMinusEscnButton = new javax.swing.JButton();
-        DNPlusEcsnButton = new javax.swing.JButton();
-        jLabel42 = new javax.swing.JLabel();
-        DNNumPlotwistersLabel = new javax.swing.JLabel();
-        DNMinusPltButton = new javax.swing.JButton();
-        DNPlusPltButton = new javax.swing.JButton();
-        jLabel43 = new javax.swing.JLabel();
-        DNNumEnsambladoresLabel = new javax.swing.JLabel();
-        DNMinusEnsmButton = new javax.swing.JButton();
-        DNPlusEnsmButton = new javax.swing.JButton();
-        jLabel44 = new javax.swing.JLabel();
         DNGuionesDispoLabel = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        DNAnimDispoLabels = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        DNDoblDispoLabel = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        DNEscnDispoLabel = new javax.swing.JLabel();
+        DNMinusAnimButton = new javax.swing.JButton();
         jLabel48 = new javax.swing.JLabel();
-        DNPlotDispoLabel = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        DNMinusGuionButton = new javax.swing.JButton();
+        DNMinusDoblButton = new javax.swing.JButton();
+        DNPlusEcsnButton = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        DNPlusDoblButton = new javax.swing.JButton();
+        DNNumEscenografosLabel = new javax.swing.JLabel();
+        DNNumAnimadoresLabel = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        DNMinusPltButton = new javax.swing.JButton();
+        DNPlusEnsmButton = new javax.swing.JButton();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        DNMinusEscnButton = new javax.swing.JButton();
+        DNPlusAnimButton = new javax.swing.JButton();
+        DNPlusGuionButton = new javax.swing.JButton();
+        DNEscnDispoLabel = new javax.swing.JLabel();
+        DNPlusPltButton = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        DNNumDobladoresLabel = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         DNCapDispoLabel = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
@@ -226,6 +291,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         DNDirectorStateLabel = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         DNDescuentoPMLabel = new javax.swing.JLabel();
+        DNImage = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -286,6 +352,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         CNNumEnsambladoresLabel = new javax.swing.JLabel();
         CNNumWorkersLabel = new javax.swing.JLabel();
         CNImageLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        GraphLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -569,6 +637,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.add(pImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 410));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -669,7 +740,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                         .addComponent(DNNumGuionistasReadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(DNPlusGuionReadButton2)))))))
-                .addContainerGap(1262, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(722, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,7 +785,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                             .addComponent(DNMinusAnimadoresReadButton3)
                             .addComponent(DNPlusAnimadoresReadButton3)
                             .addComponent(jLabel31))
-                        .addGap(17, 17, 17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CNPlusDobladoresReadButton3)
                             .addComponent(CNMinusDobladoresReadButton3)
@@ -749,120 +822,46 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                             .addComponent(DNPlusEnsambladoresReadButton7)
                             .addComponent(jLabel34))
                         .addGap(54, 54, 54)
-                        .addComponent(WritterButton)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                        .addComponent(WritterButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("Principal", jPanel1);
 
+        DNImagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel35.setText("Trabajadores Totales: ");
+        DNImagePanel.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
-        jLabel36.setText("DISNEY CHANNEL");
-
-        DNNumWorkersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumWorkersLabel.setText("6");
-
-        jLabel37.setText("DRIVE:");
-
-        jLabel38.setText("Guionistas:");
+        DNDoblDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNDoblDispoLabel.setText("0");
+        DNImagePanel.add(DNDoblDispoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 80, -1));
 
         DNNumGuionistasLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNNumGuionistasLabel.setText("1");
+        DNImagePanel.add(DNNumGuionistasLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 20, 20));
 
-        DNMinusGuionButton.setText("-");
-        DNMinusGuionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNMinusGuionButtonActionPerformed(evt);
-            }
-        });
-
-        DNPlusGuionButton.setText("+");
-        DNPlusGuionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNPlusGuionButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel39.setText("Animadores:");
-
-        DNNumAnimadoresLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumAnimadoresLabel.setText("1");
-
-        DNMinusAnimButton.setText("-");
-        DNMinusAnimButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNMinusAnimButtonActionPerformed(evt);
-            }
-        });
-
-        DNPlusAnimButton.setText("+");
-        DNPlusAnimButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNPlusAnimButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel40.setText("Dobladores:");
-
-        DNNumDobladoresLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumDobladoresLabel.setText("1");
-
-        DNMinusDoblButton.setText("-");
-        DNMinusDoblButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNMinusDoblButtonActionPerformed(evt);
-            }
-        });
-
-        DNPlusDoblButton.setText("+");
-        DNPlusDoblButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNPlusDoblButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel41.setText("Escenografos:");
-
-        DNNumEscenografosLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNNumEscenografosLabel.setText("1");
-
-        DNMinusEscnButton.setText("-");
-        DNMinusEscnButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNMinusEscnButtonActionPerformed(evt);
-            }
-        });
-
-        DNPlusEcsnButton.setText("+");
-        DNPlusEcsnButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNPlusEcsnButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel42.setText("Plotwisters: ");
+        jLabel44.setText("Guiones: ");
+        DNImagePanel.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
 
         DNNumPlotwistersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNNumPlotwistersLabel.setText("1");
-
-        DNMinusPltButton.setText("-");
-        DNMinusPltButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNMinusPltButtonActionPerformed(evt);
-            }
-        });
-
-        DNPlusPltButton.setText("+");
-        DNPlusPltButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DNPlusPltButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel43.setText("Ensambladores: ");
+        DNImagePanel.add(DNNumPlotwistersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 20, -1));
 
         DNNumEnsambladoresLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNNumEnsambladoresLabel.setText("1");
+        DNImagePanel.add(DNNumEnsambladoresLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 20, -1));
+
+        DNPlotDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNPlotDispoLabel.setText("0");
+        DNImagePanel.add(DNPlotDispoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 80, -1));
+
+        DNAnimDispoLabels.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNAnimDispoLabels.setText("0");
+        DNImagePanel.add(DNAnimDispoLabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 80, -1));
 
         DNMinusEnsmButton.setText("-");
         DNMinusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -870,6 +869,101 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 DNMinusEnsmButtonActionPerformed(evt);
             }
         });
+        DNImagePanel.add(DNMinusEnsmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
+
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("DISNEY CHANNEL");
+        DNImagePanel.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 310, 50));
+
+        DNNumWorkersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumWorkersLabel.setText("6");
+        DNImagePanel.add(DNNumWorkersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 20, -1));
+        DNNumWorkersLabel.getAccessibleContext().setAccessibleName("1");
+
+        jLabel40.setText("Dobladores:");
+        DNImagePanel.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+
+        DNGuionesDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNGuionesDispoLabel.setText("0");
+        DNImagePanel.add(DNGuionesDispoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 80, -1));
+
+        DNMinusAnimButton.setText("-");
+        DNMinusAnimButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNMinusAnimButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNMinusAnimButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+
+        jLabel48.setText("Plotwist: ");
+        DNImagePanel.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, -1, -1));
+
+        jLabel42.setText("Plotwisters: ");
+        DNImagePanel.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+
+        jLabel41.setText("Escenografos:");
+        DNImagePanel.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
+
+        DNMinusGuionButton.setText("-");
+        DNMinusGuionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNMinusGuionButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNMinusGuionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+
+        DNMinusDoblButton.setText("-");
+        DNMinusDoblButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNMinusDoblButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNMinusDoblButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+
+        DNPlusEcsnButton.setText("+");
+        DNPlusEcsnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNPlusEcsnButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNPlusEcsnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
+
+        jLabel38.setText("Guionistas:");
+        DNImagePanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+
+        jLabel46.setText("Doblajes:");
+        DNImagePanel.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
+
+        DNPlusDoblButton.setText("+");
+        DNPlusDoblButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNPlusDoblButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNPlusDoblButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
+
+        DNNumEscenografosLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumEscenografosLabel.setText("1");
+        DNImagePanel.add(DNNumEscenografosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 20, 20));
+
+        DNNumAnimadoresLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumAnimadoresLabel.setText("1");
+        DNImagePanel.add(DNNumAnimadoresLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 20, -1));
+
+        jLabel45.setText("Animaciones:");
+        DNImagePanel.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, -1, -1));
+
+        jLabel37.setText("DRIVE:");
+        DNImagePanel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
+
+        DNMinusPltButton.setText("-");
+        DNMinusPltButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNMinusPltButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNMinusPltButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         DNPlusEnsmButton.setText("+");
         DNPlusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -877,295 +971,133 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 DNPlusEnsmButtonActionPerformed(evt);
             }
         });
+        DNImagePanel.add(DNPlusEnsmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, -1));
 
-        jLabel44.setText("Guiones: ");
+        jLabel43.setText("Ensambladores: ");
+        DNImagePanel.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
 
-        DNGuionesDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNGuionesDispoLabel.setText("0");
+        jLabel39.setText("Animadores:");
+        DNImagePanel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
-        jLabel45.setText("Animaciones:");
+        DNMinusEscnButton.setText("-");
+        DNMinusEscnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNMinusEscnButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNMinusEscnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
-        DNAnimDispoLabels.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNAnimDispoLabels.setText("0");
+        DNPlusAnimButton.setText("+");
+        DNPlusAnimButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNPlusAnimButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNPlusAnimButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
-        jLabel46.setText("Doblajes:");
-
-        DNDoblDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNDoblDispoLabel.setText("0");
-
-        jLabel47.setText("Escenas:");
+        DNPlusGuionButton.setText("+");
+        DNPlusGuionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNPlusGuionButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNPlusGuionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
 
         DNEscnDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNEscnDispoLabel.setText("0");
+        DNImagePanel.add(DNEscnDispoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 90, -1));
 
-        jLabel48.setText("Plotwist: ");
+        DNPlusPltButton.setText("+");
+        DNPlusPltButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNPlusPltButtonActionPerformed(evt);
+            }
+        });
+        DNImagePanel.add(DNPlusPltButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
-        DNPlotDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DNPlotDispoLabel.setText("0");
+        jLabel47.setText("Escenas:");
+        DNImagePanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, -1));
+
+        DNNumDobladoresLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DNNumDobladoresLabel.setText("1");
+        DNImagePanel.add(DNNumDobladoresLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 20, -1));
 
         jLabel49.setText("Capitulos Disponibles:");
+        DNImagePanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, -1, -1));
 
         DNCapDispoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNCapDispoLabel.setText("0");
+        DNImagePanel.add(DNCapDispoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 420, 20, -1));
 
         jLabel50.setText("Caps con Plotwist Disponibles:");
+        DNImagePanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, -1, -1));
 
         DNCapPlotDispo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNCapPlotDispo.setText("0");
+        DNImagePanel.add(DNCapPlotDispo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 460, 20, -1));
 
         jLabel51.setText("DIAS PARA LA ENTREGA:");
+        DNImagePanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, -1, -1));
 
         DNDiasEntregaLabel.setText("Dias");
+        DNImagePanel.add(DNDiasEntregaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 110, -1, -1));
 
         jLabel52.setText("Ingresos Brutos:");
+        DNImagePanel.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
 
         DNIngresosLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DNIngresosLabel.setText("0");
+        DNImagePanel.add(DNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 130, -1));
 
         jLabel53.setText("Gastos:");
+        DNImagePanel.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 250, -1, -1));
 
         DNGastosLabel.setText("Gastos");
+        DNImagePanel.add(DNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 250, 130, -1));
 
         jLabel54.setText("Beneficios: ");
+        DNImagePanel.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, -1, -1));
 
         DNBeneficiosLabel.setText("Beneficios");
+        DNImagePanel.add(DNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 200, 130, -1));
 
         jLabel55.setText("Estado del PM:");
+        DNImagePanel.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, -1, -1));
 
         DNPMStateLabel.setText(" Label PM");
+        DNImagePanel.add(DNPMStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 420, -1, -1));
 
         jLabel56.setText("FaltasPM: ");
+        DNImagePanel.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
 
         DNFaltasPMlabel.setText("Faltas PM label");
+        DNImagePanel.add(DNFaltasPMlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, -1, -1));
 
         jLabel57.setText("Estado del Director:");
+        DNImagePanel.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, -1, -1));
 
         DNDirectorStateLabel.setText("Label Director");
+        DNImagePanel.add(DNDirectorStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, -1, -1));
 
         jLabel58.setText("Dinero Descontado al PM:");
+        DNImagePanel.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
 
         DNDescuentoPMLabel.setText("Desc PM label");
+        DNImagePanel.add(DNDescuentoPMLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 540, -1, -1));
+        DNImagePanel.add(DNImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 570));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(612, 612, 612)
-                        .addComponent(jLabel36))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel39)
-                                                .addComponent(jLabel40)
-                                                .addComponent(jLabel41)
-                                                .addComponent(jLabel42)
-                                                .addComponent(jLabel43))
-                                            .addGap(107, 107, 107)
-                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(DNMinusAnimButton)
-                                                .addComponent(DNMinusDoblButton)
-                                                .addComponent(DNMinusEscnButton)
-                                                .addComponent(DNMinusPltButton)
-                                                .addComponent(DNMinusEnsmButton)))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel38)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(DNMinusGuionButton)))
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(DNNumGuionistasLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
-                                            .addComponent(DNNumWorkersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNPlusGuionButton)
-                                        .addGap(101, 101, 101)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel44)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(DNNumEscenografosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(DNPlusEcsnButton))
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(DNNumPlotwistersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(DNPlusPltButton)))
-                                        .addGap(101, 101, 101)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel48)
-                                            .addComponent(jLabel47)
-                                            .addComponent(jLabel46)
-                                            .addComponent(jLabel45)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(DNNumAnimadoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNPlusAnimButton))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(DNNumDobladoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNPlusDoblButton))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(DNNumEnsambladoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNPlusEnsmButton)))
-                                .addGap(97, 97, 97)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DNGuionesDispoLabel)
-                                    .addComponent(DNAnimDispoLabels)
-                                    .addComponent(DNDoblDispoLabel)
-                                    .addComponent(DNEscnDispoLabel)
-                                    .addComponent(DNPlotDispoLabel))
-                                .addGap(44, 44, 44))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGap(436, 436, 436)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel50)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(DNCapPlotDispo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel49)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(DNCapDispoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(116, 116, 116)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel51)
-                                    .addComponent(jLabel52)
-                                    .addComponent(jLabel53)
-                                    .addComponent(jLabel54))
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DNBeneficiosLabel)
-                                    .addComponent(DNGastosLabel)
-                                    .addComponent(DNIngresosLabel)
-                                    .addComponent(DNDiasEntregaLabel)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel55)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(DNPMStateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel57)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNDirectorStateLabel)))
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel58)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNDescuentoPMLabel))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel56)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(DNFaltasPMlabel)))))))
-                .addContainerGap(570, Short.MAX_VALUE))
+                .addComponent(DNImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 371, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel37)
-                            .addComponent(jLabel51)
-                            .addComponent(DNDiasEntregaLabel)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(DNNumWorkersLabel)))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(DNMinusGuionButton)
-                    .addComponent(DNNumGuionistasLabel)
-                    .addComponent(DNPlusGuionButton)
-                    .addComponent(jLabel44)
-                    .addComponent(DNGuionesDispoLabel)
-                    .addComponent(jLabel52)
-                    .addComponent(DNIngresosLabel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel39)
-                        .addComponent(DNNumAnimadoresLabel)
-                        .addComponent(DNMinusAnimButton)
-                        .addComponent(DNPlusAnimButton)
-                        .addComponent(DNAnimDispoLabels)
-                        .addComponent(jLabel53)
-                        .addComponent(DNGastosLabel))
-                    .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel40)
-                        .addComponent(DNNumDobladoresLabel)
-                        .addComponent(DNMinusDoblButton)
-                        .addComponent(DNPlusDoblButton)
-                        .addComponent(DNDoblDispoLabel)
-                        .addComponent(jLabel54)
-                        .addComponent(DNBeneficiosLabel))
-                    .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel41)
-                    .addComponent(DNNumEscenografosLabel)
-                    .addComponent(DNMinusEscnButton)
-                    .addComponent(DNPlusEcsnButton)
-                    .addComponent(jLabel47)
-                    .addComponent(DNEscnDispoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel42)
-                    .addComponent(DNNumPlotwistersLabel)
-                    .addComponent(DNMinusPltButton)
-                    .addComponent(DNPlusPltButton)
-                    .addComponent(jLabel48)
-                    .addComponent(DNPlotDispoLabel))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(DNNumEnsambladoresLabel)
-                    .addComponent(DNMinusEnsmButton)
-                    .addComponent(DNPlusEnsmButton)
-                    .addComponent(jLabel55)
-                    .addComponent(DNPMStateLabel)
-                    .addComponent(jLabel56)
-                    .addComponent(DNFaltasPMlabel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel57)
-                    .addComponent(DNDirectorStateLabel)
-                    .addComponent(jLabel58)
-                    .addComponent(DNDescuentoPMLabel))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel49)
-                    .addComponent(DNCapDispoLabel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel50)
-                    .addComponent(DNCapPlotDispo))
-                .addContainerGap(118, Short.MAX_VALUE))
+            .addComponent(DNImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
-
-        DNNumWorkersLabel.getAccessibleContext().setAccessibleName("1");
 
         TabbedPane.addTab("Disney", jPanel3);
 
@@ -1201,8 +1133,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel6.setText("Plotwisters: ");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 110, -1));
 
-        CNPlusGuionButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusGuionButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusGuionButton.setText("+");
         CNPlusGuionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1211,8 +1141,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusGuionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
-        CNPlusAnimButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusAnimButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusAnimButton.setText("+");
         CNPlusAnimButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1221,8 +1149,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusAnimButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
 
-        CNPlusDoblButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusDoblButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusDoblButton.setText("+");
         CNPlusDoblButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1231,8 +1157,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusDoblButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
 
-        CNPlusEcsnButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusEcsnButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusEcsnButton.setText("+");
         CNPlusEcsnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1241,8 +1165,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusEcsnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
 
-        CNPlusPltButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusPltButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusPltButton.setText("+");
         CNPlusPltButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1251,8 +1173,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusPltButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
 
-        CNMinusGuionButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusGuionButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusGuionButton.setText("-");
         CNMinusGuionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1261,8 +1181,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNMinusGuionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
-        CNMinusAnimButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusAnimButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusAnimButton.setText("-");
         CNMinusAnimButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1271,8 +1189,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNMinusAnimButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
-        CNMinusDoblButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusDoblButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusDoblButton.setText("-");
         CNMinusDoblButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1281,8 +1197,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNMinusDoblButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
-        CNMinusEscnButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusEscnButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusEscnButton.setText("-");
         CNMinusEscnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1291,8 +1205,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNMinusEscnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, -1, -1));
 
-        CNMinusPltButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusPltButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusPltButton.setText("-");
         CNMinusPltButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1306,8 +1218,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel7.setText("Ensambladores: ");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 150, -1));
 
-        CNPlusEnsmButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNPlusEnsmButton.setForeground(new java.awt.Color(0, 0, 0));
         CNPlusEnsmButton.setText("+");
         CNPlusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1316,8 +1226,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(CNPlusEnsmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, -1, -1));
 
-        CNMinusEnsmButton.setBackground(new java.awt.Color(255, 255, 255));
-        CNMinusEnsmButton.setForeground(new java.awt.Color(0, 0, 0));
         CNMinusEnsmButton.setText("-");
         CNMinusEnsmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1436,15 +1344,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNIngresosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNIngresosLabel.setText("0");
-        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 30, -1));
+        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 110, -1));
 
         CNGastosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNGastosLabel.setText("Gastos");
-        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 340, 60, -1));
+        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 340, 120, -1));
 
         CNBeneficiosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNBeneficiosLabel.setText("Beneficios");
-        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(903, 290, 70, -1));
+        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(903, 290, 130, -1));
 
         CNGuionesDispoLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         CNGuionesDispoLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1507,6 +1415,23 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         TabbedPane.addTab("CartoonNetwork", jPanel2);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(GraphLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 623, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(GraphLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+        );
+
+        TabbedPane.addTab("Grafico", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1521,25 +1446,121 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setImageLabel (JLabel nombrelabel, String root){
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(nombrelabel.getWidth(), nombrelabel.getHeight(), nombrelabel.getWidth()));
-        nombrelabel.setIcon(icon);
-        this.repaint();
-    }
-    
-    private void CNPlusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionButtonActionPerformed
+    private void CNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsmButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getAssembler().getAssemblerquantity()== 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_CNMinusEnsmButtonActionPerformed
+
+    private void CNPlusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsmButtonActionPerformed
         // TODO add your handling code here:
         if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_CNPlusEnsmButtonActionPerformed
+
+    private void CNMinusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPltButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getPlotwisters().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
         }
-        else {
-        this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+    }//GEN-LAST:event_CNMinusPltButtonActionPerformed
+
+    private void CNMinusEscnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscnButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getEscenografos().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
         }
-    }//GEN-LAST:event_CNPlusGuionButtonActionPerformed
+    }//GEN-LAST:event_CNMinusEscnButtonActionPerformed
+
+    private void CNMinusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDoblButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getDobladores().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_CNMinusDoblButtonActionPerformed
+
+    private void CNMinusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getAnimadores().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_CNMinusAnimButtonActionPerformed
+
+    private void CNMinusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getGuionistas().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()-1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_CNMinusGuionButtonActionPerformed
+
+    private void CNPlusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPltButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_CNPlusPltButtonActionPerformed
+
+    private void CNPlusEcsnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEcsnButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_CNPlusEcsnButtonActionPerformed
+
+    private void CNPlusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDoblButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_CNPlusDoblButtonActionPerformed
 
     private void CNPlusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusAnimButtonActionPerformed
         // TODO add your handling code here:
@@ -1547,289 +1568,187 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         }
         else {
-        this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
+            this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
     }//GEN-LAST:event_CNPlusAnimButtonActionPerformed
 
-    private void CNPlusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDoblButtonActionPerformed
+    private void CNPlusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionButtonActionPerformed
         // TODO add your handling code here:
         if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_CNPlusDoblButtonActionPerformed
+        }
+        else {
+            this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()+1);
+            this.CN.actTotalTrabajadores();
+            this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
+            CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_CNPlusGuionButtonActionPerformed
 
-    private void CNPlusEcsnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEcsnButtonActionPerformed
+    private void durationDayLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_durationDayLabelActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+    }//GEN-LAST:event_durationDayLabelActionPerformed
+
+    private void DNPlusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsambladoresReadButton7ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_CNPlusEcsnButtonActionPerformed
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores +1));
+        }
+    }//GEN-LAST:event_DNPlusEnsambladoresReadButton7ActionPerformed
 
-    private void CNPlusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPltButtonActionPerformed
+    private void DNMinusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEnsambladoresReadButton7ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
+        if (DNNumEnsambladores == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores -1));
+        }
+    }//GEN-LAST:event_DNMinusEnsambladoresReadButton7ActionPerformed
+
+    private void DNPlusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPlotwistersReadButton6ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_CNPlusPltButtonActionPerformed
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters +1));
+        }
+    }//GEN-LAST:event_DNPlusPlotwistersReadButton6ActionPerformed
 
-    private void CNPlusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsmButtonActionPerformed
+    private void DNMinusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusPlotwistersReadButton6ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
+        if (DNNumPlotwisters == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters -1));
+        }
+    }//GEN-LAST:event_DNMinusPlotwistersReadButton6ActionPerformed
+
+    private void DNPlusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEscenografosReadButton5ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-        this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()+1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_CNPlusEnsmButtonActionPerformed
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos +1));
+        }
+    }//GEN-LAST:event_DNPlusEscenografosReadButton5ActionPerformed
 
-    private void CNMinusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionButtonActionPerformed
+    private void DNMinusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEscenografosReadButton5ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getGuionistas().getDevelopersquantity() == 1){
+        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
+        if (DNNumEscenografos == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.getGuionistas().setDevelopersquantity(this.CN.getGuionistas().getDevelopersquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumGuionistasLabel.setText(String.valueOf(this.CN.getGuionistas().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos -1));
         }
-        
-    }//GEN-LAST:event_CNMinusGuionButtonActionPerformed
+    }//GEN-LAST:event_DNMinusEscenografosReadButton5ActionPerformed
 
-    private void CNMinusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimButtonActionPerformed
+    private void DNPlusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDobladoresReadButton4ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getAnimadores().getDevelopersquantity() == 1){
+        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores +1));
+        }
+    }//GEN-LAST:event_DNPlusDobladoresReadButton4ActionPerformed
+
+    private void DNMinusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDobladoresReadButton4ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
+        if (DNNumDobladores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.getAnimadores().setDevelopersquantity(this.CN.getAnimadores().getDevelopersquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumAnimadoresLabel.setText(String.valueOf(this.CN.getAnimadores().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores -1));
         }
-    }//GEN-LAST:event_CNMinusAnimButtonActionPerformed
+    }//GEN-LAST:event_DNMinusDobladoresReadButton4ActionPerformed
 
-    private void CNMinusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDoblButtonActionPerformed
+    private void DNPlusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusAnimadoresReadButton3ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getDobladores().getDevelopersquantity() == 1){
+        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores +1));
+        }
+    }//GEN-LAST:event_DNPlusAnimadoresReadButton3ActionPerformed
+
+    private void DNMinusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusAnimadoresReadButton3ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
+        if (DNNumAnimadores == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.getDobladores().setDevelopersquantity(this.CN.getDobladores().getDevelopersquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumDobladoresLabel.setText(String.valueOf(this.CN.getDobladores().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores -1));
         }
-    }//GEN-LAST:event_CNMinusDoblButtonActionPerformed
+    }//GEN-LAST:event_DNMinusAnimadoresReadButton3ActionPerformed
 
-    private void CNMinusEscnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscnButtonActionPerformed
+    private void DNPlusGuionReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusGuionReadButton2ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getEscenografos().getDevelopersquantity() == 1){
+        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
+        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
+            this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas +1));
+        }
+    }//GEN-LAST:event_DNPlusGuionReadButton2ActionPerformed
+
+    private void DNMinusGuionReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusGuionReadButton3ActionPerformed
+        // TODO add your handling code here:
+        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
+        if (DNNumGuionistas == 1){
             JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
         } else {
-        this.CN.getEscenografos().setDevelopersquantity(this.CN.getEscenografos().getDevelopersquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumEscenografosLabel.setText(String.valueOf(this.CN.getEscenografos().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
+            this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
+            this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas -1));
         }
-    }//GEN-LAST:event_CNMinusEscnButtonActionPerformed
+    }//GEN-LAST:event_DNMinusGuionReadButton3ActionPerformed
 
-    private void CNMinusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPltButtonActionPerformed
+    private void DNPlusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDeadLineReadButton2ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getPlotwisters().getDevelopersquantity() == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.CN.getPlotwisters().setDevelopersquantity(this.CN.getPlotwisters().getDevelopersquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumPlotwistersLabel.setText(String.valueOf(this.CN.getPlotwisters().getDevelopersquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
-        }
-    }//GEN-LAST:event_CNMinusPltButtonActionPerformed
+        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
+        this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine + 1));
+    }//GEN-LAST:event_DNPlusDeadLineReadButton2ActionPerformed
 
-    private void CNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsmButtonActionPerformed
+    private void DNMinusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDeadLineReadButton2ActionPerformed
         // TODO add your handling code here:
-        if (this.CN.getAssembler().getAssemblerquantity()== 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.CN.getAssembler().setAssemblerquantity(this.CN.getAssembler().getAssemblerquantity()-1);
-        this.CN.actTotalTrabajadores();
-        this.CNNumEnsambladoresLabel.setText(String.valueOf(this.CN.getAssembler().getAssemblerquantity()));
-        CNNumWorkersLabel.setText(String.valueOf(this.CN.getTrabajadoresTotales()));
-        }
-    }//GEN-LAST:event_CNMinusEnsmButtonActionPerformed
-
-    private void WritterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WritterButtonActionPerformed
-        // TODO add your handling code here:
-        try {
-            Integer DurationDay = Integer.parseInt(durationDayLabel.getText());
-            
-            Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
-            Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
-            Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
-            Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
-            Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
-            Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
-            Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
-            
-            Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
-            Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
-            Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
-            Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
-            Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
-            Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
-            Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
-            
-            if(DurationDay > 0){
-                Writer writer = new Writer(DurationDay, CNDeadLine , CNNumGuionistas, CNNumAnimadores, CNNumDobladores, CNNumEscenografos, CNNumPlotwisters, CNNumEnsambladores, DNDeadLine ,DNNumGuionistas, DNNumAnimadores, DNNumDobladores, DNNumEscenografos, DNNumPlotwisters, DNNumEnsambladores);
-                writer.guardar();
-                JOptionPane.showMessageDialog(null, "Valores guardados para la siguiente simulacion");
-            } else{
-                JOptionPane.showMessageDialog(null, "Error. Valor de duracion del dia no es valido");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error. Valor de duracion del dia no es valido");
-        }
-        
-    }//GEN-LAST:event_WritterButtonActionPerformed
-
-    private void CNMinusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDeadLineReadButton1ActionPerformed
-        // TODO add your handling code here:
-        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
-        if (CNDeadLine == 1){
+        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
+        if (DNDeadLine == 1){
             JOptionPane.showMessageDialog(this, "El dia de entrega no puede ser menor a 1");
         } else {
 
-        this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine - 1));
+            this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine - 1));
         }
-        
-    }//GEN-LAST:event_CNMinusDeadLineReadButton1ActionPerformed
+    }//GEN-LAST:event_DNMinusDeadLineReadButton2ActionPerformed
 
-    private void CNPlusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDeadLineReadButton1ActionPerformed
+    private void CNPlusEnsambladoresReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsambladoresReadButton6ActionPerformed
         // TODO add your handling code here:
-        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
-        this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine + 1));
-    }//GEN-LAST:event_CNPlusDeadLineReadButton1ActionPerformed
-
-    private void CNPlusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionReadButton1ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        }
-        else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas +1));
-        }
-    }//GEN-LAST:event_CNPlusGuionReadButton1ActionPerformed
-
-    private void CNMinusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionReadButton1ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
-        if (CNNumGuionistas == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas -1));
-        }
-    }//GEN-LAST:event_CNMinusGuionReadButton1ActionPerformed
-
-    private void CNMinusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimadoresReadButton2ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
-        if (CNNumAnimadores == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores -1));
-        }
-    }//GEN-LAST:event_CNMinusAnimadoresReadButton2ActionPerformed
-
-    private void CNPlusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusAnimadoresReadButton2ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        }
-        else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores +1));
-        }
-    }//GEN-LAST:event_CNPlusAnimadoresReadButton2ActionPerformed
-
-    private void CNMinusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDobladoresReadButton3ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
-        if (CNNumDobladores == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-        this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores -1));
-        }
-    }//GEN-LAST:event_CNMinusDobladoresReadButton3ActionPerformed
-
-    private void CNPlusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDobladoresReadButton3ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-        this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores +1));}
-    }//GEN-LAST:event_CNPlusDobladoresReadButton3ActionPerformed
-
-    private void CNMinusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscenografosReadButton4ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
-        if (CNNumEscenografos == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos -1));
-        }
-    }//GEN-LAST:event_CNMinusEscenografosReadButton4ActionPerformed
-
-    private void CNPlusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEscenografosReadButton4ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
+        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos +1));}
-    }//GEN-LAST:event_CNPlusEscenografosReadButton4ActionPerformed
-
-    private void CNMinusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPlotwistersReadButton5ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
-        if (CNNumPlotwisters == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
-            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters -1));
-        }
-    }//GEN-LAST:event_CNMinusPlotwistersReadButton5ActionPerformed
-
-    private void CNPlusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPlotwistersReadButton5ActionPerformed
-        // TODO add your handling code here:
-        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
-        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters +1));}
-    }//GEN-LAST:event_CNPlusPlotwistersReadButton5ActionPerformed
+            this.CNNumEnsambladoresReadLabel.setText(String.valueOf(CNNumEnsambladores +1));}
+    }//GEN-LAST:event_CNPlusEnsambladoresReadButton6ActionPerformed
 
     private void CNMinusEnsambladoresReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsambladoresReadButton6ActionPerformed
         // TODO add your handling code here:
@@ -1842,200 +1761,164 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CNMinusEnsambladoresReadButton6ActionPerformed
 
-    private void CNPlusEnsambladoresReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEnsambladoresReadButton6ActionPerformed
+    private void CNPlusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusPlotwistersReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
+        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
         if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
             this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
-            this.CNNumEnsambladoresReadLabel.setText(String.valueOf(CNNumEnsambladores +1));}
-    }//GEN-LAST:event_CNPlusEnsambladoresReadButton6ActionPerformed
+            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters +1));}
+    }//GEN-LAST:event_CNPlusPlotwistersReadButton5ActionPerformed
 
-    private void DNMinusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDeadLineReadButton2ActionPerformed
+    private void CNMinusPlotwistersReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusPlotwistersReadButton5ActionPerformed
         // TODO add your handling code here:
-        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
-        if (DNDeadLine == 1){
+        Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
+        if (CNNumPlotwisters == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+            this.CNNumPlotwistersReadLabel.setText(String.valueOf(CNNumPlotwisters -1));
+        }
+    }//GEN-LAST:event_CNMinusPlotwistersReadButton5ActionPerformed
+
+    private void CNPlusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusEscenografosReadButton4ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
+        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos +1));}
+    }//GEN-LAST:event_CNPlusEscenografosReadButton4ActionPerformed
+
+    private void CNMinusEscenografosReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEscenografosReadButton4ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
+        if (CNNumEscenografos == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+            this.CNNumEscenografosReadLabel.setText(String.valueOf(CNNumEscenografos -1));
+        }
+    }//GEN-LAST:event_CNMinusEscenografosReadButton4ActionPerformed
+
+    private void CNPlusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDobladoresReadButton3ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
+        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+            this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores +1));}
+    }//GEN-LAST:event_CNPlusDobladoresReadButton3ActionPerformed
+
+    private void CNMinusDobladoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDobladoresReadButton3ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
+        if (CNNumDobladores == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+            this.CNNumDobladoresReadLabel.setText(String.valueOf(CNNumDobladores -1));
+        }
+    }//GEN-LAST:event_CNMinusDobladoresReadButton3ActionPerformed
+
+    private void CNPlusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusAnimadoresReadButton2ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
+        if (this.CN.getGuardarTrabajadoresTotales() >= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        }
+        else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+            this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores +1));
+        }
+    }//GEN-LAST:event_CNPlusAnimadoresReadButton2ActionPerformed
+
+    private void CNMinusAnimadoresReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusAnimadoresReadButton2ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
+        if (CNNumAnimadores == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+            this.CNNumAnimadoresReadLabel.setText(String.valueOf(CNNumAnimadores -1));
+        }
+    }//GEN-LAST:event_CNMinusAnimadoresReadButton2ActionPerformed
+
+    private void CNMinusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusGuionReadButton1ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
+        if (CNNumGuionistas == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() - 1);
+            this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas -1));
+        }
+    }//GEN-LAST:event_CNMinusGuionReadButton1ActionPerformed
+
+    private void CNPlusGuionReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionReadButton1ActionPerformed
+        // TODO add your handling code here:
+        Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
+        if (this.CN.getGuardarTrabajadoresTotales()>= this.CN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        }
+        else {
+            this.CN.setGuardarTrabajadoresTotales(this.CN.getGuardarTrabajadoresTotales() + 1);
+            this.CNNumGuionistasReadLabel.setText(String.valueOf(CNNumGuionistas +1));
+        }
+    }//GEN-LAST:event_CNPlusGuionReadButton1ActionPerformed
+
+    private void CNPlusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusDeadLineReadButton1ActionPerformed
+        // TODO add your handling code here:
+        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
+        this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine + 1));
+    }//GEN-LAST:event_CNPlusDeadLineReadButton1ActionPerformed
+
+    private void CNMinusDeadLineReadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusDeadLineReadButton1ActionPerformed
+        // TODO add your handling code here:
+        Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
+        if (CNDeadLine == 1){
             JOptionPane.showMessageDialog(this, "El dia de entrega no puede ser menor a 1");
         } else {
 
-        this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine - 1));
+            this.CNDeadLineReadLabel.setText(String.valueOf(CNDeadLine - 1));
         }
-    }//GEN-LAST:event_DNMinusDeadLineReadButton2ActionPerformed
+    }//GEN-LAST:event_CNMinusDeadLineReadButton1ActionPerformed
 
-    private void DNPlusDeadLineReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDeadLineReadButton2ActionPerformed
+    private void WritterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WritterButtonActionPerformed
         // TODO add your handling code here:
-        Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
-        this.DNDeadLineReadLabel.setText(String.valueOf(DNDeadLine + 1));
-    }//GEN-LAST:event_DNPlusDeadLineReadButton2ActionPerformed
+        try {
+            Integer DurationDay = Integer.parseInt(durationDayLabel.getText());
 
-    private void DNMinusGuionReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusGuionReadButton3ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
-        if (DNNumGuionistas == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas -1));
+            Integer CNDeadLine = Integer.parseInt(CNDeadLineReadLabel.getText());
+            Integer CNNumGuionistas = Integer.parseInt(CNNumGuionistasReadLabel.getText());
+            Integer CNNumAnimadores = Integer.parseInt(CNNumAnimadoresReadLabel.getText());
+            Integer CNNumDobladores = Integer.parseInt(CNNumDobladoresReadLabel.getText());
+            Integer CNNumEscenografos = Integer.parseInt(CNNumEscenografosReadLabel.getText());
+            Integer CNNumPlotwisters = Integer.parseInt(CNNumPlotwistersReadLabel.getText());
+            Integer CNNumEnsambladores = Integer.parseInt(CNNumEnsambladoresReadLabel.getText());
+
+            Integer DNDeadLine = Integer.parseInt(DNDeadLineReadLabel.getText());
+            Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
+            Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
+            Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
+            Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
+            Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
+            Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
+
+            if(DurationDay > 0){
+                Writer writer = new Writer(DurationDay, CNDeadLine , CNNumGuionistas, CNNumAnimadores, CNNumDobladores, CNNumEscenografos, CNNumPlotwisters, CNNumEnsambladores, DNDeadLine ,DNNumGuionistas, DNNumAnimadores, DNNumDobladores, DNNumEscenografos, DNNumPlotwisters, DNNumEnsambladores);
+                writer.guardar();
+                JOptionPane.showMessageDialog(null, "Valores guardados para la siguiente simulacion");
+            } else{
+                JOptionPane.showMessageDialog(null, "Error. Valor de duracion del dia no es valido");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Valor de duracion del dia no es valido");
         }
-    }//GEN-LAST:event_DNMinusGuionReadButton3ActionPerformed
-
-    private void DNPlusGuionReadButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusGuionReadButton2ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumGuionistas = Integer.parseInt(DNNumGuionistasReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumGuionistasReadLabel.setText(String.valueOf(DNNumGuionistas +1));
-        }
-    }//GEN-LAST:event_DNPlusGuionReadButton2ActionPerformed
-
-    private void DNMinusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusAnimadoresReadButton3ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
-        if (DNNumAnimadores == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores -1));
-        }
-    }//GEN-LAST:event_DNMinusAnimadoresReadButton3ActionPerformed
-
-    private void DNPlusAnimadoresReadButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusAnimadoresReadButton3ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumAnimadores = Integer.parseInt(DNNumAnimadoresReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumAnimadoresReadLabel.setText(String.valueOf(DNNumAnimadores +1));
-        }
-    }//GEN-LAST:event_DNPlusAnimadoresReadButton3ActionPerformed
-
-    private void DNMinusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDobladoresReadButton4ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
-         if (DNNumDobladores == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores -1));
-        }
-        
-    }//GEN-LAST:event_DNMinusDobladoresReadButton4ActionPerformed
-
-    private void DNPlusDobladoresReadButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDobladoresReadButton4ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumDobladores = Integer.parseInt(DNNumDobladoresReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumDobladoresReadLabel.setText(String.valueOf(DNNumDobladores +1));
-        }
-    }//GEN-LAST:event_DNPlusDobladoresReadButton4ActionPerformed
-
-    private void DNMinusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEscenografosReadButton5ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
-         if (DNNumEscenografos == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos -1));
-        }
-        
-    }//GEN-LAST:event_DNMinusEscenografosReadButton5ActionPerformed
-
-    private void DNPlusEscenografosReadButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEscenografosReadButton5ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumEscenografos = Integer.parseInt(DNNumEscenografosReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumEscenografosReadLabel.setText(String.valueOf(DNNumEscenografos +1));
-        }
-    }//GEN-LAST:event_DNPlusEscenografosReadButton5ActionPerformed
-
-    private void DNMinusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusPlotwistersReadButton6ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
-         if (DNNumPlotwisters == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters -1));
-        }
-    }//GEN-LAST:event_DNMinusPlotwistersReadButton6ActionPerformed
-
-    private void DNPlusPlotwistersReadButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPlotwistersReadButton6ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumPlotwisters = Integer.parseInt(DNNumPlotwistersReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumPlotwistersReadLabel.setText(String.valueOf(DNNumPlotwisters +1));
-        }
-    }//GEN-LAST:event_DNPlusPlotwistersReadButton6ActionPerformed
-
-    private void DNMinusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEnsambladoresReadButton7ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
-        if (DNNumEnsambladores == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() - 1);
-        this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores -1));
-        }
-    }//GEN-LAST:event_DNMinusEnsambladoresReadButton7ActionPerformed
-
-    private void DNPlusEnsambladoresReadButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsambladoresReadButton7ActionPerformed
-        // TODO add your handling code here:
-        Integer DNNumEnsambladores = Integer.parseInt(DNNumEnsambladoresReadLabel.getText());
-        if (this.DN.getGuardarTrabajadoresTotales()>= this.DN.getTrabajadoresTotalesMax()){
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-        this.DN.setGuardarTrabajadoresTotales(this.DN.getGuardarTrabajadoresTotales() + 1);
-        this.DNNumEnsambladoresReadLabel.setText(String.valueOf(DNNumEnsambladores +1));
-        }
-    }//GEN-LAST:event_DNPlusEnsambladoresReadButton7ActionPerformed
-
-    private void DNPlusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsmButtonActionPerformed
-        // TODO add your handling code here:
-        if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-            this.DN.getAssembler().setAssemblerquantity(this.DN.getAssembler().getAssemblerquantity()+1);
-            this.DN.actTotalTrabajadores();
-            this.DNNumEnsambladoresLabel.setText(String.valueOf(this.DN.getAssembler().getAssemblerquantity()));
-            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_DNPlusEnsmButtonActionPerformed
-
-    private void DNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEnsmButtonActionPerformed
-        // TODO add your handling code here:
-        if (this.DN.getAssembler().getAssemblerquantity()== 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-            this.DN.getAssembler().setAssemblerquantity(this.DN.getAssembler().getAssemblerquantity()-1);
-            this.DN.actTotalTrabajadores();
-            this.DNNumEnsambladoresLabel.setText(String.valueOf(this.DN.getAssembler().getAssemblerquantity()));
-            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
-        }
-    }//GEN-LAST:event_DNMinusEnsmButtonActionPerformed
-
-    private void DNPlusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPltButtonActionPerformed
-        // TODO add your handling code here:
-        if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
-            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
-        } else {
-            this.DN.getPlotwisters().setDevelopersquantity(this.DN.getPlotwisters().getDevelopersquantity()+1);
-            this.DN.actTotalTrabajadores();
-            this.DNNumPlotwistersLabel.setText(String.valueOf(this.DN.getPlotwisters().getDevelopersquantity()));
-            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_DNPlusPltButtonActionPerformed
+    }//GEN-LAST:event_WritterButtonActionPerformed
 
     private void DNMinusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusPltButtonActionPerformed
         // TODO add your handling code here:
@@ -2049,16 +1932,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DNMinusPltButtonActionPerformed
 
-    private void DNPlusEcsnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEcsnButtonActionPerformed
+    private void DNPlusPltButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusPltButtonActionPerformed
         // TODO add your handling code here:
         if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
             JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
         } else {
-            this.DN.getEscenografos().setDevelopersquantity(this.DN.getEscenografos().getDevelopersquantity()+1);
+            this.DN.getPlotwisters().setDevelopersquantity(this.DN.getPlotwisters().getDevelopersquantity()+1);
             this.DN.actTotalTrabajadores();
-            this.DNNumEscenografosLabel.setText(String.valueOf(this.DN.getEscenografos().getDevelopersquantity()));
+            this.DNNumPlotwistersLabel.setText(String.valueOf(this.DN.getPlotwisters().getDevelopersquantity()));
             DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));}
-    }//GEN-LAST:event_DNPlusEcsnButtonActionPerformed
+    }//GEN-LAST:event_DNPlusPltButtonActionPerformed
 
     private void DNMinusEscnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEscnButtonActionPerformed
         // TODO add your handling code here:
@@ -2072,6 +1955,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DNMinusEscnButtonActionPerformed
 
+    private void DNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusEnsmButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.DN.getAssembler().getAssemblerquantity()== 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.DN.getAssembler().setAssemblerquantity(this.DN.getAssembler().getAssemblerquantity()-1);
+            this.DN.actTotalTrabajadores();
+            this.DNNumEnsambladoresLabel.setText(String.valueOf(this.DN.getAssembler().getAssemblerquantity()));
+            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_DNMinusEnsmButtonActionPerformed
+
     private void DNPlusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusDoblButtonActionPerformed
         // TODO add your handling code here:
         if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
@@ -2083,18 +1978,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
         }
     }//GEN-LAST:event_DNPlusDoblButtonActionPerformed
-
-    private void DNMinusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDoblButtonActionPerformed
-        // TODO add your handling code here:
-        if (this.DN.getDobladores().getDevelopersquantity() == 1){
-            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
-        } else {
-            this.DN.getDobladores().setDevelopersquantity(this.DN.getDobladores().getDevelopersquantity()-1);
-            this.DN.actTotalTrabajadores();
-            this.DNNumDobladoresLabel.setText(String.valueOf(this.DN.getDobladores().getDevelopersquantity()));
-            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
-        }
-    }//GEN-LAST:event_DNMinusDoblButtonActionPerformed
 
     private void DNPlusAnimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusAnimButtonActionPerformed
         // TODO add your handling code here:
@@ -2133,6 +2016,40 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DNPlusGuionButtonActionPerformed
 
+    private void DNPlusEcsnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEcsnButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.DN.getEscenografos().setDevelopersquantity(this.DN.getEscenografos().getDevelopersquantity()+1);
+            this.DN.actTotalTrabajadores();
+            this.DNNumEscenografosLabel.setText(String.valueOf(this.DN.getEscenografos().getDevelopersquantity()));
+            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_DNPlusEcsnButtonActionPerformed
+
+    private void DNPlusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNPlusEnsmButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.DN.getTrabajadoresTotales() >= this.DN.getTrabajadoresTotalesMax()) {
+            JOptionPane.showMessageDialog(this, "Has superado el limite de trabajadores");
+        } else {
+            this.DN.getAssembler().setAssemblerquantity(this.DN.getAssembler().getAssemblerquantity()+1);
+            this.DN.actTotalTrabajadores();
+            this.DNNumEnsambladoresLabel.setText(String.valueOf(this.DN.getAssembler().getAssemblerquantity()));
+            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));}
+    }//GEN-LAST:event_DNPlusEnsmButtonActionPerformed
+
+    private void DNMinusDoblButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusDoblButtonActionPerformed
+        // TODO add your handling code here:
+        if (this.DN.getDobladores().getDevelopersquantity() == 1){
+            JOptionPane.showMessageDialog(this, "Cada Rol debe tener al menos un trabajador");
+        } else {
+            this.DN.getDobladores().setDevelopersquantity(this.DN.getDobladores().getDevelopersquantity()-1);
+            this.DN.actTotalTrabajadores();
+            this.DNNumDobladoresLabel.setText(String.valueOf(this.DN.getDobladores().getDevelopersquantity()));
+            DNNumWorkersLabel.setText(String.valueOf(this.DN.getTrabajadoresTotales()));
+        }
+    }//GEN-LAST:event_DNMinusDoblButtonActionPerformed
+
     private void DNMinusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNMinusGuionButtonActionPerformed
         // TODO add your handling code here:
         if (this.DN.getGuionistas().getDevelopersquantity() == 1){
@@ -2145,11 +2062,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DNMinusGuionButtonActionPerformed
 
-    private void durationDayLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_durationDayLabelActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_durationDayLabelActionPerformed
-
+    public void setImageLabel (JLabel nombrelabel, String root){
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(nombrelabel.getWidth(), nombrelabel.getHeight(), nombrelabel.getWidth()));
+        nombrelabel.setIcon(icon);
+        this.repaint();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -2255,6 +2174,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel DNFaltasPMlabel;
     private javax.swing.JLabel DNGastosLabel;
     private javax.swing.JLabel DNGuionesDispoLabel;
+    private javax.swing.JLabel DNImage;
+    private javax.swing.JPanel DNImagePanel;
     private javax.swing.JLabel DNIngresosLabel;
     private javax.swing.JButton DNMinusAnimButton;
     private javax.swing.JButton DNMinusAnimadoresReadButton3;
@@ -2297,6 +2218,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton DNPlusGuionReadButton2;
     private javax.swing.JButton DNPlusPlotwistersReadButton6;
     private javax.swing.JButton DNPlusPltButton;
+    private javax.swing.JLabel GraphLabel;
     private javax.swing.JTabbedPane TabbedPane;
     private javax.swing.JButton WritterButton;
     private javax.swing.JTextField durationDayLabel;
@@ -2361,5 +2283,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel pImage;
     // End of variables declaration//GEN-END:variables
 }

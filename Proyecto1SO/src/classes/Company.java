@@ -14,6 +14,7 @@ import javax.swing.JLabel;
  */
 public final class Company {
     
+    //Numero inicial de trabajadores
     private int numeroGuionistas;
     private int numeroAnimadores;
     private int numeroDobladores;
@@ -21,6 +22,7 @@ public final class Company {
     private int numeroPlotwisters;
     private int numeroAssemblers;
     
+    //Varibales Contables
     private float Gastos;
     private float Ingresos;
     private float Beneficios;
@@ -35,6 +37,7 @@ public final class Company {
     private int plotwistersSalary;
     private int assemblersSalary;
     
+    //Duraci'on del dia en la simulacion
     private int dayDuration;
     //Contenido que hace un trabajador para entregar el dia de la entrega
     private int guionistasContent;
@@ -137,7 +140,7 @@ public final class Company {
     }
     
     
-    
+    //Se inicia la simulación starteando los hilos
     public void StartWorking() {
         actTotalTrabajadores();
         loadWorkersValues();
@@ -149,7 +152,6 @@ public final class Company {
         getAssembler().start();
         getPM().start();
         getDirector().start();
-        System.out.println("Cantidad de guionistas: "+String.valueOf(getGuionistas().getDevelopersquantity()));
     }
     //Actualiza los trabajadores totales
     public void actTotalTrabajadores(){
@@ -159,7 +161,7 @@ public final class Company {
     public void actGuardarTotalTrabajadores(){
         this.guardarTrabajadoresTotales = Guionistas.getDevelopersquantity() + Animadores.getDevelopersquantity() + Escenografos.getDevelopersquantity()+Dobladores.getDevelopersquantity()+Plotwisters.getDevelopersquantity()+Assembler.getAssemblerquantity();
     }
-    
+    //Actualiza los valores en la interfaz
     public void loadWorkersValues(){
         
         this.labels[0].setText(String.valueOf(getTrabajadoresTotales()));

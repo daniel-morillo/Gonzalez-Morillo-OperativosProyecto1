@@ -59,23 +59,18 @@ public class PM extends Thread{
                 this.PMlabels[1].setText(String.valueOf(getCommitDay()));
                 setSanctioned(false);
                 for (int contTime = 0;contTime < 16;contTime++){
-                    //System.out.println("\nPM trabajando");
                     sleep(getTimeIdle());
                     setIdle(true);
                     ActState();
-                    //System.out.println("\nPM Flojeando");
                     sleep(getTimeIdle());
                     setIdle(false);
                     ActState();
                 }
                 setIdle(false);
                 ActState();
-                System.out.println("\nPM trabajando (cambiando dia)");
                 if (getCommitDay()!= 0) {
                     setCommitDay(getCommitDay()-1);
-                    System.out.print("\nDIAS PARA ENTREGAR: " + getCommitDay());
                 } else {
-                    System.out.println("\nYA ES EL DIA DE LA ENTREGA");
                     setCommitDay(getFixCommitDay());
                 }
                 obtainSalary();

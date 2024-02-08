@@ -71,7 +71,6 @@ public class Assembler extends Thread{
             try {
                 checkDrive();
                 obtainSalary();
-                System.out.println("\nEnsamblador gano: gano $" + getAccSalary()+"\n");
                 sleep(getDayDuration());
             } catch (InterruptedException Err){
                 System.out.println(Err);
@@ -89,9 +88,7 @@ public class Assembler extends Thread{
             }else{
                Work();
             }
-        } else {
-            System.out.println("\nAl ensamblador le faltan piezas para completar el capitulo");
-        }
+        } 
     }
 
     public void Work() {
@@ -111,7 +108,6 @@ public class Assembler extends Thread{
                 delate();
                 setMakePlot(false);
                 getMutex().release();
-                System.out.print("\n Capitulos en Drive: \nCapitulos: "+getDrive().getFinishedChapter()+"\n Capitulos con plotwist: "+getDrive().getFinishedPlotChapter());
             } catch (InterruptedException ex) {
                 Logger.getLogger(Developer.class.getName()).log(Level.SEVERE, null, ex);
             }

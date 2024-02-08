@@ -1,5 +1,5 @@
 Segundos en la simulación:3000
-Días antes del Deadline1:12
+Días antes del Deadline1:10
 Guionistas1:4
 Animadores1:2
 Dobladores1:2

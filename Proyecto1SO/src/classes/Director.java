@@ -30,6 +30,7 @@ public class Director extends Thread{
     private PM pm;
     private Drive drive;
     
+    //Los labels que el director manipula
     private JLabel[] labels;
     
     
@@ -63,7 +64,6 @@ public class Director extends Thread{
                         actState();
                         sleep(watchTime);
                         if(getPm().isIdle()){
-                            System.out.println("\n PM AMONESTADO");
                             getPm().setSanctioned(true);
                             getPm().setSanctions(getPm().getSanctions() + 1);
                         }
@@ -77,6 +77,7 @@ public class Director extends Thread{
     }
     }
     
+    //Actuaaliza los labels del estado del director
     public void actState() {
         switch(this.getIdle()){
             
@@ -102,7 +103,6 @@ public class Director extends Thread{
     }
     
     public void sendChapters() throws InterruptedException{
-        System.out.println("\nENVIANDO CAPITULOS LISTOS");
         setIdle(0);
         actState();
         mutex.acquire();
@@ -114,7 +114,6 @@ public class Director extends Thread{
         sleep(dayDuration);
         this.labels[0].setText(String.valueOf(getCompany().getIngresos()));
         this.labels[2].setText(String.valueOf(getCompany().getBeneficios()));
-        System.out.println("\nINGRESOS " + getCompany().getIngresos() + "K");
         
     }
     

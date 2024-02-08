@@ -7,10 +7,27 @@ package Interfaces;
 import classes.Company;
 import classes.Reader;
 import classes.Writer;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -19,7 +36,9 @@ import javax.swing.JOptionPane;
 public class InterfazPrincipal extends javax.swing.JFrame {
     
     
-    
+    XYSeries CNseries;
+    XYSeries DNseries;
+    double time = 0;
     Company CN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,1, 5, 1, 4, 1, 1, 4, 2, 2, 1, 2,5, 1, 6, 3,  10,40, 300000, 650000, 60,18) ;
     Company DN = new Company(2,2,1,2,2,2,20,40,16,26,34,50,3000, 1, 1,2, 3, 1, 3, 1, 1, 3, 3, 2, 1, 1,4, 3, 2, 2,  10,40, 250000, 600000, 60,15) ;
     Reader lector = new Reader();
@@ -101,6 +120,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         DN.getDrive().loadLimits();
         CN.StartWorking();
         DN.StartWorking();
+        
+        
+        CrearGrafico();
+        int delay = CN.getDayDuration();
+        new Timer(delay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                time += 1; // Aumentar el tiempo en cada actualización
+                ActualizarGrafico();
+            }
+        }).start();
+        
+        
     }
 
     /**
@@ -291,6 +323,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         CNNumEnsambladoresLabel = new javax.swing.JLabel();
         CNNumWorkersLabel = new javax.swing.JLabel();
         CNImageLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1028,6 +1062,129 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(612, 612, 612)
+                        .addComponent(jLabel36))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel39)
+                                                .addComponent(jLabel40)
+                                                .addComponent(jLabel41)
+                                                .addComponent(jLabel42)
+                                                .addComponent(jLabel43))
+                                            .addGap(107, 107, 107)
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(DNMinusAnimButton)
+                                                .addComponent(DNMinusDoblButton)
+                                                .addComponent(DNMinusEscnButton)
+                                                .addComponent(DNMinusPltButton)
+                                                .addComponent(DNMinusEnsmButton)))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(jLabel38)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(DNMinusGuionButton)))
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(DNNumGuionistasLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                                            .addComponent(DNNumWorkersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNPlusGuionButton)
+                                        .addGap(101, 101, 101)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel44)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(DNNumEscenografosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(DNPlusEcsnButton))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(DNNumPlotwistersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(DNPlusPltButton)))
+                                        .addGap(101, 101, 101)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel48)
+                                            .addComponent(jLabel47)
+                                            .addComponent(jLabel46)
+                                            .addComponent(jLabel45)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(DNNumAnimadoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNPlusAnimButton))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(DNNumDobladoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNPlusDoblButton))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(DNNumEnsambladoresLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNPlusEnsmButton)))
+                                .addGap(97, 97, 97)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DNGuionesDispoLabel)
+                                    .addComponent(DNAnimDispoLabels)
+                                    .addComponent(DNDoblDispoLabel)
+                                    .addComponent(DNEscnDispoLabel)
+                                    .addComponent(DNPlotDispoLabel))
+                                .addGap(44, 44, 44))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(436, 436, 436)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel50)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(DNCapPlotDispo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel49)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(DNCapDispoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel51)
+                                    .addComponent(jLabel52)
+                                    .addComponent(jLabel53)
+                                    .addComponent(jLabel54))
+                                .addGap(52, 52, 52)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(DNDiasEntregaLabel)
+                                    .addComponent(DNIngresosLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(DNGastosLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(DNBeneficiosLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel55)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(DNPMStateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel57)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNDirectorStateLabel)))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel58)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNDescuentoPMLabel))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel56)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(DNFaltasPMlabel)))))))
+                .addContainerGap(570, Short.MAX_VALUE))
                 .addComponent(DNImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1432, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 371, Short.MAX_VALUE))
         );
@@ -1229,12 +1386,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Gastos:");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 340, 90, -1));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 90, -1));
 
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Beneficios: ");
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 290, 120, -1));
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 340, 120, -1));
 
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
@@ -1281,15 +1438,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         CNIngresosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNIngresosLabel.setText("0");
-        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 30, -1));
+        jPanel2.add(CNIngresosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 240, 110, -1));
 
         CNGastosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNGastosLabel.setText("Gastos");
-        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 340, 60, -1));
+        jPanel2.add(CNGastosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 160, -1));
 
         CNBeneficiosLabel.setForeground(new java.awt.Color(255, 255, 255));
         CNBeneficiosLabel.setText("Beneficios");
-        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(903, 290, 70, -1));
+        jPanel2.add(CNBeneficiosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 340, 170, -1));
 
         CNGuionesDispoLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         CNGuionesDispoLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1352,6 +1509,24 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         TabbedPane.addTab("CartoonNetwork", jPanel2);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 1212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(582, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 60, Short.MAX_VALUE))
+        );
+
+        TabbedPane.addTab("Grafico", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1365,6 +1540,59 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setImageLabel (JLabel nombrelabel, String root){
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(nombrelabel.getWidth(), nombrelabel.getHeight(), nombrelabel.getWidth()));
+        nombrelabel.setIcon(icon);
+        this.repaint();
+    }
+    
+    //Grafico:
+    
+
+public void CrearGrafico() {
+    this.CNseries = new XYSeries("Cartoon Network");
+    this.DNseries = new XYSeries("Disney Chanel");
+    
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
+
+        JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo", "Utilidad", dataset, PlotOrientation.VERTICAL,true,true, false 
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(this.jLabel59.getWidth(),this.jLabel59.getHeight()));
+        getContentPane().add(chartPanel, BorderLayout.CENTER);
+        this.jLabel59.removeAll(); 
+        this.jLabel59.setLayout(new BorderLayout());
+        this.jLabel59.add(chartPanel, BorderLayout.CENTER);
+        this.jLabel59.validate();
+        this.jLabel59.repaint(); 
+}
+
+public void ActualizarGrafico() {
+    CNseries.add(time,this.CN.getBeneficios());
+    DNseries.add(time,this.DN.getBeneficios());
+    XYDataset dataset = new XYSeriesCollection(CNseries);
+    ((XYSeriesCollection) dataset).addSeries(DNseries);
+
+    JFreeChart chart = ChartFactory.createXYLineChart("Utilidades en Tiempo","Tiempo (Días)", "Beneficios ($)", dataset, PlotOrientation.VERTICAL,true,true, false );
+
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new Dimension(this.jLabel59.getWidth(),this.jLabel59.getHeight()));
+    getContentPane().add(chartPanel, BorderLayout.CENTER);
+    this.jLabel59.removeAll(); 
+    this.jLabel59.setLayout(new BorderLayout());
+    this.jLabel59.add(chartPanel, BorderLayout.CENTER);
+    this.jLabel59.validate();
+    this.jLabel59.repaint(); 
+}
+
+    
+    
+    
+    private void CNPlusGuionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPlusGuionButtonActionPerformed
 
     private void CNMinusEnsmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNMinusEnsmButtonActionPerformed
         // TODO add your handling code here:
@@ -2195,6 +2423,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2202,6 +2431,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel pImage;
     // End of variables declaration//GEN-END:variables
